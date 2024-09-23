@@ -41,6 +41,16 @@ function SignupPage() {
                         />
                         <p className="text-xs italic text-blue-600">비밀번호는 영문 대소문자, 숫자를 혼합하여 8~20자로 입력해주세요</p>
                     </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 mb-2">이름</label>
+                        <input 
+                            className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none"
+                            type="email"
+                            placeholder="이름을 입력하세요"
+                            value={email}
+                        />
+                    </div>
+                    
                     <br />
                     <button 
                         type="submit"
