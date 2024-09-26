@@ -1,0 +1,28 @@
+
+.btnFrame{
+    display: flex;
+}
+
+.menuBtn{
+    background-color: #ffe190;
+    border: 1px solid #ffbb00;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 130px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'CookieRun-Regular';
+    font-size: 15px;
+    font-weight: 700;
+    color: #7e6216;
+    cursor: pointer;
+}
+
+.containerFrame{
+    width: 100%;
+    min-height: 600px;
+    border: 1px solid #ffbb00;
+    background-color: white;
+}
