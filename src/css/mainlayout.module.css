@@ -1,0 +1,118 @@
+
+.frame{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main_frame{
+    display: flex;
+}
+
+.header_frame{
+    min-width: 1200px;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0px 25px;
+    padding: 0px 20px;
+    position: relative;
+}
+
+.header_logo{
+    background: url(/public/logo.png) no-repeat;
+    background-size: 100%;
+    width: 345px;
+    height: 80px;
+}
+
+.header_menu{
+    display: flex;
+    width: 280px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alertIcon{
+    font-size: 30px;
+    color: #FFC107;
+}
+
+.header_userInfo{
+    display: flex;
+    align-items: center;
+    width: 125px;
+    margin: 0px 15px;
+    justify-content: space-between;
+}
+
+.header_userProfile{
+    /* background: url(/public/shoppyIcon.png) no-repeat; */
+    background-size: 70%;
+    background-position: center;
+    background-color: aliceblue;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.shopIcon{
+    font-size: 30px;
+    color: #909090;
+}
+
+.sidebarIcon{
+    font-size: 30px;
+    color: #909090;
+    margin-left: 20px;
+}
+
+.loginBtn{
+    border: none;
+    background-color: #ff9f00;
+    color: white;
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+.loginBtn:hover{
+    background-color: white;
+    border: 2px solid #ff9f00;
+    color: #ff9f00;
+}
+
+.page_frame{
+    width: 100vw;
+    height: 90vh;
+}
+
+.search_frame{
+    width: 1200px;
+    display: flex;
+    border-bottom: 1px solid #ffbb00;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.searchBox{
+    width: 500px;
+    height: 45px;
+    border: 3px solid #ffbb00;
+    border-radius: 12px;
+    padding: 0px 15px;
+    margin: 0px 12px;
+}
+
+.footer_frame{
+    width: 1200px;
+    height: 30px;
+    border-top: 1px solid #ffbb00;
+}
