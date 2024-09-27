@@ -1,0 +1,50 @@
+.messageBox{
+    background: url(/public/messageBox.png) no-repeat;
+    background-size: 100%;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 68px;
+    right: 89px;
+    padding-top: 45px;
+    padding-bottom: 21px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: scroll;
+    z-index: 1;
+    display: none;
+}
+
+.alertShow{
+    display: block;
+    animation: alertShow 1.2s ease-out forwards;
+}
+
+.alertHide{
+    animation: alertHide 0.8s ease-out forwards;
+}
+
+@keyframes alertShow{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes alertHide{
+    from{
+        display: block;
+        opacity: 1;
+    }
+    to{
+        display: none;
+        opacity:0;
+    }
+}
+
+.messageBox p{
+    border-bottom: 1px solid #ffbb00;
+    padding: 12px 0px;
+}
