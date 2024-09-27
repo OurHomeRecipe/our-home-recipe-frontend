@@ -2,7 +2,6 @@ import Header from "./header";
 import Sidebar from "./sidebar";
 import {Outlet} from "react-router-dom";
 import style from "../../css/mainlayout.module.css"
-import { SidebarProvider } from "../../context/sidebarContext";
 import { IoSearch } from "react-icons/io5";
 import Footer from "./footer";
 
@@ -10,7 +9,7 @@ import Footer from "./footer";
 export default function MainLayout(){
 
     return(
-        <SidebarProvider>
+
             <div className={style.frame}>
                 <Header/>
 
@@ -23,6 +22,5 @@ export default function MainLayout(){
                 <Outlet/>
                 <Footer/>
             </div>
-        </SidebarProvider>
     )
 }

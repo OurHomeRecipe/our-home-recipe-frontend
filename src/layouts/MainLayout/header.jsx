@@ -1,19 +1,24 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../../css/mainlayout.module.css"
 import header from "../../css/header.module.css"
 import { RiMenuSearchLine } from "react-icons/ri";
-import { SidebarContext } from "../../context/sidebarContext";
 import { FaBell } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../appmain/RootStore";
+import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
 
 export default function Header(){
+
+    const dispatch = useAppDispatch();
+
+    const handleToggle = () => {
+        dispatch(toggleSidebar());
+      };
 
     // Router
     const navigate = useNavigate();
     const location = useLocation();  // 현재 위치를 가져오기 위한 hook
 
-    // 사이드바 전역 상태관리
-    const {changeSidebarMode} = useContext(SidebarContext);
 
     // 알림창 표시여부
     const [alertMessage, setAlertMessage] = useState(false);
@@ -46,7 +51,7 @@ export default function Header(){
                 <FaBell className={style.alertIcon} onClick={showAlert} />
                 <button className={style.loginBtn} onClick={handleLogin}>Login</button>
                 <p>고객센터</p>
-                <RiMenuSearchLine className={style.sidebarIcon} onClick={() => changeSidebarMode()}/>
+                <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
             </div>
 
             {/* 알림창 */}
