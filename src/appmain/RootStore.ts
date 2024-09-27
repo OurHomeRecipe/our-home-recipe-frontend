@@ -4,6 +4,7 @@ import {persistReducer} from "redux-persist";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import logger from "redux-logger";                          // redux-logger는 상태 변경 시 콘솔에 로그를 찍기 위한 미들웨어
 import storage from "redux-persist/lib/storage";            // 기본적으로 localStorage를 사용하여 상태를 저장
+import sample from "../features/sample/sampleSlice";
 
 const persistConfig = {
     key: "root",                                            // 상태 저장의 루트 키
@@ -13,6 +14,7 @@ const persistConfig = {
 
 // reducer 등록: 이곳에 각 slice reducer를 결합하여 사용
 const reducers = combineReducers({
+    sample
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers);

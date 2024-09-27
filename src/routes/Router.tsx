@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import MainPage from "../pages/mainpage/MainPage";
 import MypagePage from "../pages/mypage/MyPage";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage";
+import SamplePage from "../pages/sample/SamplePage";
 
 export default function Router() {
   return useRoutes([
@@ -17,6 +18,7 @@ export default function Router() {
           children:[
             { index: true, element: <ProfilePage/> },
           ] },
+        { path: 'sample', element: <SamplePage />}
         // { path: 'store', element: <StorePage />},
         // { path: 'review', element: <ReviewPage />}
       ],
