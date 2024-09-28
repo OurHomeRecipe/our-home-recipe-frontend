@@ -6,8 +6,12 @@ import { FaBell } from "react-icons/fa";
 import { useAppDispatch } from "../../appmain/RootStore";
 import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
 import { toggleLogin } from "../../features/login/loginSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ isLogin, setIsLogin }){
+
+    // useNavigate 훅 사용
+    const navigate = useNavigate(); 
 
     // Redux Dispatch 사용
     const dispatch = useAppDispatch();
@@ -33,7 +37,7 @@ export default function Header({ isLogin, setIsLogin }){
 
     return(
         <div className={style.header_frame}>
-            <div className={style.header_logo}></div>
+            <div className={style.header_logo} onClick={() => navigate('/')}></div>
 
             <div className={style.header_menu}>
                 <FaBell className={style.alertIcon} onClick={showAlert} />

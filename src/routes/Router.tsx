@@ -4,6 +4,8 @@ import MainPage from "../pages/mainpage/MainPage";
 import MypagePage from "../pages/mypage/MyPage";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage";
 import SamplePage from "../pages/sample/SamplePage";
+import JoinPage from "../pages/joinPage/JoinPage.container";
+import FindUserPage from "../pages/finduserPage/FindUserPage.container";
 
 export default function Router() {
   return useRoutes([
@@ -18,7 +20,9 @@ export default function Router() {
           children:[
             { index: true, element: <ProfilePage/> },
           ] },
-        { path: 'sample', element: <SamplePage />}
+        { path: 'sample', element: <SamplePage />},
+        { path: 'join', element: <JoinPage/>},
+        { path: 'finduser', element: <FindUserPage/>}
         // { path: 'store', element: <StorePage />},
         // { path: 'review', element: <ReviewPage />}
       ],

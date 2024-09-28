@@ -26,6 +26,7 @@
     background-size: 100%;
     width: 345px;
     height: 80px;
+    cursor: pointer;
 }
 
 .header_menu{

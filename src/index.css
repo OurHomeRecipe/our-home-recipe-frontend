@@ -16,3 +16,9 @@ input:focus-visible{
 svg{
     cursor: pointer;
 }
+
+
+
+input, h1, p, button {
+    font-family: 'CookieRun-Regular';
+}
