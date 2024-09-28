@@ -5,6 +5,7 @@ import logger from "redux-logger";                          // redux-logger는 �
 import storage from "redux-persist/lib/storage";            // 기본적으로 localStorage를 사용하여 상태를 저장
 import sample from "../features/sample/sampleSlice";
 import sidebar from "../features/sidebar/sidebarSlice";
+import login from "../features/login/loginSlice";
 
 const persistConfig = {
     key: "root",                                            // 상태 저장의 루트 키
@@ -15,7 +16,8 @@ const persistConfig = {
 // reducer 등록: 이곳에 각 slice reducer를 결합하여 사용
 const reducers = combineReducers({
     sample,
-    sidebar
+    sidebar,
+    login
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers);

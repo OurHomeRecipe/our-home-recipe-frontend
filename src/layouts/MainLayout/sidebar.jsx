@@ -3,6 +3,7 @@ import { useAppSelector } from "../../appmain/RootStore";
 
 export default function Sidebar(){
 
+    
     const show = useAppSelector((state) => state.sidebar.show); // sample 상태 조회
 
     return(

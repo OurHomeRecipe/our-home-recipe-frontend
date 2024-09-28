@@ -1,26 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "../../css/mainlayout.module.css"
 import header from "../../css/header.module.css"
 import { RiMenuSearchLine } from "react-icons/ri";
 import { FaBell } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../appmain/RootStore";
 import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
+import { toggleLogin } from "../../features/login/loginSlice";
 
-export default function Header(){
+export default function Header({ isLogin, setIsLogin }){
 
+    // Redux Dispatch 사용
     const dispatch = useAppDispatch();
 
+    // SideBar
     const handleToggle = () => {
         dispatch(toggleSidebar());
       };
 
-    // Router
-    const navigate = useNavigate();
-    const location = useLocation();  // 현재 위치를 가져오기 위한 hook
-
-
-    // 알림창 표시여부
+    // 알림창
     const [alertMessage, setAlertMessage] = useState(false);
 
     const showAlert = () => {
@@ -28,20 +25,11 @@ export default function Header(){
         console.log(alertMessage);
     }
 
+    //로그인
     const handleLogin = (e) => {
         e.preventDefault();
-        navigate("/login", { replace: true }); // URL을 바꾸되 페이지 새로고침 없음
-    }
-
-    useEffect(() => {
-        // URL이 "/login"으로 변경될 때만 특정 동작을 수행
-        if (location.pathname === "/login") {
-            // 이곳에서 API 호출을 하거나 다른 동작을 수행할 수 있음
-            console.log("Login URL detected. Perform API call here if necessary.");
-        }
-    }, [location]);
-
-    
+        dispatch(toggleLogin(true))
+    }    
 
     return(
         <div className={style.header_frame}>
