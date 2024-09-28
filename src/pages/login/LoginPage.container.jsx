@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LoginUI from './LoginPage.presenter'
 import { toggleLogin } from '../../features/login/loginSlice';
 import { useAppDispatch } from '../../appmain/RootStore';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
 export default function Login() {
@@ -19,7 +19,7 @@ export default function Login() {
 
   // useMutation을 사용해 데이터를 서버에 전송
   const mutation = useMutation(async (loginData) => {
-      const response = await axios.post('localhost:8080/v1/member/login', loginData);
+      const response = await axios.post('http://localhost:8080/v1/member/login', loginData);
       return response.data;
   });
 
