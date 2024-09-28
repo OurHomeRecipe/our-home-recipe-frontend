@@ -50,6 +50,7 @@
     font-size: 13px;
     color: #acaaaa;
     border-bottom: 1px solid #acaaaa;
+    cursor: pointer;
 }
 
 .loginBtn{
