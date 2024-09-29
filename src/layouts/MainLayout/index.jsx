@@ -10,7 +10,8 @@ import LoginPage from "../../pages/login/LoginPage.container";
 
 export default function MainLayout(){
 
-    const isLogin = useAppSelector((state) => state.login.login); // sample 상태 조회
+    //로그인 화면 보이는지 여부
+    const isLogin = useAppSelector((state) => state.login.loginPageShow);
 
     return(
         <div className={style.frame}>

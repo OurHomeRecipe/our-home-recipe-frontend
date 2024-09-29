@@ -2,10 +2,12 @@ import React from 'react'
 import { IoCloseCircle } from "react-icons/io5";
 import Modal from '../../common/modal/modal'
 import style from '../../css/pages/loginpage.module.css'
+import PostMemberLogin from '../../api/queries/post.member.login';
 
 export default function LoginUI({
-  handleLogin, 
-  handleSubmit, 
+  email,
+  password,
+  handleLogin,
   setEmail, 
   setPassword, 
   handleJoin,
@@ -23,7 +25,7 @@ export default function LoginUI({
               <div className={style.loginInput}>
                 <input type='email' placeholder='이메일을 입력해주세요' onChange={(e) => setEmail(e.target.value)} />
                 <input type='password' placeholder='비밀번호를 입력해주세요' onChange={(e) => setPassword(e.target.value)}/>
-                <button className={style.loginBtn} onClick={handleSubmit}>로그인</button>
+                <PostMemberLogin email={email} password={password}/>
               </div>
 
               <div className={style.loginInfoBox}>
