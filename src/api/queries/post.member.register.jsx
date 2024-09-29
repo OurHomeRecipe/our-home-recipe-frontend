@@ -20,7 +20,7 @@ export default function PostMemberRegister({email, nickname, phoneNumber, name, 
         }
     });
 
-    const handleSubmitEmail = (e) => {
+    const handleSubmitJoin = (e) => {
         e.preventDefault();
         mutation.mutate({email, nickname, phoneNumber, name, password, passwordConfirm}, {
             onSuccess: (data) => {
@@ -34,6 +34,6 @@ export default function PostMemberRegister({email, nickname, phoneNumber, name, 
       };
 
   return (
-    <button onClick={handleSubmitEmail}>회원가입</button>
+    <button onClick={handleSubmitJoin}>회원가입</button>
   )
 }

@@ -58,12 +58,12 @@ export default function JoinPageUI({
 
           <div className={style.joinBox}>
             <p>비밀번호</p>
-            <input type='password' placeholder='최소 8글자, 영문, 숫자를 포함해주세요' onChange={(e) => setPassword(e.target.value)}/>
+            <input type='password' placeholder='최소 8글자, 영문, 특수문자, 숫자를 포함해주세요' onChange={(e) => setPassword(e.target.value)}/>
           </div>
 
           <div className={style.joinBox}>
             <p>비밀번호 확인</p>
-            <input type='password' placeholder='연락처 형식에 맞게 작성해주세요' onChange={(e) => setPasswordConfirm(e.target.value)}/>
+            <input type='password' placeholder='비밀번호를 다시 입력해주세요' onChange={(e) => setPasswordConfirm(e.target.value)}/>
           </div>
 
           <PostMemberRegister
