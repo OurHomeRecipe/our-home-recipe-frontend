@@ -4,8 +4,8 @@ import {Outlet} from "react-router-dom";
 import style from "../../css/mainlayout.module.css"
 import { IoSearch } from "react-icons/io5";
 import Footer from "./footer";
-import LoginPage from "../../pages/login/LoginPage";
 import { useAppSelector } from "../../appmain/RootStore";
+import LoginPage from "../../pages/login/LoginPage.container";
 
 
 export default function MainLayout(){

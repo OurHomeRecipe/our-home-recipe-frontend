@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export default function LoginPage() {
 
   // useNavigate 훅 사용
   const navigate = useNavigate(); 
