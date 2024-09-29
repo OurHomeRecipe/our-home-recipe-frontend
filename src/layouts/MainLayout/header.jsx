@@ -3,12 +3,14 @@ import style from "../../css/mainlayout.module.css"
 import header from "../../css/header.module.css"
 import { RiMenuSearchLine } from "react-icons/ri";
 import { FaBell } from "react-icons/fa";
-import { useAppDispatch } from "../../appmain/RootStore";
+import { useAppDispatch, useAppSelector } from "../../appmain/RootStore";
 import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
-import { toggleLogin } from "../../features/login/loginSlice";
+import { toggleLoginPage, toggleLoginState } from "../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 
-export default function Header({ isLogin, setIsLogin }){
+export default function Header(){
+
+    const isLogin = useAppSelector((state) => state.login.loginState);
 
     // useNavigate 훅 사용
     const navigate = useNavigate(); 
@@ -32,7 +34,7 @@ export default function Header({ isLogin, setIsLogin }){
     //로그인
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(toggleLogin(true))
+        dispatch(toggleLoginPage(true))
     }    
 
     return(
@@ -41,7 +43,12 @@ export default function Header({ isLogin, setIsLogin }){
 
             <div className={style.header_menu}>
                 <FaBell className={style.alertIcon} onClick={showAlert} />
-                <button className={style.loginBtn} onClick={handleLogin}>Login</button>
+                {
+                    isLogin ?
+                    <button className={style.loginBtn} onClick={() => dispatch(toggleLoginState(false))}>Logout</button>
+                    :
+                    <button className={style.loginBtn} onClick={handleLogin}>Login</button>
+                }
                 <p>고객센터</p>
                 <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
             </div>
