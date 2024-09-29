@@ -47,12 +47,12 @@ export default function JoinPageUI({
 
           <div className={style.joinBox}>
             <p>비밀번호</p>
-            <input type='text' placeholder='최소 8글자, 영문, 숫자를 포함해주세요'/>
+            <input type='password' placeholder='최소 8글자, 영문, 숫자를 포함해주세요'/>
           </div>
 
           <div className={style.joinBox}>
             <p>비밀번호 확인</p>
-            <input type='text' placeholder='연락처 형식에 맞게 작성해주세요'/>
+            <input type='password' placeholder='연락처 형식에 맞게 작성해주세요'/>
           </div>
 
           <button type='button' className={style.joinButton}>회원가입</button>

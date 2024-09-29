@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import JoinPageUI from './JaoinPage.presenter'
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import JoinPageUI from './JoinPage.presenter'
 
 export default function JoinPage() {
 
