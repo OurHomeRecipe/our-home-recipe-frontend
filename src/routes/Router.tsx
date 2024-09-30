@@ -19,6 +19,10 @@ export default function Router() {
           element: <MyPagePage/>, 
           children:[
             { index: true, element: <ProfilePage/> },
+            { path: 'like'},
+            { path: 'myboards'},
+            { path: 'follower'},
+            { path: 'following'},
           ] },
         { path: 'sample', element: <SamplePage />},
         { path: 'join', element: <JoinPage/>},
