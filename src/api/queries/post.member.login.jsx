@@ -1,15 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react'
 import style from '../../css/pages/loginpage.module.css'
 import { useAppDispatch } from '../../appmain/RootStore';
 import { toggleLoginPage, toggleLoginState, toggleLoginToken } from '../../features/login/loginSlice';
+
+
 
 export default function PostMemberLogin({email,password}) {
 
 
     // Redux Dispatch 사용
     const dispatch = useAppDispatch();
+
 
     // useMutation을 사용해 데이터를 서버에 전송
     const mutation = useMutation({
@@ -24,13 +26,17 @@ export default function PostMemberLogin({email,password}) {
         },
         onSuccess: (data) => {
             console.log('로그인 성공:', data);
-            dispatch(toggleLoginToken(data.data.accessToken)) //accessToken받아오기
+            
+            //accessToken받아오기
+            dispatch(toggleLoginToken({
+                accessToken: data.data.accessToken,
+                refreshToken: data.data.refreshToken
+            }));
+            
             dispatch(toggleLoginPage(false)); //로그인 화면 닫기
             dispatch(toggleLoginState(true)); // 로그인 상태 true로 업데이트
         }
     });
-
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();

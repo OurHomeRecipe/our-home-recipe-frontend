@@ -1,18 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../../css/mainlayout.module.css"
 import header from "../../css/header.module.css"
 import { RiMenuSearchLine } from "react-icons/ri";
 import { FaBell } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../appmain/RootStore";
 import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
-import { toggleLoginPage, toggleLoginState } from "../../features/login/loginSlice";
+import { toggleLoginPage, toggleLoginState, toggleLoginToken } from "../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { getProfile } from "../../api/axios/get.me.profile";
 
 
 export default function Header(){
 
 
     const isLogin = useAppSelector((state) => state.login.loginState);
+    const [profile, setProfile] = useState([]);
+
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            if (isLogin === true) {
+                try {
+                    const profileData = await getProfile(); // getProfile()의 Promise를 기다림
+                    console.log(profileData); // 실제 데이터 출력
+                    setProfile(profileData);
+                } catch (error) {
+                    console.error("프로필 데이터를 가져오는데 실패했습니다:", error);
+                }
+            }
+        };
+    
+        fetchProfileData(); // 비동기 함수 호출
+    }, [isLogin])
 
     // useNavigate 훅 사용
     const navigate = useNavigate(); 
@@ -33,11 +51,24 @@ export default function Header(){
         console.log(alertMessage);
     }
 
+    const handleProfil = () => {
+        navigate('/mypage')
+    }
+
     //로그인
     const handleLogin = (e) => {
         e.preventDefault();
         dispatch(toggleLoginPage(true))
-    }    
+    }
+    
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch(toggleLoginState(false));
+        dispatch(toggleLoginToken({
+            accessToken: null,
+            refreshToken: null
+        }));
+    }
 
     return(
         <div className={style.header_frame}>
@@ -49,9 +80,9 @@ export default function Header(){
                     <div className={header.menuBox_login_true}>
                         <FaBell className={style.alertIcon} onClick={showAlert} />
                         <div className={header.profileBox}>
-                            <p>닉네임</p>
-                            <div className={header.profile} onClick={() => navigate('/mypage')}></div>
-                            <button className={style.loginBtn} onClick={() => dispatch(toggleLoginState(false))}>Logout</button>
+                            <div className={header.profile} onClick={handleProfil}></div>
+                            <p>{profile.nickname}</p>
+                            <button className={style.loginBtn} onClick={handleLogout}>Logout</button>
                         </div>
                         <p>고객센터</p>
                         <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
