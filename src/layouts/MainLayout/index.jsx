@@ -26,7 +26,6 @@ export default function MainLayout(){
             <Sidebar/>
             <Outlet/>
             <Footer/>
-
             {isLogin ? <LoginPage/> : ''}
         </div>
     )

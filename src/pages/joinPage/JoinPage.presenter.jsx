@@ -66,6 +66,7 @@ export default function JoinPageUI({
             <input type='password' placeholder='비밀번호를 다시 입력해주세요' onChange={(e) => setPasswordConfirm(e.target.value)}/>
           </div>
 
+          {/* 회원가입 버튼 */}
           <PostMemberRegister
             email={email}
             nickname={nickname}

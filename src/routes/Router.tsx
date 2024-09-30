@@ -1,11 +1,11 @@
 import {useRoutes} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import MainPage from "../pages/mainpage/MainPage";
-import MypagePage from "../pages/mypage/MyPage";
-import ProfilePage from "../pages/mypage/pofilepage/ProfilePage";
 import SamplePage from "../pages/sample/SamplePage";
 import JoinPage from "../pages/joinPage/JoinPage.container";
 import FindUserPage from "../pages/finduserPage/FindUserPage.container";
+import MyPagePage from "../layouts/MypageLayout/MyPage.container";
+import ProfilePage from "../pages/mypage/pofilepage/ProfilePage.container";
 
 export default function Router() {
   return useRoutes([
@@ -16,7 +16,7 @@ export default function Router() {
         { index: true, element: <MainPage/> },
         { 
           path: 'mypage', 
-          element: <MypagePage/>, 
+          element: <MyPagePage/>, 
           children:[
             { index: true, element: <ProfilePage/> },
           ] },

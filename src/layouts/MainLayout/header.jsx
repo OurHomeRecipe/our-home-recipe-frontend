@@ -41,17 +41,27 @@ export default function Header(){
         <div className={style.header_frame}>
             <div className={style.header_logo} onClick={() => navigate('/')}></div>
 
-            <div className={style.header_menu}>
-                <FaBell className={style.alertIcon} onClick={showAlert} />
-                {
-                    isLogin ?
-                    <button className={style.loginBtn} onClick={() => dispatch(toggleLoginState(false))}>Logout</button>
+                {isLogin 
+                    ?
+                    <div className={header.menuBox_login_true}>
+                        <FaBell className={style.alertIcon} onClick={showAlert} />
+                        <div className={header.profileBox}>
+                            <p>닉네임</p>
+                            <div className={header.profile} onClick={() => navigate('/mypage')}></div>
+                            <button className={style.loginBtn} onClick={() => dispatch(toggleLoginState(false))}>Logout</button>
+                        </div>
+                        <p>고객센터</p>
+                        <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
+                    </div>
                     :
-                    <button className={style.loginBtn} onClick={handleLogin}>Login</button>
+                    <div className={header.menuBox_login_false}>
+                        <FaBell className={style.alertIcon} onClick={showAlert} />
+                        <button className={style.loginBtn} onClick={handleLogin}>Login</button>
+                        <p>고객센터</p>
+                        <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
+                    </div>
+                    
                 }
-                <p>고객센터</p>
-                <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
-            </div>
 
             {/* 알림창 */}
             <div className={`${header.messageBox} ${alertMessage ? header.alertShow : header.alertHide}`}>

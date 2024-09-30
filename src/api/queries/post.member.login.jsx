@@ -3,9 +3,10 @@ import axios from 'axios';
 import React from 'react'
 import style from '../../css/pages/loginpage.module.css'
 import { useAppDispatch } from '../../appmain/RootStore';
-import { toggleLoginPage, toggleLoginState } from '../../features/login/loginSlice';
+import { toggleLoginPage, toggleLoginState, toggleLoginToken } from '../../features/login/loginSlice';
 
-export default function PostMemberLogin({email,password, handleLogin}) {
+export default function PostMemberLogin({email,password}) {
+
 
     // Redux Dispatch 사용
     const dispatch = useAppDispatch();
@@ -23,10 +24,13 @@ export default function PostMemberLogin({email,password, handleLogin}) {
         },
         onSuccess: (data) => {
             console.log('로그인 성공:', data);
+            dispatch(toggleLoginToken(data.data.accessToken)) //accessToken받아오기
             dispatch(toggleLoginPage(false)); //로그인 화면 닫기
             dispatch(toggleLoginState(true)); // 로그인 상태 true로 업데이트
         }
     });
+
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,6 +48,8 @@ export default function PostMemberLogin({email,password, handleLogin}) {
     };
 
   return (
-    <button className={style.loginBtn} onClick={handleSubmit}>로그인</button>
+    <>
+        <button className={style.loginBtn} onClick={handleSubmit}>로그인</button>
+    </>
   )
 }

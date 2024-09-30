@@ -29,12 +29,6 @@
     cursor: pointer;
 }
 
-.header_menu{
-    display: flex;
-    width: 280px;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .alertIcon{
     font-size: 30px;
