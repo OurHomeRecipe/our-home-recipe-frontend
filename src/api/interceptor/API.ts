@@ -1,21 +1,26 @@
 import axios, {AxiosInstance, InternalAxiosRequestConfig} from "axios";
+import RootStore from "../../appmain/RootStore";
+
 
 const API: AxiosInstance = axios.create({
     baseURL: "http://localhost:8080/v1"
 })
+
 
 API.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
         if(config.headers["Content-Type"] === undefined)
             config.headers["Content-Type"] = "application/json";
 
-        // TODO 저장소에 저장한 엑세스 토큰 가져오기
-        // const accesstoken = localStorage.getItem("");
-
-        // TODO 토큰이 있으면 헤더에 추가
-        // if(accesstoken) {
-        //     config.headers["Authorization"] = `Bearer ${accesstoken}`;
-        // }
+        // localStorage에 있는 Redux 데이터 가져오기
+        
+        const accessToken = RootStore.getState().login.accessToken;
+    
+        // accessToken이 있으면 Authorization 헤더에 추가
+        if (accessToken) {
+            config.headers["Authorization"] = `Bearer ${accessToken}`;
+        }
+          
 
         return config;
     },
@@ -28,10 +33,12 @@ API.interceptors.request.use(
 API.interceptors.response.use(
     (response) => {
         // 200대의 응답 데이터를 이용해 실행
+        console.log(response);
         return response.data;
     },
     async (error) => {
         // 200대 이외의 응답 에러난 경우 실행
+        console.log(error)
         const originalRequest = error.config;
         // 토큰 만료, 잘못된 토큰, 토큰이 존재하지 않는 경우, 로그아웃 된 경우: 401
         if(error.response.status === 401 && !originalRequest._retry) {
