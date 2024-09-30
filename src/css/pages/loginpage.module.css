@@ -1,3 +1,67 @@
 .frame{
-    
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    border-radius: 10px;
 }
+
+.header{
+    display: flex;
+    height: 45px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 10px;
+}
+
+.loginBox{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    height: 180px;
+}
+
+.loginInput{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 140px;
+}
+
+.loginInput input{
+    border: 1px solid #ff9e01;
+    border-radius: 7px;
+    width: 300px;
+    height: 35px;
+    font-size: 13px;
+    padding: 0px 10px;
+}
+
+.loginInfoBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 165px;
+}
+
+.loginInfoBox p{
+    font-size: 13px;
+    color: #acaaaa;
+    border-bottom: 1px solid #acaaaa;
+    cursor: pointer;
+}
+
+.loginBtn{
+    border: none;
+    background-color: #ff9f00;
+    color: white;
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+

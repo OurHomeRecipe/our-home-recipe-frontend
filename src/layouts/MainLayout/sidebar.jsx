@@ -1,10 +1,10 @@
-import { useContext } from "react"
 import style from "../../css/sidebar.module.css"
-import { SidebarContext } from "../../context/sidebarContext"
+import { useAppSelector } from "../../appmain/RootStore";
 
 export default function Sidebar(){
 
-    const {show} = useContext(SidebarContext);
+    
+    const show = useAppSelector((state) => state.sidebar.show); // sample 상태 조회
 
     return(
         <div className={`${style.frame} ${show ? style.slideOut : style.slideIn}`}>
