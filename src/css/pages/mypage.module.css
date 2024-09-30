@@ -1,6 +1,8 @@
 
 .btnFrame{
+    width: 95%;
     display: flex;
+    justify-content: flex-start;
 }
 
 .menuBtn{
@@ -21,8 +23,9 @@
 }
 
 .containerFrame{
-    width: 100%;
+    width: 95%;
     min-height: 600px;
     border: 1px solid #ffbb00;
     background-color: white;
+    border-top-right-radius: 10px;
 }

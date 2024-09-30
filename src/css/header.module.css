@@ -5,7 +5,7 @@
     height: 250px;
     position: absolute;
     top: 68px;
-    right: 89px;
+    right: 208px;
     padding-top: 45px;
     padding-bottom: 21px;
     padding-left: 20px;
@@ -13,6 +13,20 @@
     overflow: scroll;
     z-index: 1;
     display: none;
+}
+
+.menuBox_login_true{
+    display: flex;
+    width: 400px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menuBox_login_false{
+    display: flex;
+    width: 280px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .alertShow{
@@ -47,4 +61,19 @@
 .messageBox p{
     border-bottom: 1px solid #ffbb00;
     padding: 12px 0px;
+}
+
+.profileBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 210px;
+}
+
+.profile{
+    width: 40px;
+    height: 40px;
+    background-color: lightgray;
+    border-radius: 50px;
+    cursor: pointer;
 }

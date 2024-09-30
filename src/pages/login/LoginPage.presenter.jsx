@@ -3,7 +3,18 @@ import { IoCloseCircle } from "react-icons/io5";
 import Modal from '../../common/modal/modal'
 import style from '../../css/pages/loginpage.module.css'
 
-export default function LoginUI({handleLogin, handleSubmit, setEmail, setPassword}) {
+import PostMemberLogin from '../../api/queries/post.member.login';
+
+export default function LoginUI({
+  email,
+  password,
+  handleLogin,
+  setEmail, 
+  setPassword, 
+  handleJoin,
+  handleFindUser
+}) {
+
   return (
     <Modal>
         <div className={style.frame}>
@@ -16,17 +27,18 @@ export default function LoginUI({handleLogin, handleSubmit, setEmail, setPasswor
               <div className={style.loginInput}>
                 <input type='email' placeholder='이메일을 입력해주세요' onChange={(e) => setEmail(e.target.value)} />
                 <input type='password' placeholder='비밀번호를 입력해주세요' onChange={(e) => setPassword(e.target.value)}/>
-                <button className={style.loginBtn} onClick={handleSubmit}>로그인</button>
+                
+                {/* 로그인 버튼 */}
+                <PostMemberLogin email={email} password={password}/>
+                
               </div>
 
               <div className={style.loginInfoBox}>
-                <p>회원가입</p>
-                <p>아이디/비밀번호 찾기</p>
+                <p onClick={handleJoin}>회원가입</p>
+                <p onClick={handleFindUser}>아이디/비밀번호 찾기</p>
               </div>
-          </div>
+          </div>   
 
-
-            
         </div>
     </Modal>
   )

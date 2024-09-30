@@ -1,9 +1,14 @@
 .frame{
-    width: 1200px;
+    background-color: white;
+    width: 1150px;
     min-height: 700px;
-    padding: 30px 30px;
+    margin: 30px 0px;
     box-sizing: border-box;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .modalFrame{
@@ -17,4 +22,14 @@
     justify-content: center;
     align-items: center;
     z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+}
+
+.row{
+    display: flex;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
 }
