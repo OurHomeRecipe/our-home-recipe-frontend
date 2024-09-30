@@ -7,7 +7,8 @@ const loginSlice = createSlice({
     initialState: {
         loginPageShow: false,
         loginState: false,
-        loginToken: ''
+        accessToken: '',
+        refreshToken:''
     },
     reducers: {
         // 로그인 화면 보이는지 여부
@@ -19,7 +20,7 @@ const loginSlice = createSlice({
             state.loginState = action.payload;
         },
         toggleLoginToken: (state, action) => {
-            state.loginToken = action.payload;
+            state.accessToken = action.payload;
         }
         
     }

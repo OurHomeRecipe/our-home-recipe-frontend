@@ -9,7 +9,7 @@ import { toggleLoginPage, toggleLoginState } from "../../features/login/loginSli
 import { useNavigate } from "react-router-dom";
 
 
-export default function Header({ isLogin, setIsLogin }){
+export default function Header(){
 
 
     const isLogin = useAppSelector((state) => state.login.loginState);
