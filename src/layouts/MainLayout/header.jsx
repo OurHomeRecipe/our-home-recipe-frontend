@@ -8,7 +8,9 @@ import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
 import { toggleLoginPage, toggleLoginState } from "../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 
-export default function Header(){
+
+export default function Header({ isLogin, setIsLogin }){
+
 
     const isLogin = useAppSelector((state) => state.login.loginState);
 
@@ -41,6 +43,7 @@ export default function Header(){
         <div className={style.header_frame}>
             <div className={style.header_logo} onClick={() => navigate('/')}></div>
 
+
                 {isLogin 
                     ?
                     <div className={header.menuBox_login_true}>
@@ -62,6 +65,7 @@ export default function Header(){
                     </div>
                     
                 }
+
 
             {/* 알림창 */}
             <div className={`${header.messageBox} ${alertMessage ? header.alertShow : header.alertHide}`}>

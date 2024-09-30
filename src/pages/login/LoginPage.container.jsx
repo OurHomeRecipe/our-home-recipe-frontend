@@ -9,11 +9,13 @@ export default function LoginPage() {
   // useNavigate 훅 사용
   const navigate = useNavigate(); 
 
+
   // Redux Dispatch 사용
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
     dispatch(toggleLoginPage(false))
+
   }
 
   const [email, setEmail] = useState('');
@@ -40,6 +42,7 @@ export default function LoginPage() {
     navigate={navigate}
     handleJoin={handleJoin}
     handleFindUser={handleFindUser}
+
     />
   )
 }

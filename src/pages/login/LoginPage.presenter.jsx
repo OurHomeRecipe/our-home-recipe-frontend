@@ -2,6 +2,7 @@ import React from 'react'
 import { IoCloseCircle } from "react-icons/io5";
 import Modal from '../../common/modal/modal'
 import style from '../../css/pages/loginpage.module.css'
+
 import PostMemberLogin from '../../api/queries/post.member.login';
 
 export default function LoginUI({
@@ -13,6 +14,7 @@ export default function LoginUI({
   handleJoin,
   handleFindUser
 }) {
+
   return (
     <Modal>
         <div className={style.frame}>
@@ -36,6 +38,7 @@ export default function LoginUI({
                 <p onClick={handleFindUser}>아이디/비밀번호 찾기</p>
               </div>
           </div>   
+
         </div>
     </Modal>
   )
