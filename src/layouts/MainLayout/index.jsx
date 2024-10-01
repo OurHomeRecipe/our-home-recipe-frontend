@@ -6,6 +6,8 @@ import { IoSearch } from "react-icons/io5";
 import Footer from "./footer";
 import { useAppSelector } from "../../appmain/RootStore";
 import LoginPage from "../../pages/login/LoginPage.container";
+import { useEffect } from "react";
+import { getProfile } from "../../api/axios/get.me.profile";
 
 
 
@@ -13,6 +15,10 @@ export default function MainLayout(){
 
     //로그인 화면 보이는지 여부
     const isLogin = useAppSelector((state) => state.login.loginPageShow);
+
+    useEffect(() => {
+        getProfile();
+    }, [])
 
 
     return(

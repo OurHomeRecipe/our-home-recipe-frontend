@@ -5,7 +5,7 @@ import { RiMenuSearchLine } from "react-icons/ri";
 import { FaBell } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../appmain/RootStore";
 import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
-import { toggleLoginPage, toggleLoginState, toggleLoginToken } from "../../features/login/loginSlice";
+import { toggleLoginPage } from "../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { getProfile } from "../../api/axios/get.me.profile";
 
@@ -61,13 +61,10 @@ export default function Header(){
         dispatch(toggleLoginPage(true))
     }
     
+    //로그아웃
     const handleLogout = (e) => {
         e.preventDefault();
-        dispatch(toggleLoginState(false));
-        dispatch(toggleLoginToken({
-            accessToken: null,
-            refreshToken: null
-        }));
+
     }
 
     return(
