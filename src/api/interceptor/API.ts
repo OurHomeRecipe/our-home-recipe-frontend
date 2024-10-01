@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, InternalAxiosRequestConfig} from "axios";
-import RootStore, { useAppDispatch } from "../../appmain/RootStore";
+import RootStore from "../../appmain/RootStore";
 import { toggleAccessToken, toggleLoginState } from "../../features/login/loginSlice";
 
 
