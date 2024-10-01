@@ -19,14 +19,14 @@ const loginSlice = createSlice({
         toggleLoginState: (state, action) => {
             state.loginState = action.payload;
         },
-        toggleLoginToken: (state, action) => {
-            const { accessToken, refreshToken } = action.payload;
-            state.accessToken = accessToken;
-            state.refreshToken = refreshToken;
-        }
-        
+        toggleAccessToken:(state, action) => {
+            state.accessToken = action.payload;
+        },
+        toggleRefreshToken:(state, action) => {
+            state.refreshToken = action.payload;
+        },       
     }
 });
 
-export const { toggleLoginPage, toggleLoginState, toggleLoginToken } = loginSlice.actions;
+export const { toggleLoginPage, toggleLoginState, toggleAccessToken, toggleRefreshToken } = loginSlice.actions;
 export default loginSlice.reducer;

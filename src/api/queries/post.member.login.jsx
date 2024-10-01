@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import style from '../../css/pages/loginpage.module.css'
 import { useAppDispatch } from '../../appmain/RootStore';
-import { toggleLoginPage, toggleLoginState, toggleLoginToken } from '../../features/login/loginSlice';
+import { toggleAccessToken, toggleLoginPage, toggleLoginState } from '../../features/login/loginSlice';
 
 
 
@@ -28,11 +28,7 @@ export default function PostMemberLogin({email,password}) {
             console.log('로그인 성공:', data);
             
             //accessToken받아오기
-            dispatch(toggleLoginToken({
-                accessToken: data.data.accessToken,
-                refreshToken: data.data.refreshToken
-            }));
-            
+            dispatch(toggleAccessToken(data.data.accessToken));
             dispatch(toggleLoginPage(false)); //로그인 화면 닫기
             dispatch(toggleLoginState(true)); // 로그인 상태 true로 업데이트
         }
