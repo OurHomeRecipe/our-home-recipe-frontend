@@ -16,7 +16,7 @@
 .frame button {
     background-color: #ff9e01;
     color: white;
-    width: 405px;
+    width: 430px;
     height: 35px;
     border-radius: 8px;
     font-size: 14px;
@@ -24,7 +24,7 @@
 }
 
 .joinBox{
-    width: 405px;
+    width: 430px;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -5,12 +5,14 @@ import { toggleLoginPage } from "../../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import HeaderUI from "./header.presenter";
 import { getProfile } from "../../../api/axios/get.me.profile";
+import { toggleAlertUI } from "../../../features/alert/alertSlice";
 
 
 export default function Header(){
 
 
     const isLogin = useAppSelector((state) => state.login.loginState);
+    const isAlertUI = useAppSelector((state) => state.alert.showUI);
     const [profile, setProfile] = useState([]);
 
     useEffect(() => {
@@ -39,12 +41,8 @@ export default function Header(){
         dispatch(toggleSidebar());
       };
 
-    // 알림창
-    const [alertMessage, setAlertMessage] = useState(false);
-
     const showAlert = () => {
-        setAlertMessage((prev) => !prev);
-        console.log(alertMessage);
+        dispatch(toggleAlertUI());
     }
 
     const handleLogo = () => navigate('/');
@@ -68,11 +66,11 @@ export default function Header(){
     return(
         <HeaderUI
         isLogin={isLogin}
+        showAlert={showAlert}
+        isAlertUI={isAlertUI}
         handleLogo={handleLogo}
         profile={profile}
         handleToggle={handleToggle}
-        alertMessage={alertMessage}
-        showAlert={showAlert}
         handleProfil={handleProfil}
         handleLogin={handleLogin}
         handleLogout={handleLogout}

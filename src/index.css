@@ -14,7 +14,7 @@ svg{
     cursor: pointer;
 }
 
-input, h1, p, button, textarea {
+input, h1, p, button, textarea, select {
     font-family: 'CookieRun-Regular';
 }
 
@@ -24,4 +24,9 @@ input, textarea, select{
 
 select{
     appearance: none;
+}
+
+button { 
+    border: none;
+    cursor: pointer;
 }

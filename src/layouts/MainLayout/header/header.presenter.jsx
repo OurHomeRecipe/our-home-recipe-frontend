@@ -1,8 +1,8 @@
-import React from 'react'
 import style from "../../../css/mainlayout.module.css"
 import header from "../../../css/header.module.css"
 import { FaBell } from "react-icons/fa";
 import { RiMenuSearchLine } from "react-icons/ri";
+import Alert from '../alert/alert.container';
 
 
 export default function HeaderUI({
@@ -10,7 +10,7 @@ export default function HeaderUI({
     profile,
     handleLogo,
     handleToggle,
-    alertMessage,
+    isAlertUI,
     showAlert,
     handleProfil,
     handleLogin,
@@ -24,13 +24,18 @@ export default function HeaderUI({
         {isLogin 
             ?
             <div className={header.menuBox_login_true}>
+                {/* 알림창 */}
                 <FaBell className={style.alertIcon} onClick={showAlert} />
+
                 <div className={header.profileBox}>
                     <div className={header.profile} onClick={handleProfil}></div>
                     <p>{profile.nickname}</p>
                     <button className={style.loginBtn} onClick={handleLogout}>Logout</button>
                 </div>
+
                 <p>고객센터</p>
+
+                {/* 카테고리 */}
                 <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
             </div>
             :
@@ -43,14 +48,6 @@ export default function HeaderUI({
             
         }
 
-
-    {/* 알림창 */}
-    <div className={`${header.messageBox} ${alertMessage ? header.alertShow : header.alertHide}`}>
-        <p>알림1</p>
-        <p>알림2</p>
-        <p>알림3</p>
-        <p>알림4</p>
-    </div>
 </div>
   )
 }

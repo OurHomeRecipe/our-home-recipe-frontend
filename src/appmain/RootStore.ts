@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";            // 기본적으로 l
 import sample from "../features/sample/sampleSlice";
 import sidebar from "../features/sidebar/sidebarSlice";
 import login from "../features/login/loginSlice";
+import alert from "../features/alert/alertSlice";
 
 const persistConfig = {
     key: "root",                                            // 상태 저장의 루트 키
@@ -17,7 +18,8 @@ const persistConfig = {
 const reducers = combineReducers({
     sample,
     sidebar,
-    login
+    login,
+    alert
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { getProfile } from "../../api/axios/get.me.profile";
 import Header from "./header/header.container";
 import SearchComponent from "./search/search.container";
+import Alert from "./alert/alert.container";
 
 
 
@@ -30,7 +31,7 @@ export default function MainLayout(){
             <Sidebar/>
             <Outlet/>
             <Footer/>
-
+            <Alert/>
             {isLogin ? <LoginPage/> : ''}
         </div>
     )
