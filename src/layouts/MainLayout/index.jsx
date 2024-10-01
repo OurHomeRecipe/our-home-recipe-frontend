@@ -1,13 +1,14 @@
-import Header from "./header";
+
 import Sidebar from "./sidebar";
 import {Outlet} from "react-router-dom";
 import style from "../../css/mainlayout.module.css"
-import { IoSearch } from "react-icons/io5";
 import Footer from "./footer";
 import { useAppSelector } from "../../appmain/RootStore";
 import LoginPage from "../../pages/login/LoginPage.container";
 import { useEffect } from "react";
 import { getProfile } from "../../api/axios/get.me.profile";
+import Header from "./header/header.container";
+import SearchComponent from "./search/search.container";
 
 
 
@@ -25,12 +26,7 @@ export default function MainLayout(){
         <div className={style.frame}>
 
             <Header/>
-
-            <div className={style.search_frame}>
-                <input type="text" className={style.searchBox} placeholder="검색어를 입력해주세요."/>
-                <IoSearch size={40} color="#ffbb00" />
-            </div>
-
+            <SearchComponent/>
             <Sidebar/>
             <Outlet/>
             <Footer/>
