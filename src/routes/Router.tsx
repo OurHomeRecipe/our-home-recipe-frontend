@@ -8,8 +8,13 @@ import MyPagePage from "../layouts/MypageLayout/MyPage.container";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage.container";
 import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage.container";
 import AddRecipePage from "../pages/mypage/addRecipePage/addRecipePage.container";
+import { useAppSelector } from "../appmain/RootStore";
+import LoginPage from "../pages/login/LoginPage.container";
 
 export default function Router() {
+
+  const isLogin = useAppSelector((state) => state.login.loginState);
+
   return useRoutes([
     {
       path: '/',
@@ -18,7 +23,8 @@ export default function Router() {
         { index: true, element: <MainPage/> },
         { 
           path: 'mypage', 
-          element: <MyPagePage/>, 
+          element: isLogin ? <MyPagePage/> : <LoginPage/> ,
+          // element: <MyPagePage/>, 
           children:[
             { index: true, element: <ProfilePage/> },
             { path: 'like'},
@@ -29,7 +35,7 @@ export default function Router() {
         { path: 'sample', element: <SamplePage />},
         { path: 'join', element: <JoinPage/>},
         { path: 'finduser', element: <FindUserPage/>},
-        { path: 'addrecipe', element: <AddRecipePage/> }
+        { path: 'addrecipe', element: isLogin ? <AddRecipePage/> : <LoginPage/>}
 
         // { path: 'store', element: <StorePage />},
         // { path: 'review', element: <ReviewPage />}

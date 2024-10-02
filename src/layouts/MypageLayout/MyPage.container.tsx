@@ -15,6 +15,7 @@ export default function MyPagePage() {
 
   const [seletedMenu, setSelectedMenu] = useState<number>(1);
 
+
   const menu: MenuItem[] = [
     { id: 1, name: 'My Profile', url:'mypage'},
     { id: 2, name: '좋아요 목록', url:'mypage/like'},
