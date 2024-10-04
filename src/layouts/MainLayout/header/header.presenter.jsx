@@ -2,6 +2,17 @@ import style from "../../../css/mainlayout.module.css"
 import header from "../../../css/header.module.css"
 import { FaBell } from "react-icons/fa";
 import { RiMenuSearchLine } from "react-icons/ri";
+import styled from "styled-components";
+
+const ProfileImageMini = styled.div`
+    background: url(${(props) => props.preview}) no-repeat;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    background-color: lightgray;
+    border-radius: 50px;
+    cursor: pointer;
+`
 
 
 export default function HeaderUI({
@@ -26,7 +37,7 @@ export default function HeaderUI({
                 <FaBell className={style.alertIcon} onClick={showAlert} />
 
                 <div className={header.profileBox}>
-                    <div className={header.profile} onClick={handleProfil}></div>
+                    <ProfileImageMini preview={profile.profileImage} onClick={handleProfil}></ProfileImageMini>
                     <p>{profile.nickname}</p>
                     <button className={style.loginBtn} onClick={handleLogout}>Logout</button>
                 </div>

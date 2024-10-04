@@ -38,6 +38,7 @@ export default function ProfileUI({profile}) {
       setName(profile.name);
       setEmail(profile.email);
       setPhonNumber(profile.phoneNumber);
+      setPreview(profile.profileImage);
     }
   }, [profile]); // profile이 변경될 때만 실행
 
@@ -58,24 +59,15 @@ export default function ProfileUI({profile}) {
     }
   };
 
-  const updateProfileApi = useMutation({mutationFn: async (profileData) => updateProfile(profileData)})
-
-  const formData = new FormData();
-
   const handleUpdateProfile = (e) => {
     e.preventDefault();
+    
+    const formData = new FormData();
 
-    formData.append(
-      "dto",
-      new Blob(
-        [JSON.stringify({nickname, name, email, phonNumber, introduce})],
-        {type: 'application/json'}
-      )
-    )
+    formData.append('member', JSON.stringify({ nickname, name, email, phonNumber, introduce }));
 
-    // 이미지 파일이 있을 경우 FormData에 추가
     if (profileImage) {
-      formData.append("profileImage", profileImage); // 이미지 파일 추가
+      formData.append('profileImage', profileImage); // 이미지 파일 객체 추가
     }
 
     updateProfileApi.mutate(
@@ -89,6 +81,8 @@ export default function ProfileUI({profile}) {
       }}
     );
   }
+
+  const updateProfileApi = useMutation({mutationFn: async (profileData) => updateProfile(profileData)})
 
 
   return (

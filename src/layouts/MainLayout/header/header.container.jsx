@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../appmain/RootStore";
 import { toggleSidebar } from "../../../features/sidebar/sidebarSlice";
-import { toggleLoginPage } from "../../../features/login/loginSlice";
+import { toggleAccessToken, toggleLoginPage, toggleLoginState } from "../../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import HeaderUI from "./header.presenter";
 import { getProfile } from "../../../api/axios/get.me.profile";
@@ -12,27 +12,29 @@ import { useMutation } from "@tanstack/react-query";
 
 export default function Header(){
 
-
     const isLogin = useAppSelector((state) => state.login.loginState);
     const isAlertUI = useAppSelector((state) => state.alert.showUI);
     const [profile, setProfile] = useState([]);
 
 
 
-    const getProfileApi = useMutation({mutationFn: async () => getProfile()});
-
     useEffect(() => {
-        getProfileApi.mutate({},{
-            onSuccess: (data) => {
-                console.log('프로필 조회 성공', data);
-                setProfile(data);
-            },
-            onError: (error) => {
-                console.error('프로필 조회 실패', error);       
-            }
-        });
+        //로그인되어있다면
+        if(isLogin === true){
+            getProfileApi.mutate({},{
+                onSuccess: (data) => {
+                    console.log('프로필 조회 성공', data);
+                    setProfile(data);
+                },
+                onError: (error) => {
+                    console.error('프로필 조회 실패', error);       
+                }
+            });
+        }
 
-    }, [])
+    }, [isLogin] )
+
+    const getProfileApi = useMutation({mutationFn: async () => getProfile()});
 
     // useNavigate 훅 사용
     const navigate = useNavigate(); 
@@ -69,6 +71,8 @@ export default function Header(){
         logOut.mutate({},{
             onSuccess: (data) => {
                 console.log(data);
+                dispatch(toggleLoginState(false));
+                dispatch(toggleAccessToken(null));
             },
             onError: (error) => {
                 console.error('로그아웃 실패:', error);

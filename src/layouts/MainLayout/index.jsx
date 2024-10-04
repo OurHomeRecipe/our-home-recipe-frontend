@@ -8,6 +8,7 @@ import LoginPage from "../../pages/login/LoginPage.container";
 import Header from "./header/header.container";
 import SearchComponent from "./search/search.container";
 import Alert from "./alert/alert.container";
+import Modal from "../../common/modal/modal";
 
 
 
@@ -26,7 +27,7 @@ export default function MainLayout(){
             <Outlet/>
             <Footer/>
             <Alert/>
-            {isLogin ? <LoginPage/> : ''}
+            {isLogin ? <Modal><LoginPage/></Modal> : ''}
         </div>
     )
 }
