@@ -14,13 +14,23 @@ svg{
     cursor: pointer;
 }
 
-input, h1, p, button, textarea, select {
+input, h1, h2, h3, p, button, textarea, select {
     font-family: 'CookieRun-Regular';
 }
 
 input, textarea, select{
     padding: 5px 10px;
 }
+
+input::placeholder{
+    color: lightgray;
+}
+
+textarea::placeholder{
+    color: lightgray;
+}
+
+
 
 select{
     appearance: none;

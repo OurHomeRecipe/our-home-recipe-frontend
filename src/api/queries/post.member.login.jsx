@@ -23,6 +23,7 @@ export default function PostMemberLogin({email,password}) {
         },
         onError: (error) => {
             console.error('로그인 실패:', error);
+            alert('존재하지 않는 계정입니다.');
         },
         onSuccess: (data) => {
             console.log('로그인 성공:', data);

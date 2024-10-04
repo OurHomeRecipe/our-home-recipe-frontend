@@ -40,7 +40,7 @@ const slideOut = keyframes`
 
 export default function AlertUI({isAlertUI, messages}) {
   return (
-    <AlertFrame show={isAlertUI}>
+    <AlertFrame show={isAlertUI ? 'true' : undefined}>
       <div className={style.alertMessageBox}>
         {messages.map((message) => <AlertMessage key={message.id} text={message.content}/>)}    
       </div>

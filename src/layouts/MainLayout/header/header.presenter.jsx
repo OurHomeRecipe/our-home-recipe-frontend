@@ -2,7 +2,6 @@ import style from "../../../css/mainlayout.module.css"
 import header from "../../../css/header.module.css"
 import { FaBell } from "react-icons/fa";
 import { RiMenuSearchLine } from "react-icons/ri";
-import Alert from '../alert/alert.container';
 
 
 export default function HeaderUI({
@@ -10,7 +9,6 @@ export default function HeaderUI({
     profile,
     handleLogo,
     handleToggle,
-    isAlertUI,
     showAlert,
     handleProfil,
     handleLogin,

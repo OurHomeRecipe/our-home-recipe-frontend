@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import HeaderUI from "./header.presenter";
 import { getProfile } from "../../../api/axios/get.me.profile";
 import { toggleAlertUI } from "../../../features/alert/alertSlice";
+import { postLogout } from "../../../api/axios/post.member.logout";
 
 
 export default function Header(){
@@ -60,6 +61,7 @@ export default function Header(){
     //로그아웃
     const handleLogout = (e) => {
         e.preventDefault();
+        postLogout();
 
     }
 
