@@ -1,7 +1,10 @@
+
 import React, { useEffect, useRef, useState } from 'react'
+
 import prf from '../../../css/pages/profilepage.module.css'
 import { MdEdit } from "react-icons/md";
 import styled from 'styled-components';
+
 
 const ProfileImg = styled.div`
     background: url(${(props) => props.preview}) no-repeat;
@@ -21,9 +24,11 @@ const NickName = styled.input.attrs((props) => ({readOnly: props.isReadOnly, typ
     border: ${(props) => props.isReadOnly ? 'none' : '1px solid #ffe191'};
 `;
 
+
 const UserInfo = styled.input.attrs((props) => ({readOnly: props.isReadOnly, type:'text' }))`
     font-size: 15px;
     border: none;
+
     background-color: ${(props) => props.isReadOnly ? '#ffe191' : 'white'} ;
     border-radius: 10px;
     border: ${(props) => props.isReadOnly ? 'none' : '1px solid #ffe191'};
@@ -35,11 +40,13 @@ export default function ProfileUI({profile}) {
   const [preview, setPreview] = useState(null); // 이미지 미리보기 상태
   const fileInputRef = useRef(null); // 파일 입력 필드 참조
 
+
   const [nickname, setNickname] = useState('');
   const [nicknameEdit, setNickNameEdit] = useState(true);
 
   const [name, setName] = useState('');
   const [nameEdit, setNameEdit] = useState(true);
+
 
   const [email, setEmail] = useState('');
   const [emailEdit, setEmailEdit] = useState(true);
@@ -77,6 +84,7 @@ export default function ProfileUI({profile}) {
   console.log(preview);
 
 
+
   return (
     <div className={prf.frame}>
 
@@ -112,6 +120,8 @@ export default function ProfileUI({profile}) {
           </div>
 
           <div className={prf.row}>
+
+
             <textarea placeholder='자기소개를 입력할 수 있습니다.'/>
             <MdEdit />
           </div>
