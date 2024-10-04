@@ -36,7 +36,7 @@ const UserInfo = styled.input.attrs((props) => ({readOnly: props.isReadOnly, typ
 
 export default function ProfileUI({profile}) {
 
-  const [image, setImage] = useState(null);
+
   const [preview, setPreview] = useState(null); // 이미지 미리보기 상태
   const fileInputRef = useRef(null); // 파일 입력 필드 참조
 
@@ -71,7 +71,6 @@ export default function ProfileUI({profile}) {
     const file = e.target.files[0];
 
     if (file) {
-      setImage(file);
 
       const reader = new FileReader();
       reader.onloadend = () => {
