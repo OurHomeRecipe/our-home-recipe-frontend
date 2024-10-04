@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../appmain/RootStore";
 import { toggleSidebar } from "../../../features/sidebar/sidebarSlice";
-import { toggleLoginPage, toggleLoginState } from "../../../features/login/loginSlice";
+import { toggleLoginPage } from "../../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import HeaderUI from "./header.presenter";
 import { getProfile } from "../../../api/axios/get.me.profile";
@@ -17,13 +17,15 @@ export default function Header(){
     const isAlertUI = useAppSelector((state) => state.alert.showUI);
     const [profile, setProfile] = useState([]);
 
+
+
     const getProfileApi = useMutation({mutationFn: async () => getProfile()});
 
     useEffect(() => {
         getProfileApi.mutate({},{
             onSuccess: (data) => {
                 console.log('프로필 조회 성공', data);
-                setProfile(data.data);
+                setProfile(data);
             },
             onError: (error) => {
                 console.error('프로필 조회 실패', error);       
