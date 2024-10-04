@@ -38,7 +38,6 @@ API.interceptors.response.use(
     
     (response) => {
         // 200대의 응답 데이터를 이용해 실행
-        console.log(response);
         return response.data;
     },
     async (error) => {
