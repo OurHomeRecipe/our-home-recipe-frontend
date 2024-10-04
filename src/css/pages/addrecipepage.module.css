@@ -9,21 +9,27 @@
 }
 
 .foodInfo{
-    width: 400px;
-    padding: 15px 10px;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.foodInfo_left{
+    width: 375px;
 }
 
 .inputBox{
-    width: 95%;
     display: flex;
     align-items: center;
-    margin: 10px 0px;
-    justify-content: flex-start;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .inputBox p{
     color: orange;
-    width: 90px;
+    width: 140px;
 }
 
 .inputBox input{
@@ -40,8 +46,28 @@
     border: 1px solid orange;
 }
 
-.inputBox select{
-    width: 100%;
+.selectBox{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.selectBox p{
+    color: orange;
+    width: 80px;
+}
+
+.selectBox select{
+    width: 130px;
     border-radius: 6px;
     border: 1px solid orange;
+    margin: 0px 15px;
 }
+
+hr {
+    width: 85%;
+    border: none;
+    height: 0px;
+    border-top: 2px solid #ffbb00c2;
+    margin: 30px 0px;
+  }
