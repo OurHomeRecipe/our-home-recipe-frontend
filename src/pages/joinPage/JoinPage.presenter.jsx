@@ -1,25 +1,13 @@
 import React from 'react'
 import page from '../../css/pages/page.common.module.css'
 import style from '../../css/pages/joinpage.module.css'
-import GetEmailAuth from '../../api/queries/get.emailAuth'
 import PostMemberRegister from '../../api/queries/post.member.register'
 
 export default function JoinPageUI({
-  email,
-  authCode,
-  nickname,
-  password,
-  phoneNumber,
-  userName,
-  setNickName,
-  setPassword,
-  passwordConfirm,
-  setPasswordConfirm,
-  setPhoneNumber,
-  setUserName,
-  setEmail,
-  setAuthCode,
-  handleSubmitEmail
+  email, nickname, password, phoneNumber, userName, passwordConfirm,
+  setNickName, setPassword, setPasswordConfirm, setPhoneNumber, setUserName, setEmail, setAuthCode,
+  handleSubmitEmail,
+  handleEmailConfirm
 }) {
   return (
     <div className={page.frame}>
@@ -39,7 +27,7 @@ export default function JoinPageUI({
             <input type='text' placeholder='인증번호를 입력해주세요' onChange={(e) => setAuthCode(e.target.value)}/>
           </div>
 
-          <GetEmailAuth email={email} authCode={authCode}/>
+          <button onClick={handleEmailConfirm}>이메일 인증 확인</button>
 
           <div className={style.joinBox}>
             <p>닉네임</p>

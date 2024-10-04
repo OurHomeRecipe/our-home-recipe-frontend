@@ -1,45 +1,20 @@
 
 import React, { useEffect, useRef, useState } from 'react'
-
 import prf from '../../../css/pages/profilepage.module.css'
 import { MdEdit } from "react-icons/md";
-import styled from 'styled-components';
+import { NickName, ProfileImg, UserInfo } from './ProfilePage.style';
+import { useMutation } from '@tanstack/react-query';
+import { updateProfile } from '../../../api/axios/post.me.profile';
 
 
-const ProfileImg = styled.div`
-    background: url(${(props) => props.preview}) no-repeat;
-    background-size: 100%;
-    width: 250px;
-    height: 250px;
-    background-color: lightgray;
-    border-radius: 50%;
-    position: relative;
-`;
 
-const NickName = styled.input.attrs((props) => ({readOnly: props.isReadOnly, type:'text' }))`
-    font-size: 18px;
-    border: none;
-    background-color: ${(props) => props.isReadOnly ? '#ffe191' : 'white'} ;
-    border-radius: 10px;
-    border: ${(props) => props.isReadOnly ? 'none' : '1px solid #ffe191'};
-`;
-
-
-const UserInfo = styled.input.attrs((props) => ({readOnly: props.isReadOnly, type:'text' }))`
-    font-size: 15px;
-    border: none;
-
-    background-color: ${(props) => props.isReadOnly ? '#ffe191' : 'white'} ;
-    border-radius: 10px;
-    border: ${(props) => props.isReadOnly ? 'none' : '1px solid #ffe191'};
-`;
 
 export default function ProfileUI({profile}) {
 
-  const [image, setImage] = useState(null);
+  
+  const [profileImage, setProfileImage] = useState(null);
   const [preview, setPreview] = useState(null); // 이미지 미리보기 상태
   const fileInputRef = useRef(null); // 파일 입력 필드 참조
-
 
   const [nickname, setNickname] = useState('');
   const [nicknameEdit, setNickNameEdit] = useState(true);
@@ -53,6 +28,8 @@ export default function ProfileUI({profile}) {
 
   const [phonNumber, setPhonNumber] = useState('');
   const [phonNumberEdit, setPhonNumberEdit] = useState(true);
+
+  const [introduce, setIntroduce] = useState(null);
 
   useEffect(() => {
     if (profile && profile.nickname) {
@@ -71,18 +48,46 @@ export default function ProfileUI({profile}) {
     const file = e.target.files[0];
 
     if (file) {
-      setImage(file);
-
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result);
+        setPreview(reader.result); // 미리보기 설정
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // Base64로 변환된 이미지 데이터를 미리보기로 설정
+      setProfileImage(file); // 파일 객체를 상태로 저장
     }
   };
 
-  console.log(preview);
+  const updateProfileApi = useMutation({mutationFn: async (profileData) => updateProfile(profileData)})
 
+  const formData = new FormData();
+
+  const handleUpdateProfile = (e) => {
+    e.preventDefault();
+
+    formData.append(
+      "dto",
+      new Blob(
+        [JSON.stringify({nickname, name, email, phonNumber, introduce})],
+        {type: 'application/json'}
+      )
+    )
+
+    // 이미지 파일이 있을 경우 FormData에 추가
+    if (profileImage) {
+      formData.append("profileImage", profileImage); // 이미지 파일 추가
+    }
+
+    updateProfileApi.mutate(
+      formData,
+      {onSuccess: (data) => {
+        console.log('프로필 업데이트 성공', data);
+        alert('프로필이 수정되었습니다.');
+      }},
+      {onError: (error) => {
+        console.error('프로필 수정 실패:', error);
+      }}
+    );
+  }
 
 
   return (
@@ -126,6 +131,8 @@ export default function ProfileUI({profile}) {
             <MdEdit />
           </div>
         </div>
+
+        <button className={prf.saveButton} onClick={handleUpdateProfile} type='button'>저장</button>
 
     </div>
   );

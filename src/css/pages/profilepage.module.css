@@ -1,7 +1,8 @@
 .frame{
     display: flex;
     padding: 40px 0px;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -19,4 +20,13 @@
 .row{
     display: flex;
     align-items: center;
+}
+
+.saveButton{
+    width: 180px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #ff9e01;
+    color: white;
+    font-size: 18px;
 }
