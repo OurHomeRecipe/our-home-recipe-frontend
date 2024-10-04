@@ -13,6 +13,7 @@ export default function ProfileUI({profile}) {
 
   
   const [profileImage, setProfileImage] = useState(null);
+
   const [preview, setPreview] = useState(null); // 이미지 미리보기 상태
   const fileInputRef = useRef(null); // 파일 입력 필드 참조
 
