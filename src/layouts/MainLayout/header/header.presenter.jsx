@@ -38,7 +38,6 @@ export default function HeaderUI({
             </div>
             :
             <div className={header.menuBox_login_false}>
-                <FaBell className={style.alertIcon} onClick={showAlert} />
                 <button className={style.loginBtn} onClick={handleLogin}>Login</button>
                 <p>고객센터</p>
                 <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../appmain/RootStore";
 import { toggleSidebar } from "../../../features/sidebar/sidebarSlice";
-import { toggleLoginPage } from "../../../features/login/loginSlice";
+import { toggleLoginPage, toggleLoginState } from "../../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import HeaderUI from "./header.presenter";
 import { getProfile } from "../../../api/axios/get.me.profile";
 import { toggleAlertUI } from "../../../features/alert/alertSlice";
 import { postLogout } from "../../../api/axios/post.member.logout";
+import { useMutation } from "@tanstack/react-query";
 
 
 export default function Header(){
@@ -16,20 +17,20 @@ export default function Header(){
     const isAlertUI = useAppSelector((state) => state.alert.showUI);
     const [profile, setProfile] = useState([]);
 
+    const getProfileApi = useMutation({mutationFn: async () => getProfile()});
+
     useEffect(() => {
-        const fetchProfileData = async () => {
-            if (isLogin === true) {
-                try {
-                    const profileData = await getProfile(); // getProfile()의 Promise를 기다림
-                    setProfile(profileData);
-                } catch (error) {
-                    console.error("프로필 데이터를 가져오는데 실패했습니다:", error);
-                }
+        getProfileApi.mutate({},{
+            onSuccess: (data) => {
+                console.log('프로필 조회 성공', data);
+                setProfile(data.data);
+            },
+            onError: (error) => {
+                console.error('프로필 조회 실패', error);       
             }
-        };
-    
-        fetchProfileData(); // 비동기 함수 호출
-    }, [isLogin])
+        });
+
+    }, [])
 
     // useNavigate 훅 사용
     const navigate = useNavigate(); 
@@ -57,11 +58,20 @@ export default function Header(){
         e.preventDefault();
         dispatch(toggleLoginPage(true))
     }
+
+    const logOut = useMutation({mutationFn: async () => postLogout()})
     
     //로그아웃
     const handleLogout = (e) => {
         e.preventDefault();
-        postLogout();
+        logOut.mutate({},{
+            onSuccess: (data) => {
+                console.log(data);
+            },
+            onError: (error) => {
+                console.error('로그아웃 실패:', error);
+            }
+        })
 
     }
 

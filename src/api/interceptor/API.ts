@@ -47,8 +47,9 @@ API.interceptors.response.use(
         // 토큰 만료, 잘못된 토큰, 토큰이 존재하지 않는 경우, 로그아웃 된 경우: 401
         if(error.response.status === 401 && !originalRequest._retry) {
             console.log(error.response.status);
+            
             // TODO 저장소에서 accessToken 제거
-            // localStorage.removeItem('accessToken');
+            RootStore.dispatch(toggleAccessToken(null));
 
             originalRequest._retry = true;
 
@@ -76,6 +77,7 @@ API.interceptors.response.use(
                     return API(originalRequest)
                 }catch(refreshError) {
                     console.log('유효하지 않은 리프래시 토큰:', refreshError);
+                    RootStore.dispatch(toggleLoginState(false)); 
                     return Promise.reject(refreshError);
                 }
             }
