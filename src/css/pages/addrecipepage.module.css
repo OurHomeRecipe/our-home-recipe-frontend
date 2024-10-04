@@ -55,6 +55,7 @@
 .selectBox p{
     color: orange;
     width: 80px;
+    text-align: right;
 }
 
 .selectBox select{
@@ -71,3 +72,11 @@ hr {
     border-top: 2px solid #ffbb00c2;
     margin: 30px 0px;
   }
+
+  .tagBox{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+}

@@ -8,9 +8,14 @@ import { FoodImg } from './addRecipe.Page.style';
 export default function AddRecipePageUI({
     preview,
     fileInputRef,
+    ingredients,
+    tags,
     handleIconClick,
     handleImageChange
 }) {
+
+    console.log('재료',ingredients);
+    console.log('태그',tags)
 
   return (
     <div className={page.frame}>
@@ -36,32 +41,18 @@ export default function AddRecipePageUI({
         </div>
 
         <div className={style.foodInfo}>
-            <div className={style.inputBox}>
-                <div className={style.selectBox}>
-                    <p>태그</p>
-                    <select>
-                    </select>
-
-                    <select>              
-                    </select>
-
-                    <select>                   
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div className={style.foodInfo}>
-            <div className={style.inputBox}>
-                <div className={style.selectBox}>
-                    <p>시간</p>
-                    <select>
-                    </select>
-
-                    <p>난이도</p>
-                    <select>
-                    </select>
-                </div>               
+            <div className={style.tagBox}>
+                {tags.map((tag,index) => 
+                    <div key={index} className={style.selectBox}>
+                        <p>{tag.tagTypeName}:</p>
+                        <select>
+                            <option value='' >선택</option>
+                            {tag.tags.map((tag) =>
+                                <option key={tag.tagId} value={tag.tagId} >{tag.tagName}</option>
+                            )}
+                        </select>
+                    </div> 
+                )}                          
             </div>
         </div>
 
