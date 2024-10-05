@@ -5,56 +5,73 @@ import {NickName, ProfileImg, UserInfo} from './ProfilePage.style';
 
 
 export default function ProfileUI({
-    preview,
-    nickname, nicknameEdit,
-    name, nameEdit,
-    email, emailEdit,
-    phonNumber,
-    handleIconClick,
-    handleImageChange,
-    fileInputRef,phonNumberEdit,
-    setNickname, setNickNameEdit,
-    setName, setNameEdit,
-    setEmail, setEmailEdit,
-    setPhonNumber, setPhonNumberEdit,
-    handleUpdateProfile
+    newProfile,preview,
+    editState, setEditState,
+    fileInputRef,
+    setNewProfile,
+    handleIconClick, handleImageChange,handleUpdateProfile
 }) {
-
 
     return (
         <div className={prf.frame}>
 
             <div>
-                <ProfileImg preview={preview}>
+                <ProfileImg preview={preview === null ? newProfile.profileImage : preview} >
                     <MdEdit className={prf.profileImageEdit} onClick={handleIconClick}/>
-                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange}
-                           style={{display: 'none'}}/>
+                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
                 </ProfileImg>
 
                 <div className={prf.row}>
-                    <NickName value={nickname} isReadOnly={nicknameEdit} onChange={(e) => setNickname(e.target.value)}/>
-                    <MdEdit onClick={() => setNickNameEdit((edit) => !edit)}/>
+                    <NickName 
+                        value={newProfile.nickname} 
+                        isReadOnly={editState.nickname} 
+                        onChange={(e) => setNewProfile(prev => ({
+                            ...prev,
+                            nickname: e.target.value
+                        }))} 
+                    />
+                    <MdEdit onClick={() => setEditState(prev => ({...prev, nickname: !prev.nickname})) }/>
                 </div>
             </div>
 
             <div>
                 <div className={prf.row}>
                     <p>이름</p>
-                    <UserInfo value={name} isReadOnly={nameEdit} onChange={(e) => setName(e.target.value)}/>
-                    <MdEdit onClick={() => setNameEdit((edit) => !edit)}/>
+                    <UserInfo 
+                        value={newProfile.name}
+                        isReadOnly={editState.name}
+                        onChange={(e) => setNewProfile(prev => ({
+                            ...prev,
+                            name: e.target.value
+                        }))} 
+                    />
+                    <MdEdit onClick={() => setEditState(prev => ({...prev, name: !prev.name})) }/>
                 </div>
 
                 <div className={prf.row}>
                     <p>이메일</p>
-                    <UserInfo value={email} isReadOnly={emailEdit} onChange={(e) => setEmail(e.target.value)}/>
-                    <MdEdit onClick={() => setEmailEdit((edit) => !edit)}/>
+                    <UserInfo 
+                        value={newProfile.email}
+                        isReadOnly={editState.email}
+                        onChange={(e) => setNewProfile(prev => ({
+                            ...prev,
+                            email: e.target.value
+                        }))} 
+                    />
+                    <MdEdit onClick={() => setEditState(prev => ({...prev, email: !prev.email})) }/>
                 </div>
 
                 <div className={prf.row}>
                     <p>전화번호</p>
-                    <UserInfo value={phonNumber} isReadOnly={phonNumberEdit}
-                              onChange={(e) => setPhonNumber(e.target.value)}/>
-                    <MdEdit onClick={() => setPhonNumberEdit((edit) => !edit)}/>
+                    <UserInfo 
+                        value={newProfile.phoneNumber}
+                        isReadOnly={editState.phoneNumber}
+                        onChange={(e) => setNewProfile(prev => ({
+                            ...prev,
+                            phoneNumber: e.target.value
+                        }))} 
+                    />
+                    <MdEdit onClick={() => setEditState(prev => ({...prev, phoneNumber: !prev.phoneNumber})) }/>
                 </div>
 
                 <div className={prf.row}>
@@ -65,7 +82,7 @@ export default function ProfileUI({
                 </div>
             </div>
 
-            <button className={prf.saveButton} onClick={handleUpdateProfile} type='button'>저장</button>
+            <button className={prf.saveButton} type='button' onClick={handleUpdateProfile}>저장</button>
 
         </div>
     );
