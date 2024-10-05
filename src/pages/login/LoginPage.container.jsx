@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import LoginUI from './LoginPage.presenter'
 import { toggleLoginPage } from '../../features/login/loginSlice';
-import { useAppDispatch } from '../../appmain/RootStore';
+
 import { useNavigate } from 'react-router-dom';
 import { useLoginQuery } from '../../api/queries/loginQuery';
+import { useAppDispatch } from '../../RootStore';
 
 export default function LoginPage() {
 

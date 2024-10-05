@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { toggleAccessToken, toggleLoginPage, toggleLoginState } from "../../features/login/loginSlice";
-import RootStore from "../../appmain/RootStore";
+
 import API from "../interceptor/API";
+import RootStore from "../../RootStore";
 
 export const useLoginQuery = () => {
 

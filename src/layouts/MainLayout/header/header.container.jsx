@@ -1,5 +1,3 @@
-
-import RootStore, { useAppDispatch, useAppSelector } from "../../../appmain/RootStore";
 import { toggleSidebar } from "../../../features/sidebar/sidebarSlice";
 import { toggleAccessToken, toggleLoginPage, toggleLoginState } from "../../../features/login/loginSlice";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +5,9 @@ import HeaderUI from "./header.presenter";
 import { toggleAlertUI } from "../../../features/alert/alertSlice";
 import { postLogout } from "../../../api/axios/post.member.logout";
 import { useMutation } from "@tanstack/react-query";
-import { useFetchProfile, useProfileQuery } from "../../../api/queries/profileQueries";
-import { useState } from "react";
+import { useProfileQuery } from "../../../api/queries/profileQueries";
+import RootStore, { useAppDispatch, useAppSelector } from "../../../RootStore";
+
 
 
 export default function Header(){

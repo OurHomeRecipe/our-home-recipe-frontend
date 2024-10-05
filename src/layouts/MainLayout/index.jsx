@@ -3,12 +3,12 @@ import Sidebar from "./sidebar";
 import {Outlet} from "react-router-dom";
 import style from "../../css/mainlayout.module.css"
 import Footer from "./footer";
-import { useAppSelector } from "../../appmain/RootStore";
 import LoginPage from "../../pages/login/LoginPage.container";
 import Header from "./header/header.container";
 import SearchComponent from "./search/search.container";
 import Alert from "./alert/alert.container";
 import Modal from "../../common/modal/modal";
+import { useAppSelector } from "../../RootStore";
 
 
 

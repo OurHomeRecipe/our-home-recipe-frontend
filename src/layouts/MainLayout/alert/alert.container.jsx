@@ -1,6 +1,6 @@
 import React from 'react'
 import AlertUI from './alert.presenter'
-import { useAppSelector } from '../../../appmain/RootStore';
+import { useAppSelector } from '../../../RootStore';
 
 export default function Alert() {
 

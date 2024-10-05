@@ -5,10 +5,10 @@ import {createRoot} from 'react-dom/client';
 import App from './App';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {persistStore} from "redux-persist";
-import RootStore from "./appmain/RootStore";
 import {Provider} from "react-redux";
 import {PersistGate} from 'redux-persist/integration/react';
 import {BrowserRouter} from "react-router-dom";
+import RootStore from './RootStore';
 
 // React Query의 QueryClient 생성
 const queryClient = new QueryClient();
