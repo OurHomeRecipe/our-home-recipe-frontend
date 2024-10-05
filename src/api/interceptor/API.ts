@@ -1,6 +1,6 @@
 import axios, {AxiosInstance, InternalAxiosRequestConfig} from "axios";
-import RootStore from "../../appmain/RootStore";
 import { toggleAccessToken, toggleLoginState } from "../../features/login/loginSlice";
+import RootStore from "../../RootStore";
 
 
 const API: AxiosInstance = axios.create({

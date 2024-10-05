@@ -1,5 +1,5 @@
 import style from "../../css/sidebar.module.css"
-import { useAppSelector } from "../../appmain/RootStore";
+import { useAppSelector } from "../../RootStore";
 
 export default function Sidebar(){
 
