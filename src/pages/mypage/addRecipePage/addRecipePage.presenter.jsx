@@ -2,6 +2,7 @@ import page from '../../../css/pages/page.common.module.css'
 import style from '../../../css/pages/addrecipepage.module.css'
 import { LuImagePlus } from "react-icons/lu";
 import { FoodImg } from './addRecipe.Page.style';
+import AddRecipeIngredients from '../../../common/\brecipe/addRecipeIngredients';
 
 
 
@@ -13,9 +14,6 @@ export default function AddRecipePageUI({
     handleIconClick,
     handleImageChange
 }) {
-
-    console.log('재료',ingredients);
-    console.log('태그',tags)
 
   return (
     <div className={page.frame}>
@@ -35,7 +33,7 @@ export default function AddRecipePageUI({
             </div>
 
             <FoodImg preview={preview} onClick={handleIconClick}>
-                <LuImagePlus color='gray' size={25} />
+                {preview === null ? <LuImagePlus color='gray' size={25} /> : ''}               
                 <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
             </FoodImg>
         </div>
@@ -58,10 +56,12 @@ export default function AddRecipePageUI({
 
         <hr/>
 
-        <h3>재료정보</h3>
+        <h2>재료정보</h2>
+        <AddRecipeIngredients ingredients={ingredients}/>
 
-
-
+        <div className={style.buttonBox}>
+            <button type='button' className={style.saveButton}>레시피 등록</button>
+        </div>
     </div>
   )
 }
