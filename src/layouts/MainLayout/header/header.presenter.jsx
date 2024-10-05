@@ -16,8 +16,8 @@ const ProfileImageMini = styled.div`
 
 
 export default function HeaderUI({
+    profileImage,nickname,
     isLogin,
-    profile,
     handleLogo,
     handleToggle,
     showAlert,
@@ -37,8 +37,8 @@ export default function HeaderUI({
                 <FaBell className={style.alertIcon} onClick={showAlert} />
 
                 <div className={header.profileBox}>
-                    <ProfileImageMini preview={profile.profileImage} onClick={handleProfil}></ProfileImageMini>
-                    <p>{profile.nickname}</p>
+                    <ProfileImageMini preview={profileImage} onClick={handleProfil}></ProfileImageMini>
+                    <p>{nickname}</p>
                     <button className={style.loginBtn} onClick={handleLogout}>Logout</button>
                 </div>
 

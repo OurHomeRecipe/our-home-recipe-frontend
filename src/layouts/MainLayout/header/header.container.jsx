@@ -7,7 +7,7 @@ import HeaderUI from "./header.presenter";
 import { toggleAlertUI } from "../../../features/alert/alertSlice";
 import { postLogout } from "../../../api/axios/post.member.logout";
 import { useMutation } from "@tanstack/react-query";
-import { useFetchProfile } from "../../../api/queries/profileQueries";
+import { useFetchProfile, useProfileQuery } from "../../../api/queries/profileQueries";
 import { useState } from "react";
 
 
@@ -15,9 +15,9 @@ export default function Header(){
 
     const isAlertUI = useAppSelector((state) => state.alert.showUI);
     const isLogin = RootStore.getState().login.loginState;
-    const [profile, setProfile] = useState([]);
+    const {profileImage, nickname} = useProfileQuery();
 
-    useFetchProfile();
+
 
 
     // useNavigate 훅 사용
@@ -71,7 +71,8 @@ export default function Header(){
         showAlert={showAlert}
         isAlertUI={isAlertUI}
         handleLogo={handleLogo}
-        profile={profile}
+        profileImage={profileImage}
+        nickname={nickname}
         handleToggle={handleToggle}
         handleProfil={handleProfil}
         handleLogin={handleLogin}
