@@ -11,10 +11,7 @@ export default function AddRecipePage() {
   const [ingredients, setIngredients] = useState([]);
   const [tags, setTags] = useState([]);
   
-  const {data, error} = useQuery({
-    queryKey: ['metaData'],
-    queryFn: recipeMetaDataAPI
-  });
+  const {data, error} = useQuery({ queryKey: ['metaData'], queryFn: recipeMetaDataAPI });
 
   useEffect(() => {
     if (data) {
