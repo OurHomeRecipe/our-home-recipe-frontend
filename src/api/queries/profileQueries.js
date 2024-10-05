@@ -1,8 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import API from "../interceptor/API";
 import { useEffect, useState } from "react";
-import { updateProfile } from "../axios/post.me.profile";
-import { useNavigate } from "react-router-dom";
 
 // Profile 조회 쿼리
 export const useProfileQuery = () => {

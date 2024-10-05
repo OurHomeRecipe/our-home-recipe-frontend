@@ -1,0 +1,60 @@
+.frame{
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    color: orange;
+    font-size: 14px;
+}
+
+.contentBox{
+    width: 700px;
+    display: flex;
+    align-items: center;
+}
+
+.ingredient_box{
+    display: flex;
+    align-items: center;
+}
+
+.ingredient_box select{
+    width: 180px;
+    border-radius: 6px;
+    border: 1px solid orange;
+    margin: 0px 15px;
+}
+
+.defaultOption{
+    color: gray;
+}
+
+.quantityBox{
+    display: flex;
+    align-items: center;
+}
+
+.quantityBox input{
+    width: 100px;
+    border-radius: 6px;
+    border: 1px solid orange;
+    margin-right: 10px;
+}
+
+.addButton{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #ffad00;
+    color: white;
+    margin: 15px 0px;
+}
+
+.deleteBtn{
+    font-size: 22px;
+    margin-left: 15px;
+    opacity: 0;
+}
+
+.contentBox:hover .deleteBtn {
+    opacity: 1;
+}

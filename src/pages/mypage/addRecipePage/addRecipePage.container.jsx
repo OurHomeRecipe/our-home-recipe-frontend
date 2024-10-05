@@ -1,29 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import AddRecipePageUI from './addRecipePage.presenter'
-import { useQuery } from '@tanstack/react-query';
-import { recipeMetaDataAPI } from '../../../api/axios/recipe/get.recipe.metadata';
+import { useRecipeMetaDataQuery } from '../../../api/queries/recipeQueries';
 
 export default function AddRecipePage() {
 
   const [preview, setPreview] = useState(null); // 이미지 미리보기 상태
   const fileInputRef = useRef(null); // 파일 입력 필드 참조
+  const {ingredients, tags} = useRecipeMetaDataQuery();
 
-  const [ingredients, setIngredients] = useState([]);
-  const [tags, setTags] = useState([]);
-  
-  const {data, error} = useQuery({ queryKey: ['metaData'], queryFn: recipeMetaDataAPI });
-
-  useEffect(() => {
-    if (data) {
-      console.log('Fetched data:', data);
-      // 데이터가 성공적으로 가져와졌을 때 실행할 후속 작업
-      setIngredients(data.ingredients);
-      setTags(data.tags);
-    }
-    if(error){
-      console.log(error);
-    }
-  }, [data]);
 
 
   const handleIconClick = () => {
