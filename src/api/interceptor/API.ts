@@ -21,7 +21,7 @@ API.interceptors.request.use(
             config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
 
-        if(accessToken === null){
+        if(accessToken === ''){
             RootStore.dispatch(toggleLoginState(false));
         }
 
@@ -59,7 +59,7 @@ API.interceptors.response.use(
                 RootStore.dispatch(toggleLoginState(false));               
             }
             
-            if(refreshToken !== null){
+            if(refreshToken !== ''){
                 try{
                     // TODO 리프래시 토큰을 이용해서 토큰 재발급 요청
                     const response = await API.post('/member/token/refresh', { }, {

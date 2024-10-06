@@ -1,25 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { toggleAccessToken, toggleLoginPage, toggleLoginState } from "../../features/login/loginSlice";
-
-import API from "../interceptor/API";
 import RootStore from "../../RootStore";
+import { postLogin, postLogout } from "../axios/member/loginApi";
 
+/**
+ * 로그인 Query
+ * @author 소연
+ */
 export const useLoginQuery = () => {
 
-    const loginData = useMutation({
-        mutationFn: async(loginData) => {
-            try {
-                const response = await API.post(
-                    '/member/login',
-                    loginData,
-                    {withCredentials: true}, //CORS
-                );
-                return response.data;
-        
-            } catch (error) {
-                throw error;
-            }
-        }, 
+    const loginMuation = useMutation({
+        mutationFn: postLogin,
         onSuccess: (data) => {
             //accessToken받아오기
             RootStore.dispatch(toggleAccessToken(data.accessToken));
@@ -34,8 +25,35 @@ export const useLoginQuery = () => {
 
 
     const login = (email,password) => {
-        loginData.mutate({email, password});
+        loginMuation.mutate({email, password});
     }
 
     return {login}
+}
+
+
+
+/**
+ * 로그아웃 React Query
+ * 
+ */
+export const useLogoutQuery = () => {
+
+    const logOutData = useMutation({
+        mutationFn: async () => postLogout,
+        onSuccess: (data) => {
+            console.log(data);
+            RootStore.dispatch(toggleLoginState(false));
+            RootStore.dispatch(toggleAccessToken(null));
+        },
+        onError: (error) => {
+            console.error('로그아웃 실패:', error);
+        }
+    })
+
+    const logOut = () => {
+        logOutData.mutate();
+    }
+
+    return {logOut}
 }
