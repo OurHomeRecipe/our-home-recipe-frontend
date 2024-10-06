@@ -1,19 +1,14 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import API from "../interceptor/API";
 import { useEffect, useState } from "react";
+import {useSelector} from "react-redux";
 
 /**
  * 프로필 조회 쿼리
  * @author 소연
  */
 export const useProfileQuery = () => {
-
-    const [profileImage, setProfileImage] = useState('');
-    const [email, setEmail] = useState('');
-    const [nickname, setNickName] = useState('');
-    const [name, setName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [introduce, setIntroduce] = useState('');
+    const accessToken = useSelector((state) => state.login.accessToken);
 
     const {data, error} = useQuery({
         queryKey: ['profile'],  // 쿼리 키
@@ -26,27 +21,17 @@ export const useProfileQuery = () => {
                 throw error;
             }
         },
+        enabled: !!accessToken,
         retry: false // 쿼리 실패 시 재시도 방지
     });
 
-    useEffect(() => {
-        if (data) {
-            setProfileImage(data.profileImage);
-            setNickName(data.nickname);
-            setName(data.name);
-            setEmail(data.email);
-            setPhoneNumber(data.phoneNumber);
-            setIntroduce(data.introduce);
-        }
-    }, [data]); // data가 업데이트될 때마다 실행
-    
     return {
-        profileImage,
-        nickname,
-        name,
-        email,
-        phoneNumber,
-        introduce,
+        profileImage: data?.profileImage || '',
+        nickname: data?.nickname || '',
+        name: data?.name || '',
+        email: data?.email || '',
+        phoneNumber: data?.phoneNumber || '',
+        introduce: data?.introduce || '',
         error
     }
     
