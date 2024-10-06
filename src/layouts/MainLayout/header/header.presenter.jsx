@@ -3,6 +3,10 @@ import header from "../../../css/header.module.css"
 import { FaBell } from "react-icons/fa";
 import { RiMenuSearchLine } from "react-icons/ri";
 import styled from "styled-components";
+import RootStore from "../../../RootStore";
+import { toggleAlertUI } from "../../../features/alert/alertSlice";
+import { toggleSidebar } from "../../../features/sidebar/sidebarSlice";
+import { toggleLoginPage } from "../../../features/login/loginSlice";
 
 const ProfileImageMini = styled.div`
     background: url(${(props) => props.preview}) no-repeat;
@@ -14,44 +18,37 @@ const ProfileImageMini = styled.div`
     cursor: pointer;
 `
 
-
 export default function HeaderUI({
     profileImage,nickname,
-    isLogin,
-    handleLogo,
-    handleToggle,
-    showAlert,
-    handleProfil,
-    handleLogin,
-    handleLogout
+    navigate,logOut
 }) {
   return (
     <div className={style.header_frame}>
-    <div className={style.header_logo} onClick={handleLogo}></div>
+    <div className={style.header_logo} onClick={()=> navigate('/')}></div>
 
 
-        {isLogin 
+        {RootStore.getState().login.loginState 
             ?
             <div className={header.menuBox_login_true}>
                 {/* 알림창 */}
-                <FaBell className={style.alertIcon} onClick={showAlert} />
+                <FaBell className={style.alertIcon} onClick={()=>RootStore.dispatch(toggleAlertUI())} />
 
                 <div className={header.profileBox}>
-                    <ProfileImageMini preview={profileImage} onClick={handleProfil}></ProfileImageMini>
+                    <ProfileImageMini preview={profileImage} onClick={()=>navigate('/mypage')}></ProfileImageMini>
                     <p>{nickname}</p>
-                    <button className={style.loginBtn} onClick={handleLogout}>Logout</button>
+                    <button className={style.loginBtn} onClick={()=> logOut()}>Logout</button>
                 </div>
 
                 <p>고객센터</p>
 
                 {/* 카테고리 */}
-                <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
+                <RiMenuSearchLine className={style.sidebarIcon} onClick={ () => RootStore.dispatch(toggleSidebar())}/>
             </div>
             :
             <div className={header.menuBox_login_false}>
-                <button className={style.loginBtn} onClick={handleLogin}>Login</button>
+                <button className={style.loginBtn} onClick={()=>RootStore.dispatch(toggleLoginPage(true))}>Login</button>
                 <p>고객센터</p>
-                <RiMenuSearchLine className={style.sidebarIcon} onClick={handleToggle}/>
+                <RiMenuSearchLine className={style.sidebarIcon} onClick={ () => RootStore.dispatch(toggleSidebar())}  />
             </div>
             
         }

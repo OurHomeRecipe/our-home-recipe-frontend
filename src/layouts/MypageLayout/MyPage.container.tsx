@@ -8,21 +8,22 @@ export interface MenuItem {
   url: string;
 }
 
+const menu: MenuItem[] = [
+  { id: 1, name: 'My Profile', url:'mypage'},
+  { id: 2, name: '좋아요 목록', url:'mypage/like'},
+  { id: 3, name: '나의 게시글', url:'mypage/myboards' },
+  { id: 4, name: '팔로워', url:'mypage/follower' },
+  { id: 5, name: '팔로잉', url:'mypage/following' },
+]
+
+
 export default function MyPagePage() {
 
-  // useNavigate 훅 사용
+  //React-Router
   const navigate = useNavigate(); 
 
+  //State
   const [seletedMenu, setSelectedMenu] = useState<number>(1);
-
-
-  const menu: MenuItem[] = [
-    { id: 1, name: 'My Profile', url:'mypage'},
-    { id: 2, name: '좋아요 목록', url:'mypage/like'},
-    { id: 3, name: '나의 게시글', url:'mypage/myboards' },
-    { id: 4, name: '팔로워', url:'mypage/follower' },
-    { id: 5, name: '팔로잉', url:'mypage/following' },
-  ]
 
   const handleMenu = (menuId:number, menuUrl:string) => {
     setSelectedMenu(menuId);

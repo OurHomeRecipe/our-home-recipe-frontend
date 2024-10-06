@@ -5,11 +5,13 @@ import {NickName, ProfileImg, UserInfo} from './ProfilePage.style';
 
 
 export default function ProfileUI({
-    newProfile,preview,
+    preview,
+    newProfile, setNewProfile,
     editState, setEditState,
     fileInputRef,
-    setNewProfile,
-    handleIconClick, handleImageChange,handleUpdateProfile
+    handleIconClick, 
+    handleImageChange,
+    handleUpdateProfile
 }) {
 
     return (

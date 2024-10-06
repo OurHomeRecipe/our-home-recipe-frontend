@@ -107,17 +107,10 @@ export default function ProfilePage() {
 
   return (
     <ProfileUI 
-        profileImage={profileImage}
-        nickname={nickname}
-        name={name}
-        email={email}
-        phoneNumber={phoneNumber}
-        introduce={introduce}
         preview={preview}
-        fileInputRef={fileInputRef}
         newProfile={newProfile}
         editState={editState}
-
+        fileInputRef={fileInputRef}
         setEditState={setEditState}
         setNewProfile={setNewProfile}
         handleIconClick={handleIconClick}

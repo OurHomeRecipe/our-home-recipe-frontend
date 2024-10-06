@@ -2,7 +2,10 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import API from "../interceptor/API";
 import { useEffect, useState } from "react";
 
-// Profile 조회 쿼리
+/**
+ * 프로필 조회 쿼리
+ * @author 소연
+ */
 export const useProfileQuery = () => {
 
     const [profileImage, setProfileImage] = useState('');
@@ -51,7 +54,10 @@ export const useProfileQuery = () => {
 
 
 
-// 프로필 업데이트 쿼리
+/**
+ * 프로필 업데이트 리액트 쿼리
+ * @author 소연
+ */
 export const useProfileUpdateQuery = () => { 
 
         const update = useMutation({
