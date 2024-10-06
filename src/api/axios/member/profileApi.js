@@ -1,7 +1,12 @@
-// 내 프로필 업데이트
+import API from "../../interceptor/API";
 
-import API from "../interceptor/API";
 
+/**
+ * 프로필 업데이트
+ * @author 소연
+ * @param {*} profileData 
+ * @returns {*} {id : 1}
+ */
 export const updateProfile = async (profileData) => {
     try {
         const response = await API.post(
@@ -16,7 +21,6 @@ export const updateProfile = async (profileData) => {
         );
         return response.data;
     } catch (error) {
-        console.error('Error fetching profile:', error);
-        console.log(error.errorMessage);
+        throw error
     }
 };

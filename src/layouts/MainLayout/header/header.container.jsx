@@ -3,10 +3,11 @@ import { toggleAccessToken, toggleLoginPage, toggleLoginState } from "../../../f
 import { useNavigate } from "react-router-dom";
 import HeaderUI from "./header.presenter";
 import { toggleAlertUI } from "../../../features/alert/alertSlice";
-import { postLogout } from "../../../api/axios/post.member.logout";
 import { useMutation } from "@tanstack/react-query";
 import { useProfileQuery } from "../../../api/queries/profileQueries";
 import RootStore, { useAppDispatch, useAppSelector } from "../../../RootStore";
+import { postLogout } from "../../../api/axios/member/loginApi";
+
 
 
 
