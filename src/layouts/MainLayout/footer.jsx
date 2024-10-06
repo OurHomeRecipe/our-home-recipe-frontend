@@ -7,8 +7,9 @@ export default function Footer() {
   const [imgShow, setImgShow] = useState(false);
 
   const closePayBox = () => {
-    setImgShow(false);
-  }
+      setImgShow(false);
+    }
+  
     
 
 
