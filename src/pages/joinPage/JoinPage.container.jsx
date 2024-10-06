@@ -1,71 +1,66 @@
 import React, { useState } from 'react'
 import JoinPageUI from './JoinPage.presenter'
-import { useMutation } from '@tanstack/react-query';
-import { postEmailAuth } from '../../api/axios/post.email.auth.request';
-import { postEmailAuchConfirm } from '../../api/axios/post.email.auth.confirm';
+import { postEmailAuchConfirm, postEmailAuth, postRegister } from '../../api/axios/member/emailApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function JoinPage() {
 
-  const [email, setEmail] = useState('');
-  const [authCode, setAuthCode] = useState('');
-  const [nickname, setNickName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [userName, setUserName] = useState();
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState();
+  // useNavigate 훅 사용
+  const navigate = useNavigate(); 
 
-  // useMutation을 사용해 데이터를 서버에 전송
-  const mutation1 = useMutation({mutationFn: async (emailAuthData) => postEmailAuth(emailAuthData)});
+  const [loginData, setLoginData] = useState({
+    email: '',
+    authCode: '',
+    nickname: '',
+    phoneNumber: '',
+    name: '',
+    password: '',
+    passwordConfirm: '',
+  })
 
-  const handleSubmitEmail = (e) => {
-  e.preventDefault();
-  mutation1.mutate({email}, {
-      onSuccess: (data) => {
-          console.log('이메일 인증 성공:', data);
-          alert('인증 메일이 발송되었습니다. 메일을 확인해주세요.')
-      },
-      onError: (error) => {
-          console.error('이메일 인증 실패:', error);
-          alert(error.errorMessage);
-      }
-  });
+  const handleSubmitEmail = async(e) => {
+    e.preventDefault();
+    try {
+      const data = await postEmailAuth(loginData.email);
+      alert(data) // 데이터 처리
+    } catch (error) {
+        alert(error.errorMessage);
+    }
   };
 
-  const mutation2 = useMutation({mutationFn: async (emailAuthData) => postEmailAuchConfirm(emailAuthData)});
-
-  const handleEmailConfirm = (e) => {
+  const handleEmailConfirm = async(e) => {
+    if(loginData.authCode === ''){
+      alert("올바른 인증번호를 입력해주세요");
+      return;
+    }
     e.preventDefault();
-    mutation2.mutate({email, authCode}, {
-        onSuccess: (data) => {
-            console.log('이메일 인증 성공:', data);
-            alert('인증 성공');
+    try {
+      const data = await postEmailAuchConfirm({email: loginData.email, authCode: loginData.authCode});
+      alert(data);
+    } catch (error) {
+        alert(error.errorMessage);
+    }
+};
 
-        },
-        onError: (error) => {
-            console.error('이메일 인증 실패:', error);
-            alert('인증 실패');
-        }
-    });
+const handleSubmitJoin = async(e) => {
+  e.preventDefault();
+  try {
+      const data = await postRegister(loginData);
+      console.log('회원가입 성공:', data);
+      alert('회원가입을 축하합니다');
+      navigate('/');
+  } catch (error) {
+      alert(error.errorMessage);
+  }
 };
 
   return (
     <JoinPageUI
-      email={email}
-      authCode={authCode}
-      nickname={nickname}
-      phoneNumber={phoneNumber}
-      userName={userName}
-      password={password}
-      passwordConfirm={passwordConfirm}
-      setNickName={setNickName}
-      setPassword={setPassword}
-      setPasswordConfirm={setPasswordConfirm}
-      setPhoneNumber={setPhoneNumber}
-      setUserName={setUserName}
-      setEmail={setEmail}
-      setAuthCode={setAuthCode}
+      loginData={loginData}
+      setLoginData={setLoginData}
       handleSubmitEmail={handleSubmitEmail}
       handleEmailConfirm={handleEmailConfirm}
+      handleSubmitJoin={handleSubmitJoin}
     />
   )
 }

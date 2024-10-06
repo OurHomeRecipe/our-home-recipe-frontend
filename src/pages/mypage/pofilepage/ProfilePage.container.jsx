@@ -101,7 +101,7 @@ export default function ProfilePage() {
             formData.append('profileImage', updatedData.profileImage); // 이미지 파일 객체 추가
         }
 
-        profileUpdate(formData);
+        profileUpdate(formData); //React Query  
     }
 
 
