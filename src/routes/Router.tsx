@@ -6,10 +6,11 @@ import FindUserPage from "../pages/finduserPage/FindUserPage.container";
 import MyPagePage from "../layouts/MypageLayout/MyPage.container";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage.container";
 import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage.container";
-import AddRecipePage from "../pages/mypage/addRecipePage/addRecipePage.container";
+
 
 import LoginPage from "../pages/login/LoginPage.container";
 import { useAppSelector } from "../RootStore";
+import AddRecipePage from "../pages/mypage/addRecipePage/addRecipePage";
 
 export default function Router() {
 

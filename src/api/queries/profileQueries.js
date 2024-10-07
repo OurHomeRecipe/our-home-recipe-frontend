@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import API from "../interceptor/API";
-import { useEffect, useState } from "react";
 import {useSelector} from "react-redux";
 
 /**
