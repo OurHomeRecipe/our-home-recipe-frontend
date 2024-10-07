@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import JoinPageUI from './JoinPage.presenter'
 import { postEmailAuchConfirm, postEmailAuth, postRegister } from '../../api/axios/member/emailApi';
 import { useNavigate } from 'react-router-dom';
+import RootStore, { useAppSelector } from '../../RootStore';
+import { toggleAlertMessage, toggleAlertServerity } from '../../features/alert/alertSlice';
 
 export default function JoinPage() {
+
+  const {alertSeverity, alertMessage} = useAppSelector(state => state.alert);
 
   // useNavigate 훅 사용
   const navigate = useNavigate(); 
@@ -30,7 +34,8 @@ export default function JoinPage() {
 
   const handleEmailConfirm = async(e) => {
     if(loginData.authCode === ''){
-      alert("올바른 인증번호를 입력해주세요");
+      RootStore.dispatch(toggleAlertServerity("info"));
+      RootStore.dispatch(toggleAlertMessage("올바른 인증번호를 입력해주세요"));
       return;
     }
     e.preventDefault();
@@ -57,6 +62,8 @@ const handleSubmitJoin = async(e) => {
   return (
     <JoinPageUI
       loginData={loginData}
+      alertSeverity={alertSeverity}
+      alertMessage={alertMessage}
       setLoginData={setLoginData}
       handleSubmitEmail={handleSubmitEmail}
       handleEmailConfirm={handleEmailConfirm}

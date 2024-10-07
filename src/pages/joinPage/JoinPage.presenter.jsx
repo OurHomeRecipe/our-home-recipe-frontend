@@ -1,8 +1,11 @@
 import React from 'react'
 import page from '../../css/pages/page.common.module.css'
 import style from '../../css/pages/joinpage.module.css'
+import BasicAlerts from '../../common/alert/basicAlert'
 
 export default function JoinPageUI({
+  alertSeverity,
+  alertMessage,
   setLoginData,
   handleSubmitEmail,
   handleEmailConfirm,
@@ -10,6 +13,7 @@ export default function JoinPageUI({
 }) {
   return (
     <div className={page.frame}>
+      {alertMessage && <BasicAlerts serverity={alertSeverity} message={alertMessage} />}
         <div className={style.frame}>
 
           <h1>회원가입</h1>

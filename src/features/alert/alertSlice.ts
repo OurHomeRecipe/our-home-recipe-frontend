@@ -4,14 +4,22 @@ const alertSlice = createSlice({
     name: 'alert',
 
     initialState: {
-        showUI: false
+        showUI: false,
+        alertSeverity: '',
+        alertMessage: ''
     },
     reducers: {
         toggleAlertUI: (state) => {
             state.showUI = !state.showUI
-        }   
+        },
+        toggleAlertServerity: (state,action) => {
+            state.alertSeverity = action.payload;
+        },
+        toggleAlertMessage: (state,action) => {
+            state.alertMessage = action.payload;
+        },
     }
 });
 
-export const { toggleAlertUI } = alertSlice.actions;
+export const { toggleAlertUI, toggleAlertServerity, toggleAlertMessage } = alertSlice.actions;
 export default alertSlice.reducer;
