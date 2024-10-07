@@ -9,30 +9,13 @@
     display: flex;
 }
 
-.header_frame{
-    min-width: 1200px;
-    height: 10vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    margin: 0px 25px;
-    padding: 0px 20px;
-    position: relative;
-}
 
-.header_logo{
-    background: url(/public/logo.png) no-repeat;
-    background-size: 100%;
-    width: 345px;
-    height: 80px;
-    cursor: pointer;
-}
 
 
 .alertIcon{
     font-size: 30px;
     color: #FFC107;
+    margin: 0px 5px;
 }
 
 .header_userInfo{

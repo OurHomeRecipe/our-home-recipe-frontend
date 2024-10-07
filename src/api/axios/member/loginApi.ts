@@ -1,21 +1,6 @@
+
+import { LoginData, LoginResponse, LogoutResponse } from "../../../interfaces";
 import API from "../../interceptor/API";
-
-// 로그인 데이터 타입 정의
-interface LoginData {
-    email: string;
-    password: string;
-}
-
-// 로그인 응답 타입 정의
-interface LoginResponse {
-    accessToken: string;
-    refreshToken: string;
-}
-
-interface LogoutResponse {
-    message: string;
-}
-
 
 
 /**
