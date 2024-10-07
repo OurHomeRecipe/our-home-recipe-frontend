@@ -1,4 +1,6 @@
+import { EmailAuthData, EmailAuthResponse, RegisterData } from "../../../interfaces";
 import API from "../../interceptor/API";
+
 
 /**
  * 이메일 인증코드 요청
@@ -6,14 +8,14 @@ import API from "../../interceptor/API";
  * @param email email 정보
  * @returns {*} message: "인증 메일이 정상적으로 발송되었습니다."
  */
-export const postEmailAuth = async (email) => {
+export const postEmailAuth = async (email:EmailAuthData): Promise<EmailAuthResponse> => {
     try {
         const response = await API.post(
             '/member/email/auth/request', 
             email,
             {withCredentials: true}
         );
-        return response.message
+        return response.data.message;
     } catch (error) {
         throw error;  // 에러를 다시 던져서 onError에서 처리할 수 있도록
     }
@@ -27,14 +29,14 @@ export const postEmailAuth = async (email) => {
  * @returns {*} message: "이메일 인증이 정상적으로 처리되었습니다."
  */
 
-export const postEmailAuchConfirm = async(emailAuthData) => {
+export const postEmailAuchConfirm = async(emailAuthData:EmailAuthData): Promise<EmailAuthResponse> => {
     try {
         const response = await API.post(
             '/member/email/auth/confirm',
             emailAuthData,
             {withCredentials: true}
         );
-        return response.message;
+        return response.data.message;
     } catch (error) {
         throw error;  // 에러를 다시 던져서 onError에서 처리할 수 있도록
     }
@@ -47,7 +49,7 @@ export const postEmailAuchConfirm = async(emailAuthData) => {
  * @param {*} registerData {email, nickname, phoneNumber, name, password, passwordConfirm}
  * @returns {*} {id:4}
  */
-export const postRegister = async(registerData) => {
+export const postRegister = async(registerData: RegisterData) => {
     try {
         const response = await API.post(
             '/member/register',

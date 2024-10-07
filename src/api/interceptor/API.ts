@@ -48,7 +48,7 @@ API.interceptors.response.use(
             console.log(error.response.status);
             
             // TODO 저장소에서 accessToken 제거
-            RootStore.dispatch(toggleAccessToken(null));
+            RootStore.dispatch(toggleAccessToken(''));
 
             originalRequest._retry = true;
 
