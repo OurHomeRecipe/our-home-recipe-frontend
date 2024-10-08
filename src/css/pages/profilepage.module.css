@@ -22,7 +22,21 @@
     align-items: center;
 }
 
+.row p {
+    width: 60px;
+    margin-right: 3px;
+}
+
+.row input {
+    flex-grow: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    min-width: 150px; /* 최소 너비 설정 */
+    max-width: 208px; /* 최대 너비 설정 */
+}
+
 .saveButton{
+    margin-top: 10px;
     width: 180px;
     height: 40px;
     border-radius: 10px;
