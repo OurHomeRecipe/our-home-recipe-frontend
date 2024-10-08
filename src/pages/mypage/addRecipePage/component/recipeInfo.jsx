@@ -1,12 +1,9 @@
 import style from '../style/addrecipepage.module.css'
 import { FoodImg } from '../style/addRecipe.Page.style'
-import useImageUpload from '../../../../common/hook/useImageUpload';
 import { LuImagePlus } from 'react-icons/lu';
 
-export default function RecipeInfo({setRecipeData}) {
+export default function RecipeInfo({preview, fileInputRef, handleIconClick, handleImageChange, setRecipeData}) {
 
-    //이미지 업로드
-    const {preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
 
   return (
     <div className={style.foodInfo}>

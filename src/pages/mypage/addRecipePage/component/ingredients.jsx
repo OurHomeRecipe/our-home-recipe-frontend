@@ -31,26 +31,11 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
         }
         // 선택된 인덱스를 제외한 새로운 배열로 업데이트
         setSelects(selects.filter(({ index }) => index !== indexToDelete));
-
-        setRecipeData(prev => ({
-            ...prev,
-            ingredients: selects
-        }))
-
     };
 
     const upDateIngredient = (e, index) => {
-        // const newIndex = selects.length + 1;
         const ingredientId = e.target.value;
         const ingredientName = e.target.options[e.target.selectedIndex].textContent;
-        // setSelects(prev => ([
-        //     ...prev,
-        //     {
-        //         index: newIndex,
-        //         ingredientId:ingredientId,
-        //         ingredientName:ingredientName
-        //     }
-        // ]));
 
         setSelects(prevSelects => 
             prevSelects.map((select, i) => 
