@@ -35,6 +35,7 @@ export default function AddRecipePage() {
         console.log(preview)
       }
     };
+    
 
     return (
       <div className={page.frame}>
