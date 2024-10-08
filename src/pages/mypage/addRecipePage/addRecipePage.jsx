@@ -1,4 +1,5 @@
 
+
 import { useRecipeMetaDataQuery } from '../../../api/queries/recipeQueries';
 import page from '../../../css/pages/page.common.module.css'
 import style from './style/addrecipepage.module.css'
@@ -15,13 +16,14 @@ export default function AddRecipePage() {
       <div className={page.frame}>
           <h1>레시피 등록</h1>
             <RecipeInfo/>
-
             <RecipeTags tags={tags}/>
-  
+
+
           <hr/>
   
           <h2>재료정보</h2>
           <RecipeIngredients ingredients={ingredients}/>
+
   
           <div className={style.buttonBox}>
               <button type='button' className={style.saveButton}>레시피 등록</button>
