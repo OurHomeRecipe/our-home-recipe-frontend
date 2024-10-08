@@ -2,16 +2,28 @@ import { useState } from "react";
 import style from "../style/addRecipeIngredients.module.css"
 import { BiSolidMinusCircle } from "react-icons/bi";
 
-export default function RecipeIngredients({ingredients}) {
-
-    const [selects, setSelects] = useState([{ index: 1 }]);
+export default function RecipeIngredients({ingredients, setRecipeData}) {
 
 
+
+    const [selects, setSelects] = useState([
+        { 
+            index: 1, 
+            ingredientId: '',
+            ingredientName:'',
+            quantity: 0 }
+    ]);
+
+    console.log(selects)
+
+
+    // 선택박스 추가 생성
     const addSelect = () => {
         const newIndex = selects.length + 1;
         setSelects([...selects, { index: newIndex }]); // 재료추가
     };
 
+    // 선택박스 삭제
     const deleteIngredient = (indexToDelete) => {
         if(selects.length === 1){
             alert("하나의 재료는 반드시 있어야 합니다.")
@@ -19,7 +31,48 @@ export default function RecipeIngredients({ingredients}) {
         }
         // 선택된 인덱스를 제외한 새로운 배열로 업데이트
         setSelects(selects.filter(({ index }) => index !== indexToDelete));
+
+        setRecipeData(prev => ({
+            ...prev,
+            ingredients: selects
+        }))
+
     };
+
+    const upDateIngredient = (e, index) => {
+        // const newIndex = selects.length + 1;
+        const ingredientId = e.target.value;
+        const ingredientName = e.target.options[e.target.selectedIndex].textContent;
+        // setSelects(prev => ([
+        //     ...prev,
+        //     {
+        //         index: newIndex,
+        //         ingredientId:ingredientId,
+        //         ingredientName:ingredientName
+        //     }
+        // ]));
+
+        setSelects(prevSelects => 
+            prevSelects.map((select, i) => 
+                i+1 === index ? { 
+                    ...select, 
+                    ingredientId:ingredientId,
+                    ingredientName:ingredientName
+                } : 
+                select
+            )
+        );
+        
+    }
+
+    const updateQuantity = (e, index) => {
+        setSelects(prevSelects => 
+            prevSelects.map((select, i) => 
+                i+1 === index ? { ...select, quantity: e.target.value } : select
+            )
+        );
+    };
+    
 
 
   return (
@@ -34,7 +87,7 @@ export default function RecipeIngredients({ingredients}) {
         <div key={index} className={style.contentBox}>
             <div className={style.ingredient_box}>
                 <p>재료: </p>
-                <select>
+                <select onChange={(e) => upDateIngredient(e,index)}>
                     <option value=''>선택</option>
                     {ingredients.map(ingredient => (
                         <option key={ingredient.ingredientId} value={ingredient.ingredientId}>
@@ -44,7 +97,7 @@ export default function RecipeIngredients({ingredients}) {
                 </select>
             </div>
             <div className={style.quantityBox}>
-                <input type='text' />
+                <input type='text' onChange={(e) => updateQuantity(e, index)}/>
                 <p>g</p>
             </div>
             <BiSolidMinusCircle
@@ -54,5 +107,6 @@ export default function RecipeIngredients({ingredients}) {
         </div>
     ))}
 </div>
-  )
+)
+
 }

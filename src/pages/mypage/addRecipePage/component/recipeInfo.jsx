@@ -1,10 +1,9 @@
-import React from 'react'
 import style from '../style/addrecipepage.module.css'
 import { FoodImg } from '../style/addRecipe.Page.style'
 import useImageUpload from '../../../../common/hook/useImageUpload';
 import { LuImagePlus } from 'react-icons/lu';
 
-export default function RecipeInfo() {
+export default function RecipeInfo({setRecipeData}) {
 
     //이미지 업로드
     const {preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
@@ -14,12 +13,20 @@ export default function RecipeInfo() {
     <div className={style.foodInfo_left}>
         <div className={style.inputBox}>
             <p>레시피 제목</p>
-            <input type='text' placeholder='예) 진짜 엽떡맛 나는 떡볶이'/>
+            <input 
+                type='text' 
+                placeholder='예) 진짜 엽떡맛 나는 떡볶이' 
+                onChange={(e) => setRecipeData(prev => ({...prev, recipeName:e.target.value}))}
+            />
         </div>
 
         <div className={style.inputBox}>
             <p>요리 소개</p>
-            <textarea type='text' placeholder='이 레시피의 탄생 배경을 적어주세요. 예) 엽떡을 자주 시켜먹어서 직접 만들어 본 레시피 입니다.'/>
+            <textarea 
+                type='text' 
+                placeholder='이 레시피의 탄생 배경을 적어주세요. 예) 엽떡을 자주 시켜먹어서 직접 만들어 본 레시피 입니다.'
+                onChange={(e) => setRecipeData(prev => ({...prev, description:e.target.value}))}
+            />
         </div>        
     </div>
 
