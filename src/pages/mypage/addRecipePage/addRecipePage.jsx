@@ -4,14 +4,16 @@ import page from '../../../css/pages/page.common.module.css'
 import style from './style/addrecipepage.module.css'
 import { LuImagePlus } from "react-icons/lu";
 import { FoodImg } from './style/addRecipe.Page.style';
-import AddRecipeIngredients from './component/addRecipeIngredients';
 import useImageUpload from '../../../common/hook/useImageUpload';
+import RecipeIngredients from './component/ingredients';
+import RecipeTags from './component/tags';
 
 export default function AddRecipePage() {
 
+    //이미지 업로드
     const {preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
 
-    //React-Query
+    //재료, 태그정보 가져오기
     const {ingredients, tags} = useRecipeMetaDataQuery();
 
     
@@ -38,27 +40,13 @@ export default function AddRecipePage() {
                   <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
               </FoodImg>
           </div>
-  
-          <div className={style.foodInfo}>
-              <div className={style.tagBox}>
-                  {tags.map((tag,index) => 
-                      <div key={index} className={style.selectBox}>
-                          <p>{tag.tagTypeName}:</p>
-                          <select>
-                              <option value='' >선택</option>
-                              {tag.tags.map((tag) =>
-                                  <option key={tag.tagId} value={tag.tagId} >{tag.tagName}</option>
-                              )}
-                          </select>
-                      </div> 
-                  )}                          
-              </div>
-          </div>
+
+          <RecipeTags tags={tags}/>
   
           <hr/>
   
           <h2>재료정보</h2>
-          <AddRecipeIngredients ingredients={ingredients}/>
+          <RecipeIngredients ingredients={ingredients}/>
   
           <div className={style.buttonBox}>
               <button type='button' className={style.saveButton}>레시피 등록</button>

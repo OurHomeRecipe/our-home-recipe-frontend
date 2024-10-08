@@ -2,7 +2,7 @@ import { useState } from "react";
 import style from "../style/addRecipeIngredients.module.css"
 import { BiSolidMinusCircle } from "react-icons/bi";
 
-export default function AddRecipeIngredients({ingredients}) {
+export default function RecipeIngredients({ingredients}) {
 
     const [selects, setSelects] = useState([{ index: 1 }]);
 
