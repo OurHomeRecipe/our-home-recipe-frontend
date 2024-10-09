@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../style/addRecipeIngredients.module.css"
 import { BiSolidMinusCircle } from "react-icons/bi";
 
 export default function RecipeIngredients({ingredients, setRecipeData}) {
-
-
 
     const [selects, setSelects] = useState([
         { 
@@ -15,6 +13,13 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
     ]);
 
     console.log(selects)
+
+    useEffect(() => {
+        setRecipeData(prev => ({
+            ...prev,
+            ingredients: selects
+        }))
+    }, [selects]);
 
 
     // 선택박스 추가 생성
@@ -33,6 +38,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
         setSelects(selects.filter(({ index }) => index !== indexToDelete));
     };
 
+    //재료입력
     const upDateIngredient = (e, index) => {
         const ingredientId = e.target.value;
         const ingredientName = e.target.options[e.target.selectedIndex].textContent;
@@ -50,6 +56,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
         
     }
 
+    //그램 수 입력
     const updateQuantity = (e, index) => {
         setSelects(prevSelects => 
             prevSelects.map((select, i) => 

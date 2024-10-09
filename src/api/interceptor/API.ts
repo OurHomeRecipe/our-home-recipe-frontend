@@ -55,7 +55,7 @@ API.interceptors.response.use(
             // TODO 저장소에서 리프래시 토큰 가져오기
             const refreshToken = RootStore.getState().login.refreshToken;
 
-            if(refreshToken === null){
+            if(refreshToken === ""){
                 RootStore.dispatch(toggleLoginState(false));               
             }
             
