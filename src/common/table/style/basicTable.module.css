@@ -1,0 +1,27 @@
+.basic {
+    font-family: 'CookieRun-Regular';
+    border: 1px solid lightgray;
+    width: 950px;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+.basic thead{
+    color: white;
+    background-color: orange;
+    height: 40px;
+}
+
+.basic th {
+    text-align: center;
+}
+
+.basic td {
+    border-bottom: 1px solid orange;
+}
+
+.basic td img {
+    width: 60px;
+    height: 60px;
+}

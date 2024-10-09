@@ -32,3 +32,24 @@ export const getRecipeMetaData = async () => {
         throw error
     }
   }
+
+  /**
+   * 회원별 레시피 조회 API
+   * 사용자 닉네임으로 검색
+   */
+  export const getUserRecipe = async (nickname) => {
+    try {
+      const response = await API.get(
+        '/recipe/member/search',
+        {
+          params: {
+            nickname: nickname, // key와 value를 이렇게 전달
+            page: 0, 
+          }
+        }
+      );
+        return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }

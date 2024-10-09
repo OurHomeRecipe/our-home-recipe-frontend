@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getRecipeMetaData, postRecipe } from "../axios/recipe/receipyApi";
+import { getRecipeMetaData, getUserRecipe } from "../axios/recipe/receipyApi";
 import API from "../interceptor/API";
+import { useProfileQuery } from "./profileQueries";
 
 /**
  * 레시피 메타데이터 조회
@@ -43,6 +44,7 @@ export const useRecipeRegisterQuery = () => {
           },
         onSuccess: (data) => {
             console.log(data);
+            alert('레시피가 등록되었습니다.')
         },
         onError: (error) => {
             console.error(error);
@@ -56,3 +58,24 @@ export const useRecipeRegisterQuery = () => {
     return { recipeRegist };
 
 }
+
+
+  /**
+   * 사용자별 레시피 조회 쿼리
+   */
+  export const useSearchRecipeByUserQuery = () => {
+
+    const { nickname } = useProfileQuery();
+
+    const { data, error } = useQuery({
+        queryKey: ['userByRecipeData', nickname], // 쿼리 키 수정
+        queryFn: () => getUserRecipe(nickname),
+        enabled: !!nickname, // nickname이 존재할 때만 쿼리를 실행
+        retry: false // 쿼리 실패 시 재시도 방지
+    });
+
+    return {
+        content: data?.content || [],
+        error
+    };
+};

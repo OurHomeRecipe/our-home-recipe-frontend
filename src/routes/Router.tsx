@@ -5,12 +5,10 @@ import JoinPage from "../pages/joinPage/JoinPage.container";
 import FindUserPage from "../pages/finduserPage/FindUserPage.container";
 import MyPagePage from "../layouts/MypageLayout/MyPage.container";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage.container";
-import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage.container";
-
-
 import LoginPage from "../pages/login/LoginPage.container";
 import { useAppSelector } from "../RootStore";
 import AddRecipePage from "../pages/mypage/addRecipePage/addRecipePage";
+import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage";
 
 export default function Router() {
 
