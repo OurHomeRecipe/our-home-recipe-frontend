@@ -31,3 +31,9 @@ export interface RegisterData {
 export interface EmailAuthResponse {
     message: string;
 }
+
+export interface PasswordReset {
+    email: string;
+    name: string;
+    phoneNumber: string;
+}
