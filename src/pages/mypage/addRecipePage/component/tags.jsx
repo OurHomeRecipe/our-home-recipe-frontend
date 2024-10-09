@@ -22,7 +22,7 @@ export default function RecipeTags({tags, setRecipeData}) {
                     <div key={index} className={style.selectBox}>
                         <p>{tagGroup.tagTypeName}</p>
 
-                        <select name={`select${index}`} onChange={(e) => getSelectOption(e, tagGroup?.tagTypeName)}>
+                        <select name={`select${index}`} onChange={(e) => getSelectOption(e, tagGroup.tagTypeName)}>
                             <option value=''>선택</option>
 
                             {tagGroup.tags.map(tag =>
