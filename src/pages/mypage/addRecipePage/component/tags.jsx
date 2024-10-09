@@ -1,6 +1,7 @@
 import React from 'react'
 import style from '../style/addrecipepage.module.css'
 
+
 export default function RecipeTags({tags, setRecipeData}) {
 
     const getSelectOption1 = (e) => {
@@ -51,6 +52,7 @@ export default function RecipeTags({tags, setRecipeData}) {
         }));
     }
 
+
   return (
     <div className={style.foodInfo}>
     <div className={style.tagBox}>
@@ -58,8 +60,10 @@ export default function RecipeTags({tags, setRecipeData}) {
         {/* 식사시간 */}
         <div className={style.selectBox}>
             <p>{tags[0]?.tagTypeName}</p>
+
             <select onChange={getSelectOption1}>
                 <option value=''>선택</option>
+
                 {tags[0]?.tags.map(tag => 
                     <option key={tag.tagId} value={tag.tagId}>{tag.tagName}</option>
                 )}
@@ -69,7 +73,9 @@ export default function RecipeTags({tags, setRecipeData}) {
         {/* 계절 */}
         <div className={style.selectBox}>
             <p>{tags[1]?.tagTypeName}</p>
+
             <select onChange={getSelectOption2}>
+
                 <option>선택</option>
                 {tags[1]?.tags.map(tag => 
                     <option key={tag.tagId} value={tag.tagId}>{tag.tagName}</option>
@@ -80,7 +86,9 @@ export default function RecipeTags({tags, setRecipeData}) {
         {/* 인분 */}
         <div className={style.selectBox}>
             <p>{tags[2]?.tagTypeName}</p>
+
             <select onChange={getSelectOption3}>
+
                 <option>선택</option>
                 {tags[2]?.tags.map(tag => 
                     <option key={tag.tagId} value={tag.tagId}>{tag.tagName}</option>
@@ -91,7 +99,9 @@ export default function RecipeTags({tags, setRecipeData}) {
         {/* 목적 */}
         <div className={style.selectBox}>
             <p>{tags[3]?.tagTypeName}</p>
+
             <select onChange={getSelectOption4}>
+
                 <option>선택</option>
                 {tags[3]?.tags.map(tag => 
                     <option key={tag.tagId} value={tag.tagId}>{tag.tagName}</option>

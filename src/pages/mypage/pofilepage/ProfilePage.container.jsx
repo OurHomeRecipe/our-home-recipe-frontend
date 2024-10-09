@@ -32,7 +32,8 @@ export default function ProfilePage() {
         name: true,
         email: true,
         phoneNumber: true,
-        profileImage: true
+        profileImage: true,
+        introduce: true
     })
 
     const [preview, setPreview] = useState(null); // 이미지 미리보기 상태
@@ -64,18 +65,12 @@ export default function ProfilePage() {
     
         if (nickname !== newProfile.nickname)
             updatedProfile.nickname = newProfile.nickname;
-        
-        if (name !== newProfile.name) 
-            updatedProfile.name = newProfile.name;
-        
-        if (email !== newProfile.email) 
-            updatedProfile.email = newProfile.email;
-        
-        if (phoneNumber !== newProfile.phoneNumber) 
-            updatedProfile.phoneNumber = newProfile.phoneNumber;
-        
-        if (profileImage !== newProfile.profileImage) 
+
+        if (profileImage !== newProfile.profileImage)
             updatedProfile.profileImage = newProfile.profileImage; // 이미지 파일 객체
+
+        if (profileImage !== newProfile.introduce)
+            updatedProfile.introduce = newProfile.introduce; // 이미지 파일 객체
             
         return updatedProfile;
     };

@@ -6,6 +6,7 @@ import style from './style/addrecipepage.module.css'
 import RecipeIngredients from './component/ingredients';
 import RecipeTags from './component/tags';
 import RecipeInfo from './component/recipeInfo';
+
 import { useState } from 'react';
 import useImageUpload from '../../../common/hook/useImageUpload';
 
@@ -38,6 +39,7 @@ export default function AddRecipePage() {
             formData.append('profileImage', imgFile); // 이미지 파일 객체 추가
         }
     }
+
   
     return (
       <div className={page.frame}>
@@ -52,10 +54,12 @@ export default function AddRecipePage() {
             <RecipeTags tags={tags} setRecipeData={setRecipeData}/>
 
 
+
           <hr/>
   
           <h2>재료정보</h2>
           <RecipeIngredients ingredients={ingredients} setRecipeData={setRecipeData}/>
+
 
   
           <div className={style.buttonBox}>
