@@ -41,7 +41,7 @@ export default function AddRecipePage() {
         }
 
         //레시피 등록 쿼리
-        //recipeRegist(formData);
+        recipeRegist(formData);
     }
 
   
