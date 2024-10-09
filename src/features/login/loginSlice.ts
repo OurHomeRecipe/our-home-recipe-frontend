@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../RootStore";
 
 interface loginItem {
     loginPageShow: boolean;  // 로그인 모달창 표시 여부

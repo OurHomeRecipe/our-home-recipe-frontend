@@ -10,7 +10,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
             index: 1, 
             ingredientId: '',
             ingredientName:'',
-            quantity: 0 }
+            ingredientQuantity: 0 }
     ]);
 
     console.log(selects)
@@ -65,7 +65,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
     const updateQuantity = (e, index) => {
         setSelects(prevSelects => 
             prevSelects.map((select, i) => 
-                i+1 === index ? { ...select, quantity: e.target.value } : select
+                i+1 === index ? { ...select, ingredientQuantity: e.target.value } : select
             )
         );
     };

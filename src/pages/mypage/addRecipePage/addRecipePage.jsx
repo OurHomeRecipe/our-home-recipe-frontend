@@ -1,6 +1,4 @@
-
-
-import { useRecipeMetaDataQuery } from '../../../api/queries/recipeQueries';
+import { useRecipeMetaDataQuery, useRecipeRegisterQuery } from '../../../api/queries/recipeQueries';
 import page from '../../../css/pages/page.common.module.css'
 import style from './style/addrecipepage.module.css'
 import RecipeIngredients from './component/ingredients';
@@ -12,16 +10,19 @@ import useImageUpload from '../../../common/hook/useImageUpload';
 
 export default function AddRecipePage() {
 
+    const {ingredients, tags} = useRecipeMetaDataQuery(); //재료, 태그정보 가져오기
+    const {recipeRegist} = useRecipeRegisterQuery();
+
+    //이미지 등록
     const {imgFile, preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
+    
+    //레시피 등록 데이터
     const [recipeData, setRecipeData] = useState({
         recipeName: "",
         description: "",
         tags: [],
         ingredients: []
       });
-
-    //재료, 태그정보 가져오기
-    const {ingredients, tags} = useRecipeMetaDataQuery();
 
     //레시피 등록
     const handleAddRecipe = () => {
@@ -38,6 +39,9 @@ export default function AddRecipePage() {
         if (imgFile) {
             formData.append('profileImage', imgFile); // 이미지 파일 객체 추가
         }
+
+        //레시피 등록 쿼리
+        //recipeRegist(formData);
     }
 
   
@@ -52,8 +56,6 @@ export default function AddRecipePage() {
                 setRecipeData={setRecipeData}
             />
             <RecipeTags tags={tags} setRecipeData={setRecipeData}/>
-
-
 
           <hr/>
   
