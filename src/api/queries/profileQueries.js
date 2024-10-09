@@ -50,7 +50,7 @@ export const useProfileUpdateQuery = () => {
                     const response = await API.post(
                         '/member/me/profile',
                         profileData,
-                        {headers: {"Content-Type": 'multipart/from-data'}},
+                        {headers: {"Content-Type": 'multipart/form-data'}},
                         {withCredentials: true}, //CORS
                     );
                     return response.data;
