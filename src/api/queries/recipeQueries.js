@@ -33,7 +33,7 @@ export const useRecipeRegisterQuery = () => {
               const response = await API.post(
                 '/recipe/register',
                 recipeData,
-                { headers: {"Content-Type": 'application/json'} },
+                { headers: {"Content-Type": 'multipart/form-data'} },
                 {withCredentials: true} //CORS
               );
               return response;
