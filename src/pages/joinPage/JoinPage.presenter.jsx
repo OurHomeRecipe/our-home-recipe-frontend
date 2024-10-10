@@ -1,7 +1,7 @@
 import React from 'react'
 import page from '../../css/pages/page.common.module.css'
 import style from '../../css/pages/joinpage.module.css'
-import BasicAlerts from '../../common/alert/basicAlert'
+import BasicAlerts from '../../common/component/alert/basicAlert'
 
 export default function JoinPageUI({
   alertSeverity,

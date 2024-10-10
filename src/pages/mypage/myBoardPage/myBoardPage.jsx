@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { IoMdAddCircleOutline } from "react-icons/io";
 import style from './styles/myBoard.module.css'
-import BasicTable from '../../../common/table/basicTable';
 import { useSearchRecipeByUserQuery } from '../../../api/queries/recipeQueries';
 import { useEffect, useState } from 'react';
+import BasicTable from '../../../common/component/table/basicTable';
 
 export default function MyBoardPage() {
 

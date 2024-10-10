@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Alert from '@mui/material/Alert';
-import style from '../../css/pages/page.common.module.css'
+import style from '../../../css/pages/page.common.module.css'
 
 /**
  * 기본 알림 메시지

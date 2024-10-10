@@ -5,13 +5,15 @@ import JoinPage from "../pages/joinPage/JoinPage.container";
 import FindUserPage from "../pages/finduserPage/FindUserPage.container";
 import MyPagePage from "../layouts/MypageLayout/MyPage.container";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage.container";
-import LoginPage from "../pages/login/LoginPage.container";
+import LoginPage from "../pages/login/LoginPage";
 import { useAppSelector } from "../RootStore";
 import AddRecipePage from "../pages/mypage/addRecipePage/addRecipePage";
 import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage";
 
-export default function Router() {
 
+
+export default function Router() {
+  
   const isLogin = useAppSelector((state) => state.login.loginState);
 
   return useRoutes([

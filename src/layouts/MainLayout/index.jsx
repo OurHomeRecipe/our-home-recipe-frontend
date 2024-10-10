@@ -3,7 +3,7 @@ import Sidebar from "./sidebar";
 import {Outlet} from "react-router-dom";
 import style from "../../css/mainlayout.module.css"
 import Footer from "./footer";
-import LoginPage from "../../pages/login/LoginPage.container";
+import LoginPage from "../../pages/login/LoginPage";
 import Alert from "./alert/alert.container";
 import Modal from "../../common/modal/modal";
 import { useAppSelector } from "../../RootStore";
