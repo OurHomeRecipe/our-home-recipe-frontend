@@ -1,15 +1,14 @@
 import {useRoutes} from "react-router-dom";
+import { useAppSelector } from "../RootStore";
 import MainLayout from "../layouts/MainLayout";
 import MainPage from "../pages/mainpage/MainPage";
-import JoinPage from "../pages/joinPage/JoinPage.container";
 import FindUserPage from "../pages/finduserPage/FindUserPage.container";
 import MyPagePage from "../layouts/MypageLayout/MyPage.container";
-
 import LoginPage from "../pages/login/LoginPage";
-import { useAppSelector } from "../RootStore";
 import AddRecipePage from "../pages/mypage/addRecipePage/addRecipePage";
 import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage";
+import JoinPage from "../pages/joinPage/JoinPage";
 
 
 
