@@ -1,11 +1,18 @@
 import common from '../../css/pages/page.common.module.css'
 import style from './style/mainPage.module.css'
 import RecipeCard from './component/recipeCard'
+import { useState } from 'react';
 
 
 export default function MainPage() {
 
-    // 3개씩 배열을 그룹화하는 함수
+  const [currentPage, setCurrentPage] = useState(1); //현재 페이지
+
+  const itemsPerPage = 9; //한 페이지에 보여줄 아이템 개수
+  const startIndex = (currentPage - 1) * itemsPerPage; //0, 9, 18, 27... 
+  const currentItems = items.slice(startIndex, startIndex + itemsPerPage); // {0~8} {9~17} {18~26} ...
+
+    // 3개씩 배열을 그룹화
     const getRows = (items) => {
       const rows = [];
       for (let i = 0; i < items.length; i += 3) {
@@ -17,7 +24,7 @@ export default function MainPage() {
   return (
     <div className={common.frame}>
       {
-        getRows(items).map((row, rowIndex) => 
+        getRows(currentItems).map((row, rowIndex) => 
           <div key={rowIndex} className={style.rowFrame}>
             {
               row.map((item, itemIndex) => <RecipeCard key={itemIndex} item={item}/>)
@@ -25,6 +32,11 @@ export default function MainPage() {
           </div>
         )
       }
+
+      <div className={style.pagination}>
+        <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>이전</button>
+        <button onClick={() => setCurrentPage(currentPage + 1)}>다음</button>
+      </div>
 
     </div>
   )
@@ -73,16 +85,43 @@ const items = [
   {
     imgFile: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/01/17/3d67642d4eddda0984123d1f7c587cf11.jpg',
     recipeName: '돈가스김밥',
-    NickName: '소연'
+    NickName: '소연',
+    recipeDesc: '요즘 돈가스 김밥 한줄이 5000원 넘나? 미친 물가다 ㄹㅇ..'
   },
   {
-    imgFile: 'https://homecuisine.co.kr/files/attach/images/140/868/087/c936189e03c496989162bf511a99b12e.JPG',
-    recipeName: '마라떡볶이',
-    NickName: '소연'
+    imgFile: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/01/17/3d67642d4eddda0984123d1f7c587cf11.jpg',
+    recipeName: '돈가스김밥',
+    NickName: '소연',
+    recipeDesc: '요즘 돈가스 김밥 한줄이 5000원 넘나? 미친 물가다 ㄹㅇ..'
   },
   {
-    imgFile: 'https://homecuisine.co.kr/files/attach/images/140/868/087/c936189e03c496989162bf511a99b12e.JPG',
-    recipeName: '마라떡볶이',
-    NickName: '소연'
+    imgFile: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/01/17/3d67642d4eddda0984123d1f7c587cf11.jpg',
+    recipeName: '돈가스김밥',
+    NickName: '소연',
+    recipeDesc: '요즘 돈가스 김밥 한줄이 5000원 넘나? 미친 물가다 ㄹㅇ..'
+  },
+  {
+    imgFile: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/01/17/3d67642d4eddda0984123d1f7c587cf11.jpg',
+    recipeName: '돈가스김밥',
+    NickName: '소연',
+    recipeDesc: '요즘 돈가스 김밥 한줄이 5000원 넘나? 미친 물가다 ㄹㅇ..'
+  },
+  {
+    imgFile: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/01/17/3d67642d4eddda0984123d1f7c587cf11.jpg',
+    recipeName: '돈가스김밥',
+    NickName: '소연',
+    recipeDesc: '요즘 돈가스 김밥 한줄이 5000원 넘나? 미친 물가다 ㄹㅇ..'
+  },
+  {
+    imgFile: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/01/17/3d67642d4eddda0984123d1f7c587cf11.jpg',
+    recipeName: '돈가스김밥',
+    NickName: '소연',
+    recipeDesc: '요즘 돈가스 김밥 한줄이 5000원 넘나? 미친 물가다 ㄹㅇ..'
+  },
+  {
+    imgFile: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/01/17/3d67642d4eddda0984123d1f7c587cf11.jpg',
+    recipeName: '돈가스김밥',
+    NickName: '소연',
+    recipeDesc: '요즘 돈가스 김밥 한줄이 5000원 넘나? 미친 물가다 ㄹㅇ..'
   },
 ]
