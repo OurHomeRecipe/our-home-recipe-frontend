@@ -1,17 +1,87 @@
+import React, { useEffect, useState } from 'react'
+import { useProfileQuery, useProfileUpdateQuery } from '../../../api/queries/profileQueries';
+import {NickName, ProfileImg, UserInfo} from './ProfilePage.style';
 import prf from '../../../css/pages/profilepage.module.css'
 import {MdEdit} from "react-icons/md";
-import {NickName, ProfileImg, UserInfo} from './ProfilePage.style';
+import useImageUpload from '../../../common/hook/useImageUpload';
+
+export default function ProfilePage() {
+
+    const {imgFile, preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
+    const { profileImage, nickname, name, email, phoneNumber, introduce,} = useProfileQuery();
+    const { profileUpdate } = useProfileUpdateQuery();
+
+    const [ newProfile, setNewProfile] = useState({
+        nickname: '',
+        name: '',
+        email: '',
+        phoneNumber: '',
+        profileImage: '',
+        introduce: ''
+    })
+
+    useEffect(() => {
+        setNewProfile((prev) => ({
+            ...prev,
+            nickname: nickname,
+            name: name || '',       // 비어있을 수 있는 값 처리
+            email: email || '',
+            phoneNumber: phoneNumber || '',
+            profileImage: profileImage || '',
+            introduce: introduce
+        }));
+    }, [nickname, name, email, phoneNumber, profileImage, introduce]); 
+
+    const [editState, setEditState] = useState({
+        nickname: true,
+        name: true,
+        email: true,
+        phoneNumber: true,
+        profileImage: true,
+        introduce: true
+    })
+
+    // 수정된 부분 감지
+    const detectChanges = () => {
+        const updatedProfile = {};
+    
+        if (nickname !== newProfile.nickname)
+            updatedProfile.nickname = newProfile.nickname;
+
+        if (profileImage !== imgFile)
+            updatedProfile.profileImage = imgFile; // 이미지 파일 객체
+
+        if (introduce !== newProfile.introduce)
+            updatedProfile.introduce = newProfile.introduce;
+            
+        return updatedProfile;
+    };
+
+    //프로필 업데이트
+    const handleUpdateProfile = (e) => {
+        e.preventDefault();
+  
+        const updatedData = detectChanges();
+  
+        if (Object.keys(updatedData).length === 0) {
+            alert('변경된 사항이 없습니다.');
+            return;
+        }
+  
+        const formData = new FormData();
+  
+        formData.append('member',
+            new Blob([JSON.stringify(updatedData)], {type:"application/json"})
+        );
+  
+        if (updatedData.profileImage) {
+            formData.append('profileImage', updatedData.profileImage); // 이미지 파일 객체 추가
+        }
+
+        profileUpdate(formData); //React Query  
+    }
 
 
-export default function ProfileUI({
-    preview,
-    newProfile, setNewProfile,
-    editState, setEditState,
-    fileInputRef,
-    handleIconClick,
-    handleImageChange,
-    handleUpdateProfile
-}) {
     return (
         <div className={prf.frame}>
             <ProfileImg preview={preview === null ? newProfile.profileImage : preview} >
