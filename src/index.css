@@ -14,7 +14,7 @@ svg{
     cursor: pointer;
 }
 
-input, h1, h2, h3, p, button, textarea, select {
+input, h1, h2, h3, p, button, textarea, select, pre {
     font-family: 'CookieRun-Regular';
 }
 

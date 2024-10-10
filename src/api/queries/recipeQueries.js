@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getRecipeMetaData, getUserRecipe } from "../axios/recipe/receipyApi";
+import { getMyRecipe, getRecipeMetaData } from "../axios/recipe/receipyApi";
 import API from "../interceptor/API";
-import { useProfileQuery } from "./profileQueries";
 
 /**
  * 레시피 메타데이터 조회
@@ -63,14 +62,10 @@ export const useRecipeRegisterQuery = () => {
   /**
    * 사용자별 레시피 조회 쿼리
    */
-  export const useSearchRecipeByUserQuery = () => {
-
-    const { nickname } = useProfileQuery();
-
+  export const useMyRecipeQuery = () => {
     const { data, error } = useQuery({
-        queryKey: ['userByRecipeData', nickname], // 쿼리 키 수정
-        queryFn: () => getUserRecipe(nickname),
-        enabled: !!nickname, // nickname이 존재할 때만 쿼리를 실행
+        queryKey: ['myRecipeData'], // 쿼리 키 수정
+        queryFn: getMyRecipe,
         retry: false // 쿼리 실패 시 재시도 방지
     });
 

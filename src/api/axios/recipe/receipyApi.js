@@ -34,18 +34,15 @@ export const getRecipeMetaData = async () => {
   }
 
   /**
-   * 회원별 레시피 조회 API
+   * 내 레시피 조회 API
    * 사용자 닉네임으로 검색
    */
-  export const getUserRecipe = async (nickname) => {
+  export const getMyRecipe = async () => {
     try {
       const response = await API.get(
-        '/recipe/member/search',
+        '/recipe/me',      
         {
-          params: {
-            nickname: nickname, // key와 value를 이렇게 전달
-            page: 0, 
-          }
+          params: {page: 0}
         }
       );
         return response.data;

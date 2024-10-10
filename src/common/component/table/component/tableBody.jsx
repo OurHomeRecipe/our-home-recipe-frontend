@@ -8,7 +8,7 @@ export default function TableBody({rows}) {
         {rows.map(item => 
             <tr>
                 <td>
-                    <PreviewImg>
+                    <PreviewImg preview={item.preview}>
                         {item.preview === '' ? <IoImagesOutline color='gray' size={25} /> : ''} 
                     </PreviewImg>
                 </td>

@@ -1,0 +1,49 @@
+.frame{
+    background-color: lightgray;
+    width: 350px;
+    height: 250px;
+    position: relative;
+}
+
+.frame img{
+    width: 100%;
+    height: 100%;
+}
+
+.infoBox{
+    background-color: #00000063;
+    position: absolute;
+    width: 100%;
+    height: 35%;
+    bottom: 0px;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px 10px;
+}
+
+.info h1 {
+    font-size: 20px;
+    margin: 7px 10px;
+}
+
+.info p {
+    font-size: 14px;
+    margin: 0px 10px;
+}
+
+.infoDetailBox{
+    background-color: #00000063;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 15px 15px;
+}

@@ -14,8 +14,7 @@ export default function BasicTable({colWidth, columns, items, }) {
         <TableHead>
             {columns.map( col => 
                 <th key={col.id}>{col.text}</th>
-            )
-            }
+            )}
         </TableHead>
 
         <TableBody rows={items}/>
