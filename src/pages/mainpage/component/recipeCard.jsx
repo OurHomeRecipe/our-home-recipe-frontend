@@ -8,16 +8,16 @@ export default function RecipeCard({item}) {
 
   return (
     <div className={style.frame}>
-        <img src={item.imgFile} alt={`${item.recipeName}이미지`} />
+        <img src={item.recipeImage} alt={`${item.recipeName}이미지`} />
         {isHovered ? 
             <div className={style.infoDetailBox} onMouseLeave={() => setIsHovered(false)}>
-                <p>{item.recipeDesc}</p>
+                <p>{item.recipeDescription}</p>
             </div>
             :
             <div className={style.infoBox}>
                 <div className={style.info}>
                     <h1>{item.recipeName}</h1>
-                    <p>@{item.NickName}</p>
+                    <p>@{item.createdBy}</p>
                 </div>
                 <FaCircleInfo 
                     size={30} 
