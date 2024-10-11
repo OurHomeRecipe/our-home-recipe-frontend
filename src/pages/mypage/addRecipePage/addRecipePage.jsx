@@ -14,7 +14,7 @@ export default function AddRecipePage() {
     const navigate = useNavigate();
 
     const {ingredients, tags} = useRecipeMetaDataQuery(); //재료, 태그정보 가져오기
-    const {recipeRegist} = useRecipeRegisterQuery();
+    const {recipeRegist} = useRecipeRegisterQuery(); // 레시피 등록 쿼리
 
     //이미지 등록
     const {imgFile, preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
@@ -25,27 +25,30 @@ export default function AddRecipePage() {
         description: "",
         tags: [],
         ingredients: []
-      });
+    });
 
-    //레시피 등록
-    const handleAddRecipe = () => {
-        console.log(recipeData);
-        console.log(imgFile);
+    const createFormData = (recipeData, imgFile) => {
 
-        //FormData로 만들어서 api로 보내야됨
         const formData = new FormData();
-  
+
         formData.append('recipe',
             new Blob([JSON.stringify(recipeData)], {type:"application/json"})
         );
-  
-        if (imgFile) {
-            formData.append('profileImage', imgFile); // 이미지 파일 객체 추가
-        }
+    
+        formData.append('profileImage', imgFile); // 이미지 파일 객체 추가
+        
+        return formData
+    }
+
+    //레시피 등록
+    const handleAddRecipe = () => {
+
+        const formData = createFormData(recipeData, imgFile)
 
         //레시피 등록 쿼리
         recipeRegist(formData);
         navigate('/mypage/myboards');
+        
     }
 
   
@@ -54,6 +57,7 @@ export default function AddRecipePage() {
           <h1>레시피 등록</h1>
             <RecipeInfo
                 preview={preview}
+                recipeData={recipeData}
                 fileInputRef={fileInputRef}
                 handleIconClick={handleIconClick}
                 handleImageChange={handleImageChange}

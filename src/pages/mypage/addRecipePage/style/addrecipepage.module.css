@@ -18,6 +18,13 @@
 
 .foodInfo_left{
     width: 375px;
+    height: 250px;
+}
+
+.foodInfo_right{
+    height: 250px;
+    box-sizing: border-box;
+    padding-top: 8px;
 }
 
 .inputBox{
@@ -40,7 +47,7 @@
 
 .inputBox textarea{
     width: 100%;
-    height: 100px;
+    height: 115px;
     resize: none;
     border-radius: 10px;
     border: 1px solid orange;
@@ -97,4 +104,12 @@ hr {
     background-color: #ff9e01;
     color: white;
     font-size: 20px;
+}
+
+.errorMassage{
+    font-size: 12px;
+    color: #e50000;
+    margin: 0px 0px;
+    text-align: right;
+    margin-bottom: 15px;
 }

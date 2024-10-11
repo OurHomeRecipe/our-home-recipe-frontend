@@ -2,8 +2,9 @@
 import style from '../style/addrecipepage.module.css'
 import { FoodImg } from '../style/addRecipe.Page.style'
 import { LuImagePlus } from 'react-icons/lu';
+import { useState } from 'react';
 
-export default function RecipeInfo({preview, fileInputRef, handleIconClick, handleImageChange, setRecipeData}) {
+export default function RecipeInfo({preview, recipeData, fileInputRef, handleIconClick, handleImageChange, setRecipeData}) {
 
 
   return (
@@ -11,14 +12,13 @@ export default function RecipeInfo({preview, fileInputRef, handleIconClick, hand
     <div className={style.foodInfo_left}>
         <div className={style.inputBox}>
             <p>레시피 제목</p>
-
             <input 
                 type='text' 
                 placeholder='예) 진짜 엽떡맛 나는 떡볶이' 
                 onChange={(e) => setRecipeData(prev => ({...prev, recipeName:e.target.value}))}
             />
-
         </div>
+        {recipeData.recipeName === "" ? <p className={style.errorMassage}>* 레시피 제목을 입력해주세요.</p> : ""}
 
         <div className={style.inputBox}>
             <p>요리 소개</p>
@@ -32,10 +32,13 @@ export default function RecipeInfo({preview, fileInputRef, handleIconClick, hand
         </div>        
     </div>
 
-    <FoodImg preview={preview} onClick={handleIconClick}>
-        {preview === null ? <LuImagePlus color='gray' size={25} /> : ''}               
-        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
-    </FoodImg>
+    <div className={style.foodInfo_right}>
+        <FoodImg preview={preview} onClick={handleIconClick}>
+            {preview === null ? <LuImagePlus color='gray' size={25} /> : ''}               
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+        </FoodImg>
+        {preview === null ? <p className={style.errorMassage}>* 이미지를 등록해주세요.</p> : ""}
+    </div>
 </div>
   )
 }
