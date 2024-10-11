@@ -4,14 +4,10 @@ import style from './style/addrecipepage.module.css'
 import RecipeIngredients from './component/ingredients';
 import RecipeTags from './component/tags';
 import RecipeInfo from './component/recipeInfo';
-
 import { useState } from 'react';
 import useImageUpload from '../../../common/hook/useImageUpload';
-import { useNavigate } from 'react-router-dom';
 
 export default function AddRecipePage() {
-
-    const navigate = useNavigate();
 
     const {ingredients, tags} = useRecipeMetaDataQuery(); //재료, 태그정보 가져오기
     const {recipeRegist} = useRecipeRegisterQuery(); // 레시피 등록 쿼리

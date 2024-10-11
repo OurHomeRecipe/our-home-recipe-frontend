@@ -5,10 +5,10 @@ import MainPage from "../pages/mainpage/MainPage";
 import FindUserPage from "../pages/finduserPage/FindUserPage.container";
 import MyPagePage from "../layouts/MypageLayout/MyPage.container";
 import LoginPage from "../pages/login/LoginPage";
-import AddRecipePage from "../pages/mypage/addRecipePage/addRecipePage";
 import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage";
 import JoinPage from "../pages/joinPage/JoinPage";
+import AddRecipePage from "../pages/recipe/addRecipePage/addRecipePage";
 
 
 
