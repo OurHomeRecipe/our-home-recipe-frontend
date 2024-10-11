@@ -35,20 +35,15 @@ export default function AddRecipePage() {
             new Blob([JSON.stringify(recipeData)], {type:"application/json"})
         );
     
-        formData.append('profileImage', imgFile); // 이미지 파일 객체 추가
+        formData.append('recipeImage', imgFile); // 이미지 파일 객체 추가
         
         return formData
     }
 
     //레시피 등록
-    const handleAddRecipe = () => {
-
-        const formData = createFormData(recipeData, imgFile)
-
-        //레시피 등록 쿼리
-        recipeRegist(formData);
-        navigate('/mypage/myboards');
-        
+    const handleAddRecipe = () => {      
+        const formData = createFormData(recipeData, imgFile)       
+        recipeRegist(formData); //레시피 등록 쿼리
     }
 
   

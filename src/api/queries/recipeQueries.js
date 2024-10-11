@@ -1,6 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getMyRecipe, getRecipeMetaData } from "../axios/recipe/receipyApi";
+import { getMyRecipe, getRecipeList, getRecipeListByName, getRecipeMetaData } from "../axios/recipe/receipyApi";
 import API from "../interceptor/API";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../RootStore";
+import { useEffect, useState } from "react";
+
+
 
 /**
  * 레시피 메타데이터 조회
@@ -27,6 +32,8 @@ export const useRecipeMetaDataQuery = () => {
  */
 export const useRecipeRegisterQuery = () => {
 
+    const navigate = useNavigate();
+
     const regist = useMutation({
         mutationFn: async (recipeData) => {
             try {
@@ -43,7 +50,8 @@ export const useRecipeRegisterQuery = () => {
           },
         onSuccess: (data) => {
             console.log(data);
-            alert('레시피가 등록되었습니다.')
+            alert('레시피가 등록되었습니다.');
+            navigate('/mypage/myboards'); //페이지 이동
         },
         onError: (error) => {
             console.error(error);
@@ -60,7 +68,7 @@ export const useRecipeRegisterQuery = () => {
 
 
   /**
-   * 사용자별 레시피 조회 쿼리
+   * 내 레시피 조회 쿼리
    */
   export const useMyRecipeQuery = () => {
     const { data, error } = useQuery({
@@ -74,3 +82,25 @@ export const useRecipeRegisterQuery = () => {
         error
     };
 };
+
+ /**
+   * 레시피 목록 조회
+   * @description 레시피 이름으로 조회
+   */
+  export const useRecipeListQuery = () => {
+
+    const recipeName = useAppSelector(state => state.search.searchContent);
+
+    const {data, error} = useQuery({
+        queryKey: ['recipeListByName', recipeName], //검색 내용이 바뀔때마다 다시 api 호출
+        queryFn: () => getRecipeListByName(recipeName),
+        retry: false
+    })
+
+    console.log('data', data?.content);
+
+    return{
+        content: data?.content || [],
+        error
+    }
+  }
