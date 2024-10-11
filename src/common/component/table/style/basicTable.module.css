@@ -13,6 +13,12 @@
     height: 40px;
 }
 
+.basic tbody tr td:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .basic th {
     text-align: center;
 }
