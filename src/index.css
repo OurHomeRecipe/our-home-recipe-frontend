@@ -30,6 +30,9 @@ textarea::placeholder{
     color: lightgray;
 }
 
+p{
+    margin: 8px 0px;
+}
 
 
 select{

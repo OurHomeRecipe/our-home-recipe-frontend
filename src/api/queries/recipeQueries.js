@@ -1,9 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getMyRecipe, getRecipeDetail, getRecipeList, getRecipeListByName, getRecipeMetaData } from "../axios/recipe/receipyApi";
+import { getMyRecipe, getRecipeDetail, getRecipeListByName, getRecipeMetaData } from "../axios/recipe/receipyApi";
 import API from "../interceptor/API";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../RootStore";
-import { useEffect, useState } from "react";
 
 
 
@@ -111,20 +110,22 @@ export const useRecipeRegisterQuery = () => {
   export const useRecipeDetailQuery = (recipeId) => {
     
 
-    const {data, error} = useQuery({
+    const {data, error, isLoading} = useQuery({
+
         queryKey: ['recipeDetail', recipeId],
         queryFn: () => getRecipeDetail(recipeId),
         retry: false
     })
 
         return{
-            recipeImage: data?.recipeImage,
-            recipeName: data?.recipeName,
-            recipeDescription: data?.recipeDescription,
-            tags:data?.tags,
-            ingredients: data?.ingredients,
-            member: data?.member || [],
-            error
+            data, error, isLoading,
+
+            recipeImage: data?.recipeImage || '', // 이미지 기본값을 빈 문자열로 설정
+            recipeName: data?.recipeName || '',   // 레시피 이름의 기본값을 빈 문자열로 설정
+            recipeDescription: data?.recipeDescription || '', // 설명의 기본값을 빈 문자열로 설정
+            tags: data?.tags || [],  // 태그의 기본값을 빈 배열로 설정
+            ingredients: data?.ingredients || [], // 재료의 기본값을 빈 배열로 설정
+            member: data?.member || {},  // 멤버 정보의 기본값을 빈 객체로 설정
         }
     
   }
