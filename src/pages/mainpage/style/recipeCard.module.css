@@ -25,9 +25,16 @@
     padding: 10px 10px;
 }
 
+.info{
+    height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .info h1 {
     font-size: 20px;
-    margin: 7px 10px;
+    margin: 0px 10px;
 }
 
 .info p {
@@ -47,4 +54,10 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding: 15px 15px;
+}
+
+.rating{
+    background-color: #ffffff5e;
+    border-radius: 7px;
+    padding: 3px 5px;
 }
