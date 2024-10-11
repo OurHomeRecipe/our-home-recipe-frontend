@@ -9,6 +9,7 @@ import MyBoardPage from "../pages/mypage/myBoardPage/myBoardPage";
 import ProfilePage from "../pages/mypage/pofilepage/ProfilePage";
 import JoinPage from "../pages/joinPage/JoinPage";
 import AddRecipePage from "../pages/recipe/addRecipePage/addRecipePage";
+import DetailRecipePage from "../pages/recipe/detailRecipePage/detailRecipePage";
 
 
 
@@ -35,10 +36,8 @@ export default function Router() {
           ] },
         { path: 'join', element: <JoinPage/>},
         { path: 'finduser', element: <FindUserPage/>},
-        { path: 'addrecipe', element: isLogin ? <AddRecipePage/> : <LoginPage/>}
-
-        // { path: 'store', element: <StorePage />},
-        // { path: 'review', element: <ReviewPage />}
+        { path: 'addrecipe', element: isLogin ? <AddRecipePage/> : <LoginPage/>}, //레시피 등록
+        { path: 'detailrecipe/:id', element: <DetailRecipePage/> } // 레시피 상세보기
       ],
     },
   ])

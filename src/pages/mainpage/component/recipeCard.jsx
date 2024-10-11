@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import style from '../style/recipeCard.module.css'
 import { FaCircleInfo } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 export default function RecipeCard({item}) {
 
+    const navigate = useNavigate();
     const [isHovered, setIsHovered] = useState(false); //mouse가 hover됐는지 여부를 검사하는 상태변수
 
   return (
-    <div className={style.frame}>
+    <div className={style.frame} onClick={() => navigate(`/detailRecipe/${item.recipeId}`)}>
         <img src={item.recipeImage} alt={`${item.recipeName}이미지`} />
         {isHovered ? 
             <div className={style.infoDetailBox} onMouseLeave={() => setIsHovered(false)}>
-                <p>{item.recipeDescription}</p>
+                <pre>{item.recipeDescription}</pre>
             </div>
             :
             <div className={style.infoBox}>
