@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getMyRecipe, getRecipeList, getRecipeListByName, getRecipeMetaData } from "../axios/recipe/receipyApi";
+import { getMyRecipe, getRecipeDetail, getRecipeList, getRecipeListByName, getRecipeMetaData } from "../axios/recipe/receipyApi";
 import API from "../interceptor/API";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../RootStore";
@@ -103,4 +103,28 @@ export const useRecipeRegisterQuery = () => {
         content: data?.content || [],
         error
     }
+  }
+
+  /**
+ * 레시피 상세조회 쿼리
+ */
+  export const useRecipeDetailQuery = (recipeId) => {
+    
+
+    const {data, error} = useQuery({
+        queryKey: ['recipeDetail', recipeId],
+        queryFn: () => getRecipeDetail(recipeId),
+        retry: false
+    })
+
+        return{
+            recipeImage: data?.recipeImage,
+            recipeName: data?.recipeName,
+            recipeDescription: data?.recipeDescription,
+            tags:data?.tags,
+            ingredients: data?.ingredients,
+            member: data?.member || [],
+            error
+        }
+    
   }

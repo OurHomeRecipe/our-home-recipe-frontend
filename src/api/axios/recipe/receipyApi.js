@@ -72,3 +72,19 @@ export const getRecipeListByName = async(recipeName) => {
     throw error;
   }
 }
+
+/**
+ * 레시피 상세조회 API
+ */
+export const getRecipeDetail = async(recipeId) => {
+  try {
+    const response = await API.get(
+      `/recipe/guest/${recipeId}`,      
+    );
+      console.log(response.data)
+      return response.data;
+  }
+  catch (error) {
+    throw error;
+  }
+}
