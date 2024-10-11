@@ -7,7 +7,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
 
     const [selects, setSelects] = useState([
         { 
-            index: 1, 
+            index: 0, 
             ingredientId: '',
             ingredientName:'',
             ingredientQuantity: 0 }
@@ -15,6 +15,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
 
     console.log(selects)
 
+    // 선택한 값이 변경될 때 마다 recipeData의 ingredients 값도 바뀜
     useEffect(() => {
         setRecipeData(prev => ({
             ...prev,
@@ -24,22 +25,21 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
 
 
     // 선택박스 추가 생성
-
     const addSelect = () => {
-        const newIndex = selects.length + 1;
-        setSelects([...selects, { index: newIndex }]); // 재료추가
+        const lastIndex = selects[selects.length-1].index + 1
+        console.log(selects[selects.length-1].index);
+        setSelects([...selects, { index: lastIndex }]);
     };
 
 
     // 선택박스 삭제
-
     const deleteIngredient = (indexToDelete) => {
         if(selects.length === 1){
             alert("하나의 재료는 반드시 있어야 합니다.")
             return;
         }
         // 선택된 인덱스를 제외한 새로운 배열로 업데이트
-        setSelects(selects.filter(({ index }) => index !== indexToDelete));
+        setSelects(selects.filter((select) => select.index !== indexToDelete));
     };
 
 
@@ -49,8 +49,8 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
         const ingredientName = e.target.options[e.target.selectedIndex].textContent;
 
         setSelects(prevSelects => 
-            prevSelects.map((select, i) => 
-                i+1 === index ? { 
+            prevSelects.map( select => 
+                select.index === index ? { 
                     ...select, 
                     ingredientId:ingredientId,
                     ingredientName:ingredientName
@@ -64,8 +64,8 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
     //그램 수 입력
     const updateQuantity = (e, index) => {
         setSelects(prevSelects => 
-            prevSelects.map((select, i) => 
-                i+1 === index ? { ...select, ingredientQuantity: e.target.value } : select
+            prevSelects.map(select => 
+                select.index === index ? { ...select, ingredientQuantity: e.target.value } : select
             )
         );
     };
@@ -80,13 +80,12 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
         </button>
     </div>
 
-    {selects.map(({ index }) => (
-        <div key={index} className={style.contentBox}>
+    {selects.map(select => (
+        <div key={select.index} className={style.contentBox}>
             <div className={style.ingredient_box}>
                 <p>재료: </p>
 
-                <select onChange={(e) => upDateIngredient(e,index)}>
-
+                <select onChange={(e) => upDateIngredient(e,select.index)}>
                     <option value=''>선택</option>
                     {ingredients.map(ingredient => (
                         <option key={ingredient.ingredientId} value={ingredient.ingredientId}>
@@ -97,13 +96,13 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
             </div>
             <div className={style.quantityBox}>
 
-                <input type='text' onChange={(e) => updateQuantity(e, index)}/>
+                <input type='text' onChange={(e) => updateQuantity(e, select.index)}/>
 
                 <p>g</p>
             </div>
             <BiSolidMinusCircle
                 className={style.deleteBtn}
-                onClick={() => deleteIngredient(index)} // 클릭 시 삭제할 인덱스 전달
+                onClick={() => deleteIngredient(select.index)} // 클릭 시 삭제할 인덱스 전달
             />
         </div>
     ))}

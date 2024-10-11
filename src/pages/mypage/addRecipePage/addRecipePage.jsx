@@ -70,8 +70,6 @@ export default function AddRecipePage() {
           <h2>재료정보</h2>
           <RecipeIngredients ingredients={ingredients} setRecipeData={setRecipeData}/>
 
-
-  
           <div className={style.buttonBox}>
               <button type='button' className={style.saveButton} onClick={handleAddRecipe}>레시피 등록</button>
           </div>
