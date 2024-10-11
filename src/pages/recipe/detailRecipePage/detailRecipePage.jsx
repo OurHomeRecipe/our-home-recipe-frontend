@@ -9,6 +9,7 @@ export default function DetailRecipePage() {
     const recipeId = location.pathname.split('/')[2]; //레시피 아이디
     console.log('레시피id:', recipeId);
 
+
     const { data, error, isLoading } = useRecipeDetailQuery(recipeId);
 
     if (isLoading) {
@@ -58,7 +59,6 @@ export default function DetailRecipePage() {
                     <p>{ingredient.ingredientUnit}</p>
                 </div>
             )}
-
         </div>
     </div>
   )

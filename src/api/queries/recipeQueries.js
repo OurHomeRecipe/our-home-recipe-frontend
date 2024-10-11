@@ -111,6 +111,7 @@ export const useRecipeRegisterQuery = () => {
     
 
     const {data, error, isLoading} = useQuery({
+
         queryKey: ['recipeDetail', recipeId],
         queryFn: () => getRecipeDetail(recipeId),
         retry: false
