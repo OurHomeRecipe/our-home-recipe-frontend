@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PreviewImg = styled.div`
     background: url(${(props) => props.preview}) no-repeat;
     background-size: 100%;
+    background-position: center;
     display: flex;
     width: 300px;
     height: 180px;

@@ -70,15 +70,14 @@ export const useRecipeRegisterQuery = () => {
    * 내 레시피 조회 쿼리
    */
   export const useMyRecipeQuery = () => {
-    const { data, error } = useQuery({
+    const { data, error, isLoading } = useQuery({
         queryKey: ['myRecipeData'], // 쿼리 키 수정
         queryFn: getMyRecipe,
         retry: false // 쿼리 실패 시 재시도 방지
     });
 
     return {
-        content: data?.content || [],
-        error
+        data, error, isLoading
     };
 };
 
@@ -95,8 +94,6 @@ export const useRecipeRegisterQuery = () => {
         queryFn: () => getRecipeListByName(recipeName),
         retry: false
     })
-
-    console.log('data', data?.content);
 
     return{
         content: data?.content || [],

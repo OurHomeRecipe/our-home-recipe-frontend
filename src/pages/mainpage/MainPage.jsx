@@ -21,7 +21,6 @@ export default function MainPage() {
     for (let i = 0; i < items.length; i += 3) {
       rows.push(items.slice(i, i + 3));
     }
-    console.log('새로운 배열', rows);
     return rows;
   };
   

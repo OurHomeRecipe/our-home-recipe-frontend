@@ -7,6 +7,7 @@ import BasicTable from '../../../common/component/table/basicTable';
 
 export default function MyBoardPage() {
 
+  //칼럼
   const columns = [
     { id: 'preview', text: "미리보기" },
     { id: 'recipeName', text: "레시피 이름" },
@@ -23,24 +24,9 @@ export default function MyBoardPage() {
 
 ]
 
-  const { content } = useMyRecipeQuery(); //서버로부터 받아온 recipe 데이터
-  const [items, setItems] = useState([]) //테이블안에 들어갈 데이터
-
-  useEffect(() => {
-    if (content.length !== 0) { // content가 있을 때만 실행
-      content.map(item => setItems(prev => [
-        ...prev,
-        {
-          preview: item.recipeImage,
-          recipeName: item.recipeName,
-          rating: item.rating,
-          viewCount: item.viewCount
-        }
-      ]))
-    }
-  }, [content]); 
-
-  console.log(items);
+  const { data, error, isLoading } = useMyRecipeQuery(); //서버로부터 받아온 recipe 데이터
+  const {content} = data || {} // 테이블안에 들어갈 데이터
+  console.log(content);
 
   const navigate = useNavigate();
 
@@ -49,6 +35,8 @@ export default function MyBoardPage() {
   }
 
 
+  if (isLoading) { return <div>Loading...</div>; }
+  if (error) { return <div>Error: {error.message}</div>; }
 
   return (
     <div className={style.frame}>
@@ -64,8 +52,7 @@ export default function MyBoardPage() {
         </button>
       </div>
 
-      <BasicTable colWidth={colWidth} columns={columns} items={items} />
-
+      <BasicTable colWidth={colWidth} columns={columns} items={content} />
     </div>
   )
 }

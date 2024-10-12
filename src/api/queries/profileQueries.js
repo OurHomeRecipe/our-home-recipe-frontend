@@ -7,7 +7,8 @@ import {useSelector} from "react-redux";
  * @author 소연
  */
 export const useProfileQuery = () => {
-    const accessToken = useSelector((state) => state.login.accessToken);
+
+    const loginState = useSelector((state) => state.login.loginState); //로그인 상태(boolean)
     
     const {data, error, isLoading} = useQuery({
         queryKey: ['profile'],  // 쿼리 키
@@ -20,7 +21,8 @@ export const useProfileQuery = () => {
                 throw error;
             }
         },
-        enabled: !!accessToken,
+        // enabled: true - 정상적으로 실행 enabled: false - 컴포넌트가 렌더링되거나 다시 렌더링되더라도 쿼리가 자동으로 실행되지 않음
+        enabled: loginState,
         retry: false // 쿼리 실패 시 재시도 방지
     });
 

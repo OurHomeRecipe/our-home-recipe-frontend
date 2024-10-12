@@ -13,8 +13,6 @@ export default function ProfilePage() {
     //프로필 조회
     const { data, error, isLoading } = useProfileQuery(); 
     const { profileImage, nickname, name, email, phoneNumber, introduce,} = data || {};
-
-    console.log(data);
     
     //프로필 수정
     const { profileUpdate } = useProfileUpdateQuery(); 
@@ -37,10 +35,10 @@ export default function ProfilePage() {
             nickname: true,
             introduce: true
         })
-      }, [nickname, profileImage, introduce, data]); // 데이터가 로드될 때마다 업데이트
+    }, [nickname, profileImage, introduce, data]); // 데이터가 로드될 때마다 업데이트
 
-    console.log(newProfile);
 
+    //수정할지 여부
     const [editState, setEditState] = useState({
         nickname: true,
         introduce: true
@@ -120,14 +118,14 @@ export default function ProfilePage() {
             <div>
                 <div className={style.row}>
                     <p>닉네임</p>
-                    <NickName
-                        value={newProfile.nickname}
-                        isReadOnly={editState.nickname}
-                        onChange={(e) => setNewProfile(prev => ({
-                            ...prev,
-                            nickname: e.target.value
-                        }))}
-                    />
+                        <NickName
+                            value={newProfile.nickname}
+                            isReadOnly={editState.nickname}
+                            onChange={(e) => setNewProfile(prev => ({
+                                ...prev,
+                                nickname: e.target.value
+                            }))}
+                        />
                     <MdEdit onClick={() => setEditState(prev => ({...prev, nickname: !prev.nickname}))}/>
                 </div>
 

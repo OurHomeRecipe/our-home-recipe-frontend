@@ -32,7 +32,7 @@ export default function Header(){
     const showLoginModal = () => RootStore.dispatch(toggleLoginPage(true));
 
     if (isLoading) { return <div>Loading...</div>; }
-    if (error) { return <div>Error: {error.message}</div>; }
+    if (error) { console.error(error); }
     
     return(
         <div className={header.frame}>

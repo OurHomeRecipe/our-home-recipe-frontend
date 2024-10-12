@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react'
 import style from '../style/addrecipepage.module.css'
 
 export default function RecipeTags({tags, setRecipeData}) {

@@ -45,6 +45,7 @@
 .row{
     display: flex;
     align-items: center;
+    margin: 15px 0px;
 }
 
 .row p {
@@ -58,6 +59,10 @@
     box-sizing: border-box;
     min-width: 150px; /* 최소 너비 설정 */
     max-width: 208px; /* 최대 너비 설정 */
+}
+
+.row textarea {
+    resize: none;
 }
 
 .saveButton{

@@ -10,10 +10,13 @@ export const ProfileImg = styled.div`
     position: relative;
 `;
 
-export const NickName = styled.input.attrs((props) => ({readOnly: props.isReadOnly, type:'text' }))`
+export const NickName = styled.input.attrs((props) => ({
+    readOnly: props.isReadOnly,
+    type: 'text',
+}))`
     font-size: 18px;
     border: none;
-    background-color: ${(props) => props.isReadOnly ? '#ffe191' : 'white'} ;
+    background-color: ${(props) => props.isReadOnly ? '#ffe191' : 'white'};
     border-radius: 10px;
     border: ${(props) => props.isReadOnly ? 'none' : '1px solid #ffe191'};
 `;
@@ -21,7 +24,6 @@ export const NickName = styled.input.attrs((props) => ({readOnly: props.isReadOn
 export const UserInfo = styled.input.attrs((props) => ({readOnly: props.isReadOnly, type:'text' }))`
     font-size: 15px;
     border: none;
-
     background-color: ${(props) => props.isReadOnly ? '#ffe191' : 'white'} ;
     border-radius: 10px;
     border: ${(props) => props.isReadOnly ? 'none' : '1px solid #ffe191'};
