@@ -5,6 +5,8 @@ import { BiSolidMinusCircle } from "react-icons/bi";
 
 export default function RecipeIngredients({ingredients, setRecipeData}) {
 
+
+    // 선택한 재료
     const [selects, setSelects] = useState([
         { 
             index: 0, 
@@ -13,7 +15,8 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
             ingredientQuantity: 0 }
     ]);
 
-    console.log(selects)
+
+    const [ingredientUnit, setIngredientUnit] = useState('');
 
     // 선택한 값이 변경될 때 마다 recipeData의 ingredients 값도 바뀜
     useEffect(() => {
@@ -27,7 +30,6 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
     // 선택박스 추가 생성
     const addSelect = () => {
         const lastIndex = selects[selects.length-1].index + 1
-        console.log(selects[selects.length-1].index);
         setSelects([...selects, { index: lastIndex }]);
     };
 
@@ -43,7 +45,8 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
     };
 
 
-    //재료입력
+
+    // 선택박스에서 값을 선택할 때마다 수행되는 로직
     const upDateIngredient = (e, index) => {
         const ingredientId = e.target.value;
         const ingredientName = e.target.options[e.target.selectedIndex].textContent;
@@ -58,8 +61,15 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
                 select
             )
         );
-        
+
+        for (let i = 0; i < ingredients.length; i++) {
+            if (ingredientId === String(ingredients[i].ingredientId)) {
+                setIngredientUnit(ingredients[i].ingredientUnit);
+                break;  // 원하는 값을 찾으면 루프를 중단
+            }
+        }
     }
+
 
     //그램 수 입력
     const updateQuantity = (e, index) => {
@@ -82,6 +92,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
 
     {selects.map(select => (
         <div key={select.index} className={style.contentBox}>
+
             <div className={style.ingredient_box}>
                 <p>재료: </p>
 
@@ -94,12 +105,12 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
                     ))}
                 </select>
             </div>
+
             <div className={style.quantityBox}>
-
                 <input type='text' onChange={(e) => updateQuantity(e, select.index)}/>
-
-                <p>g</p>
+                <p>{ingredientUnit}</p>
             </div>
+
             <BiSolidMinusCircle
                 className={style.deleteBtn}
                 onClick={() => deleteIngredient(select.index)} // 클릭 시 삭제할 인덱스 전달

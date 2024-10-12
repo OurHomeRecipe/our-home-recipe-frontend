@@ -2,6 +2,7 @@ import { useState } from 'react';
 import style from '../style/recipeCard.module.css'
 import { FaCircleInfo } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { HiOutlineEye } from "react-icons/hi";
 
 export default function RecipeCard({item}) {
 
@@ -21,12 +22,20 @@ export default function RecipeCard({item}) {
                     <h1>{item.recipeName}</h1>
                     <p>@{item.createdBy}</p>
                 </div>
-                <FaCircleInfo 
-                    size={30} 
-                    color='#ffffff87'
-                    onMouseEnter={() => setIsHovered(true)} // 마우스가 들어왔을 때
-                    
-                />
+
+                <div className={style.info}>
+                        <FaCircleInfo 
+                            size={30} 
+                            color='#ffffff87'
+                            onMouseEnter={() => setIsHovered(true)} // 마우스가 들어왔을 때
+                            
+                        />
+                        <div className={style.viewCountBox}>
+                            <HiOutlineEye size={20} />
+                            <p>{item.viewCount}</p>
+                        </div>
+                </div>
+
             </div>
         }
     </div>

@@ -9,8 +9,12 @@ import useImageUpload from '../../../common/hook/useImageUpload';
 
 export default function AddRecipePage() {
 
-    const {ingredients, tags} = useRecipeMetaDataQuery(); //재료, 태그정보 가져오기
-    const {recipeRegist} = useRecipeRegisterQuery(); // 레시피 등록 쿼리
+    //재료, 태그정보 가져오기
+    const { data, error, isLoading } = useRecipeMetaDataQuery()
+    const { ingredients, tags } = data || [];
+
+    // 레시피 등록 쿼리
+    const {recipeRegist} = useRecipeRegisterQuery();
 
     //이미지 등록
     const {imgFile, preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
@@ -23,6 +27,7 @@ export default function AddRecipePage() {
         ingredients: []
     });
 
+    //formData 만들기
     const createFormData = (recipeData, imgFile) => {
 
         const formData = new FormData();
@@ -43,6 +48,9 @@ export default function AddRecipePage() {
     }
 
   
+    if (isLoading) { return <div>Loading...</div>; }
+    if (error) { return <div>Error: {error.message}</div>; }
+
     return (
       <div className={page.frame}>
           <h1>레시피 등록</h1>
