@@ -119,13 +119,6 @@ export const useRecipeRegisterQuery = () => {
 
         return{
             data, error, isLoading,
-
-            recipeImage: data?.recipeImage || '', // 이미지 기본값을 빈 문자열로 설정
-            recipeName: data?.recipeName || '',   // 레시피 이름의 기본값을 빈 문자열로 설정
-            recipeDescription: data?.recipeDescription || '', // 설명의 기본값을 빈 문자열로 설정
-            tags: data?.tags || [],  // 태그의 기본값을 빈 배열로 설정
-            ingredients: data?.ingredients || [], // 재료의 기본값을 빈 배열로 설정
-            member: data?.member || {},  // 멤버 정보의 기본값을 빈 객체로 설정
         }
     
   }

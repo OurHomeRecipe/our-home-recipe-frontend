@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useProfileQuery, useProfileUpdateQuery } from '../../../api/queries/profileQueries';
-import {NickName, ProfileImg, UserInfo} from './ProfilePage.style';
-import style from '../../../css/pages/profilepage.module.css'
+import {NickName, ProfileImg, UserInfo} from './styles/profile.style';
+import style from './styles/profile.module.css'
 import {MdEdit} from "react-icons/md";
 import useImageUpload from '../../../common/hook/useImageUpload';
 
@@ -92,26 +92,28 @@ export default function ProfilePage() {
     return (
         <div className={style.frame}>
 
-            <div>
-                <ProfileImg preview={preview === null ? newProfile.profileImage : preview} >
-                    <MdEdit className={style.profileImageEdit} onClick={handleIconClick}/>
-                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
-                </ProfileImg>
+            <div className={style.firstInfoBox}>
+                    <ProfileImg preview={preview === null ? newProfile.profileImage : preview} >
+                        <MdEdit className={style.profileImageEdit} onClick={handleIconClick}/>
+                        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
+                    </ProfileImg>
 
-                <div className={style.row}>
-                    <p>이름</p>
-                    <p>{name}</p>
-                </div>
+                    <div className={style.userInfoBox}>
+                            <div className={style.userInfo}>
+                                <p>이름 :</p>
+                                <p>{name}</p>
+                            </div>
 
-                <div className={style.row}>
-                    <p>이메일</p>
-                    <p>{email}</p>
-                </div>
+                            <div className={style.userInfo}>
+                                <p>이메일 :</p>
+                                <p>{email}</p>
+                            </div>
 
-                <div className={style.row}>
-                    <p>전화번호</p>
-                    <p>{phoneNumber}</p>
-                </div>
+                            <div className={style.userInfo}>
+                                <p>전화번호 :</p>
+                                <p>{phoneNumber}</p>
+                            </div>
+                    </div>
             </div>
 
 
