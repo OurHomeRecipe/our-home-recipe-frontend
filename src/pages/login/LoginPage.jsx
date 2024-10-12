@@ -31,6 +31,16 @@ export default function LoginPage() {
     dispatch(toggleLoginPage(false)); //모달창 닫기
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin(); // 엔터키를 눌렀을 때 로그인
+    }
+  };
+
+  const handleLogin = (e) => {
+    login(email, password)
+  }
+
   return (
     <div className={style.frame}>
 
@@ -46,8 +56,8 @@ export default function LoginPage() {
 
       <div className={style.loginBox}>           
           <div className={style.loginInput}>
-            <input type='email' placeholder='이메일을 입력해주세요' onChange={(e) => setEmail(e.target.value)} />
-            <input type='password' placeholder='비밀번호를 입력해주세요' onChange={(e) => setPassword(e.target.value)}/>
+            <input type='email' placeholder='이메일을 입력해주세요' onChange={(e) => setEmail(e.target.value)} onKeyDown={handleKeyDown}/>
+            <input type='password' placeholder='비밀번호를 입력해주세요' onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyDown}/>
             
             {/* 로그인 버튼 */}
             <button className={style.loginBtn} onClick={()=>login(email, password)}>로그인</button>            

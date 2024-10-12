@@ -49,3 +49,7 @@
     box-sizing: border-box;
     padding: 15px 15px;
 }
+
+.infoDetailBox pre{
+    white-space: pre-wrap; 
+}
