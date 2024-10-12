@@ -17,8 +17,9 @@ export default function Header(){
     //Redux-Toolkit
     const isLogin = RootStore.getState().login.loginState;
     
-    //React-Query
-    const {profileImage, nickname} = useProfileQuery();
+    //프로필 조회
+    const { data, error, isLoading } = useProfileQuery(); 
+    const { profileImage, nickname} = data || {};
     const {logOut} = useLogoutQuery();
     
     //React-Router
@@ -30,6 +31,9 @@ export default function Header(){
 
     const showLoginModal = () => RootStore.dispatch(toggleLoginPage(true));
 
+    if (isLoading) { return <div>Loading...</div>; }
+    if (error) { return <div>Error: {error.message}</div>; }
+    
     return(
         <div className={header.frame}>
         <div className={header.left_content} onClick={()=> navigate('/')}></div>

@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import { useProfileQuery, useProfileUpdateQuery } from '../../../api/queries/profileQueries';
 import {NickName, ProfileImg, UserInfo} from './ProfilePage.style';
-import prf from '../../../css/pages/profilepage.module.css'
+import style from '../../../css/pages/profilepage.module.css'
 import {MdEdit} from "react-icons/md";
 import useImageUpload from '../../../common/hook/useImageUpload';
 
 export default function ProfilePage() {
 
+    //이미지 업로드
     const {imgFile, preview, fileInputRef, handleIconClick, handleImageChange } = useImageUpload();
-    const { profileImage, nickname, name, email, phoneNumber, introduce,} = useProfileQuery();
-    const { profileUpdate } = useProfileUpdateQuery();
+    
+    //프로필 조회
+    const { data, error, isLoading } = useProfileQuery(); 
+    const { profileImage, nickname, name, email, phoneNumber, introduce,} = data || {};
+
+    console.log(data);
+    
+    //프로필 수정
+    const { profileUpdate } = useProfileUpdateQuery(); 
 
     const [ newProfile, setNewProfile] = useState({
-        nickname: '',
-        name: '',
-        email: '',
-        phoneNumber: '',
+        nickname : '',
         profileImage: '',
         introduce: ''
     })
 
     useEffect(() => {
-        setNewProfile((prev) => ({
-            ...prev,
-            nickname: nickname,
-            name: name || '',       // 비어있을 수 있는 값 처리
-            email: email || '',
-            phoneNumber: phoneNumber || '',
+        if (data) {
+          setNewProfile({
+            nickname: nickname || '', // 값이 없을 경우 빈 문자열로 설정
             profileImage: profileImage || '',
-            introduce: introduce
-        }));
-    }, [nickname, name, email, phoneNumber, profileImage, introduce]); 
+            introduce: introduce || ''
+          });
+        }
+        setEditState({
+            nickname: true,
+            introduce: true
+        })
+      }, [nickname, profileImage, introduce, data]); // 데이터가 로드될 때마다 업데이트
+
+    console.log(newProfile);
 
     const [editState, setEditState] = useState({
         nickname: true,
-        name: true,
-        email: true,
-        phoneNumber: true,
-        profileImage: true,
         introduce: true
     })
 
@@ -81,16 +86,37 @@ export default function ProfilePage() {
         profileUpdate(formData); //React Query  
     }
 
+    if (isLoading) { return <div>Loading...</div>; }
+    if (error) { return <div>Error: {error.message}</div>; }
 
     return (
-        <div className={prf.frame}>
-            <ProfileImg preview={preview === null ? newProfile.profileImage : preview} >
-                <MdEdit className={prf.profileImageEdit} onClick={handleIconClick}/>
-                <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
-            </ProfileImg>
+        <div className={style.frame}>
 
             <div>
-                <div className={prf.row}>
+                <ProfileImg preview={preview === null ? newProfile.profileImage : preview} >
+                    <MdEdit className={style.profileImageEdit} onClick={handleIconClick}/>
+                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
+                </ProfileImg>
+
+                <div className={style.row}>
+                    <p>이름</p>
+                    <p>{name}</p>
+                </div>
+
+                <div className={style.row}>
+                    <p>이메일</p>
+                    <p>{email}</p>
+                </div>
+
+                <div className={style.row}>
+                    <p>전화번호</p>
+                    <p>{phoneNumber}</p>
+                </div>
+            </div>
+
+
+            <div>
+                <div className={style.row}>
                     <p>닉네임</p>
                     <NickName
                         value={newProfile.nickname}
@@ -103,43 +129,7 @@ export default function ProfilePage() {
                     <MdEdit onClick={() => setEditState(prev => ({...prev, nickname: !prev.nickname}))}/>
                 </div>
 
-                <div className={prf.row}>
-                    <p>이름</p>
-                    <UserInfo
-                        value={newProfile.name}
-                        isReadOnly={editState.name}
-                        onChange={(e) => setNewProfile(prev => ({
-                            ...prev,
-                            name: e.target.value
-                        }))}
-                    />
-                </div>
-
-                <div className={prf.row}>
-                    <p>이메일</p>
-                    <UserInfo
-                        value={newProfile.email}
-                        isReadOnly={editState.email}
-                        onChange={(e) => setNewProfile(prev => ({
-                            ...prev,
-                            email: e.target.value
-                        }))}
-                    />
-                </div>
-
-                <div className={prf.row}>
-                    <p>전화번호</p>
-                    <UserInfo
-                        value={newProfile.phoneNumber}
-                        isReadOnly={editState.phoneNumber}
-                        onChange={(e) => setNewProfile(prev => ({
-                            ...prev,
-                            phoneNumber: e.target.value
-                        }))}
-                    />
-                </div>
-
-                <div className={prf.row}>
+                <div className={style.row}>
                     <p>자기소개</p>
                     <UserInfo
                         value={newProfile.introduce}
@@ -154,7 +144,7 @@ export default function ProfilePage() {
                 </div>
             </div>
 
-            <button className={prf.saveButton} type='button' onClick={handleUpdateProfile}>저장</button>
+            <button className={style.saveButton} type='button' onClick={handleUpdateProfile}>저장</button>
         </div>
     );
 }

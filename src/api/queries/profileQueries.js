@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import API from "../interceptor/API";
 import {useSelector} from "react-redux";
 
@@ -8,8 +8,8 @@ import {useSelector} from "react-redux";
  */
 export const useProfileQuery = () => {
     const accessToken = useSelector((state) => state.login.accessToken);
-
-    const {data, error} = useQuery({
+    
+    const {data, error, isLoading} = useQuery({
         queryKey: ['profile'],  // 쿼리 키
         queryFn: async () => {
             try {
@@ -25,13 +25,7 @@ export const useProfileQuery = () => {
     });
 
     return {
-        profileImage: data?.profileImage || '',
-        nickname: data?.nickname || '',
-        name: data?.name || '',
-        email: data?.email || '',
-        phoneNumber: data?.phoneNumber || '',
-        introduce: data?.introduce || '',
-        error
+        data, error, isLoading
     }
     
 };
@@ -43,6 +37,8 @@ export const useProfileQuery = () => {
  * @author 소연
  */
 export const useProfileUpdateQuery = () => { 
+
+    const queryClient = useQueryClient();
 
         const update = useMutation({
             mutationFn: async (profileData) => {
@@ -61,7 +57,7 @@ export const useProfileUpdateQuery = () => {
             onSuccess: (data) => {
                 console.log('프로필 업데이트 성공', data);
                 alert('프로필이 수정되었습니다.');
-                window.location.reload(); //페이지 새로고침
+                queryClient.invalidateQueries(['profile']); // 프로필 업데이트 성공 시 쿼리 무효화 및 새로고침
             },
             onError: (error) => {
                 console.error('프로필 수정 실패:', error);
