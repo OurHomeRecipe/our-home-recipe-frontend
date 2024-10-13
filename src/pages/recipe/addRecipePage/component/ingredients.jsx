@@ -51,6 +51,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
         const ingredientId = e.target.value;
         const ingredientName = e.target.options[e.target.selectedIndex].textContent;
 
+        //선택한 재료 상태 배열에 추가
         setSelects(prevSelects => 
             prevSelects.map( select => 
                 select.index === index ? { 
@@ -62,6 +63,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
             )
         );
 
+        //선택한 재료의 단위 설정
         for (let i = 0; i < ingredients.length; i++) {
             if (ingredientId === String(ingredients[i].ingredientId)) {
                 setIngredientUnit(ingredients[i].ingredientUnit);

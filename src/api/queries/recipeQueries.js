@@ -3,7 +3,7 @@ import { getMyRecipe, getRecipeDetail, getRecipeListByName, getRecipeMetaData } 
 import API from "../interceptor/API";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../RootStore";
-
+import { createRecipeComment } from "../axios/recipe/recipyCommentApis";
 
 
 /**
@@ -97,12 +97,11 @@ export const useRecipeRegisterQuery = () => {
     }
   }
 
-  /**
+/**
  * 레시피 상세조회 쿼리
  */
   export const useRecipeDetailQuery = (recipeId) => {
     
-
     const {data, error, isLoading} = useQuery({
 
         queryKey: ['recipeDetail', recipeId],
@@ -112,6 +111,29 @@ export const useRecipeRegisterQuery = () => {
 
         return{
             data, error, isLoading,
-        }
-    
+        } 
   }
+
+/**
+ * 레시피 댓글 등록 쿼리
+ */
+export const useRecipeCommentMutation = () => {
+
+    const regist = useMutation({
+        mutationFn: ({recipeId,comment}) => createRecipeComment({recipeId,comment}),
+        onSuccess: (data) => {
+            console.log(data);
+        },
+        onError: (error) => {
+            console.error(error);
+        }
+    });
+
+    const addComment = ({recipeId,comment}) => {
+        regist.mutate({recipeId,comment});
+    }
+
+    return { addComment };
+
+
+}
