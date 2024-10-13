@@ -5,3 +5,10 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+.pagenationBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}

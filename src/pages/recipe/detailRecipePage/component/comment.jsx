@@ -31,7 +31,7 @@ export default function Comment({recipeId}) {
 
         {content.length !== 0 ?         
           <div className={style.pagenationBox}>
-            <Pagenation totalPages={totalPages} pageSize={pageable.pageSize} setPage={setPage}/>
+            <Pagenation totalPages={totalPages} pageSize={pageable.pageSize} page={page} setPage={setPage}/>
           </div>
         : ''}
     </div>

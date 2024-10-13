@@ -83,10 +83,11 @@ export const useRecipeRegisterQuery = () => {
    */
 export const useRecipeListQuery = () => {
 
-    const recipeName = useAppSelector(state => state.search.searchContent);
+    //Redux로 가져온 전역 상태변수
+    const recipeName = useAppSelector(state => state.search.searchContent); 
 
     const {data, error} = useQuery({
-        queryKey: ['recipeListByName', recipeName], //검색 내용이 바뀔때마다 다시 api 호출
+        queryKey: ['recipeListByName', recipeName], // recipeName이 바뀔때마다 다시 api 호출
         queryFn: () => getRecipeListByName(recipeName),
         retry: false
     })

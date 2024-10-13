@@ -37,8 +37,8 @@ export default function MainPage() {
       }
 
       {content.length !== 0 ?       
-        <div className={style.pagination}>
-          <Pagenation totalPages={totalPages} pageSize={pageable.pageSize} setPage={setPage}/>
+        <div className={style.pagenationBox}>
+          <Pagenation totalPages={totalPages} pageSize={pageable.pageSize} page={page} setPage={setPage}/>
         </div>
       : ''}
 
