@@ -8,7 +8,27 @@
     padding: 25px 40px;
 }
 
+.commentBox {
+    background-color: #fff5e3;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding: 10px 25px;
+}
 
+.commentBox pre {
+    padding: 0px 20px;
+}
+
+.writer{
+    color: orange;
+}
+
+.date{
+    color: #b9b9b9;
+    text-align: right;
+    font-size: 13px;
+}
 
 
 
@@ -20,23 +40,7 @@
     flex-direction: column;
     box-sizing: border-box;
     padding-bottom: 30px;
-}
-
-.writerInfo{
-    display: flex;
-    align-items: center;
-    height: 40px;
-    margin-bottom: 10px;
-}
-
-.writerInfo p {
-    margin-right: 10px;
-}
-
-.writerInfo input {
-    border: 1px solid orange;
-    border-radius: 8px;
-    color: orange;
+    margin-bottom: 40px;
 }
 
 .commentInputBox textarea {

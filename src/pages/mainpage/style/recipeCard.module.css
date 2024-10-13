@@ -26,24 +26,34 @@
     padding: 10px 10px;
 }
 
-.info{
+.infoLeft{
     height: 65px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.info h1 {
+.infoLeft h1 {
     font-size: 20px;
     margin: 7px 10px;
 }
 
-.info p {
+.infoLeft p {
     font-size: 14px;
     margin: 0px 10px;
 }
 
+.infoRight{
+    height: 77px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
 .infoDetailBox{
+    display: flex;
+    flex-direction: column;
     background-color: #ffffffab;
     position: absolute;
     width: 100%;
@@ -65,4 +75,7 @@
 .viewCountBox{
     display: flex;
     align-items: center;
+}
+.viewCountBox p{
+    margin-left: 7px;
 }

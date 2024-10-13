@@ -4,6 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    box-sizing: border-box;
+    padding: 45px 0px;
 }
 
 .buttonBox{

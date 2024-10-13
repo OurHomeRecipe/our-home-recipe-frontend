@@ -54,9 +54,7 @@ export default function DetailRecipePage() {
                 )}
             </div>
 
-
-
-            <Comment/>
+            <Comment recipeId={recipeId}/>
 
     </div>
     )

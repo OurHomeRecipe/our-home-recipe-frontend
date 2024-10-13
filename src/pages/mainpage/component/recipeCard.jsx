@@ -3,6 +3,7 @@ import style from '../style/recipeCard.module.css'
 import { FaCircleInfo } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineEye } from "react-icons/hi";
+import { Rating } from '@mui/material';
 
 export default function RecipeCard({item}) {
 
@@ -13,17 +14,18 @@ export default function RecipeCard({item}) {
     <div className={style.frame} onClick={() => navigate(`/detailRecipe/${item.recipeId}`)}>
         <img src={item.recipeImage} alt={`${item.recipeName}이미지`} />
         {isHovered ? 
-            <div className={style.infoDetailBox} onMouseLeave={() => setIsHovered(false)}>
+            <div className={style.infoDetailBox} onMouseLeave={() => setIsHovered(false)}>              
                 <pre>{item.recipeDescription}</pre>
+                <Rating name="read-only" value={item.rating} readOnly />
             </div>
             :
             <div className={style.infoBox}>
-                <div className={style.info}>
+                <div className={style.infoLeft}>
                     <h1>{item.recipeName}</h1>
                     <p>@{item.createdBy}</p>
                 </div>
 
-                <div className={style.info}>
+                <div className={style.infoRight}>
                         <FaCircleInfo 
                             size={30} 
                             color='#ffffff87'

@@ -1,9 +1,9 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMyRecipe, getRecipeDetail, getRecipeListByName, getRecipeMetaData } from "../axios/recipe/receipyApi";
 import API from "../interceptor/API";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../RootStore";
-import { createRecipeComment } from "../axios/recipe/recipyCommentApis";
+import { createRecipeComment, readRecipeComment } from "../axios/recipe/recipyCommentApis";
 
 
 /**
@@ -119,10 +119,14 @@ export const useRecipeRegisterQuery = () => {
  */
 export const useRecipeCommentMutation = () => {
 
+    const queryClient = useQueryClient();
+
     const regist = useMutation({
         mutationFn: ({recipeId,comment}) => createRecipeComment({recipeId,comment}),
         onSuccess: (data) => {
             console.log(data);
+            // 댓글 등록 성공 시 쿼리 무효화 및 새로고침
+            queryClient.invalidateQueries(['recipeComment']);
         },
         onError: (error) => {
             console.error(error);
@@ -134,6 +138,20 @@ export const useRecipeCommentMutation = () => {
     }
 
     return { addComment };
+}
 
+/**
+ * 레시피 댓글 조회 쿼리
+ */
+export const useRecipeCommentQuery = (recipeId) => {
+    const {data, error, isLoading} = useQuery({
 
+        queryKey: ['recipeComment'],
+        queryFn: () => readRecipeComment(recipeId),
+        retry: false
+    })
+
+        return{
+            data, error, isLoading
+        } 
 }
