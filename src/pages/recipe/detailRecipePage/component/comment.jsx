@@ -5,12 +5,13 @@ import Pagenation from '../../../../common/component/pagenation/pagenation';
 import { useState } from 'react';
 
 export default function Comment({recipeId}) {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const {data, error, isLoading} = useRecipeCommentQuery({recipeId, page});  
   const {content, pageable} = data || [];
   const { totalPages } = data || '';
   console.log(pageable)
   console.log('댓글',content);
+  console.log('선택한 페이지',page);
 
   if (isLoading) { return <div>Loading...</div>; }
   if (error) { return <div>Error: {error.message}</div>; }
@@ -28,9 +29,11 @@ export default function Comment({recipeId}) {
           </div>
         )}
 
-        <div className={style.pagenationBox}>
-          <Pagenation totalPages={totalPages} pageSize={pageable.pageSize}/>
-        </div>
+        {content.length !== 0 ?         
+          <div className={style.pagenationBox}>
+            <Pagenation totalPages={totalPages} pageSize={pageable.pageSize} setPage={setPage}/>
+          </div>
+        : ''}
     </div>
   )
 }

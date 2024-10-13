@@ -81,7 +81,7 @@ export const useRecipeRegisterQuery = () => {
    * 레시피 목록 조회
    * @description 레시피 이름으로 조회
    */
-  export const useRecipeListQuery = () => {
+export const useRecipeListQuery = () => {
 
     const recipeName = useAppSelector(state => state.search.searchContent);
 
@@ -93,6 +93,8 @@ export const useRecipeRegisterQuery = () => {
 
     return{
         content: data?.content || [],
+        totalPages: data?.totalPages || '',
+        pageable: data?.pageable || [],
         error
     }
   }
@@ -146,7 +148,7 @@ export const useRecipeCommentMutation = () => {
 export const useRecipeCommentQuery = ({recipeId, page}) => {
     const {data, error, isLoading} = useQuery({
 
-        queryKey: ['recipeComment'],
+        queryKey: ['recipeComment',page],
         queryFn: () => readRecipeComment({recipeId, page}),
         retry: false
     })

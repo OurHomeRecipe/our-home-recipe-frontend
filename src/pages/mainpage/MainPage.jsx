@@ -3,17 +3,17 @@ import style from './style/mainPage.module.css'
 import RecipeCard from './component/recipeCard'
 import { useState } from 'react';
 import { useRecipeListQuery } from '../../api/queries/recipeQueries';
+import Pagenation from '../../common/component/pagenation/pagenation';
 
 
 
 export default function MainPage() {
 
-  const {content} = useRecipeListQuery(); //서버에서 받아온 레시피 목록
-  const [currentPage, setCurrentPage] = useState(1); //현재 페이지
+  const {content, totalPages, pageable} = useRecipeListQuery(); //서버에서 받아온 레시피 목록
+  const [page, setPage] = useState(0); //현재 페이지
 
-  const itemsPerPage = 9; //한 페이지에 보여줄 아이템 개수
-  const startIndex = (currentPage - 1) * itemsPerPage; //0, 9, 18, 27... 
-  const currentItems = content.slice(startIndex, startIndex + itemsPerPage); // {0~8} {9~17} {18~26} ...
+  const startIndex = (page) * pageable.pageSize; //0, 9, 18, 27... 
+  const currentItems = content.slice(startIndex, startIndex + pageable.pageSize); // {0~8} {9~17} {18~26} ...
 
   // 3개씩 배열을 그룹화
   const getRows = (items) => {
@@ -23,7 +23,6 @@ export default function MainPage() {
     }
     return rows;
   };
-  
 
   return (
     <div className={common.frame}>
@@ -37,10 +36,11 @@ export default function MainPage() {
         )
       }
 
-      <div className={style.pagination}>
-        <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>이전</button>
-        <button onClick={() => setCurrentPage(currentPage + 1)}>다음</button>
-      </div>
+      {content.length !== 0 ?       
+        <div className={style.pagination}>
+          <Pagenation totalPages={totalPages} pageSize={pageable.pageSize} setPage={setPage}/>
+        </div>
+      : ''}
 
     </div>
   )

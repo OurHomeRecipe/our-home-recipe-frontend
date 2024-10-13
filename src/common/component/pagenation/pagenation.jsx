@@ -4,12 +4,12 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import { PageNumber } from './styles/pagenation.style';
 import { useState } from 'react';
 
-export default function Pagenation({totalPages, pageSize}) {
+export default function Pagenation({totalPages, pageSize, setPage}) {
 
     // 테스트용 값
     // const totalPages = 21;
     // const pageSize = 9;
-    
+
     const [start, setStart] = useState(0); // 시작 페이지
 
     const handlePrev = () => {
@@ -21,7 +21,8 @@ export default function Pagenation({totalPages, pageSize}) {
     };
 
     const selectPage = (e) => {
-        console.log(e.target.innerText);
+        const selectPage = e.target.innerText - 1;
+        setPage(selectPage);
     }
 
 
@@ -64,8 +65,8 @@ export default function Pagenation({totalPages, pageSize}) {
             />
         }
 
-        {getPageNumber(totalPages, pageSize)[start].map( page => 
-            <PageNumber key={page} onClick={selectPage}>{page.page}</PageNumber>
+        {getPageNumber(totalPages, pageSize)[start].map( (page, index) => 
+            <PageNumber key={index} onClick={selectPage}>{page.page}</PageNumber>
         )}
 
         {noNext ? '' : 
