@@ -66,3 +66,9 @@
     color: #FF9800;
     font-size: 16px;
 }
+
+.pagenationBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

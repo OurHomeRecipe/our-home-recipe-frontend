@@ -1,14 +1,16 @@
 import CommentInput from './commentInput'
 import style from '../style/comment.module.css'
 import { useRecipeCommentQuery } from '../../../../api/queries/recipeQueries'
+import Pagenation from '../../../../common/component/pagenation/pagenation';
+import { useState } from 'react';
 
 export default function Comment({recipeId}) {
-
-  const {data, error, isLoading} = useRecipeCommentQuery(recipeId);
-
-  const {content} = data || [];
-
-  console.log(content);
+  const [page, setPage] = useState(1);
+  const {data, error, isLoading} = useRecipeCommentQuery({recipeId, page});  
+  const {content, pageable} = data || [];
+  const { totalPages } = data || '';
+  console.log(pageable)
+  console.log('댓글',content);
 
   if (isLoading) { return <div>Loading...</div>; }
   if (error) { return <div>Error: {error.message}</div>; }
@@ -26,6 +28,9 @@ export default function Comment({recipeId}) {
           </div>
         )}
 
+        <div className={style.pagenationBox}>
+          <Pagenation totalPages={totalPages} pageSize={pageable.pageSize}/>
+        </div>
     </div>
   )
 }

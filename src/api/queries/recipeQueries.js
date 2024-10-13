@@ -143,11 +143,11 @@ export const useRecipeCommentMutation = () => {
 /**
  * 레시피 댓글 조회 쿼리
  */
-export const useRecipeCommentQuery = (recipeId) => {
+export const useRecipeCommentQuery = ({recipeId, page}) => {
     const {data, error, isLoading} = useQuery({
 
         queryKey: ['recipeComment'],
-        queryFn: () => readRecipeComment(recipeId),
+        queryFn: () => readRecipeComment({recipeId, page}),
         retry: false
     })
 

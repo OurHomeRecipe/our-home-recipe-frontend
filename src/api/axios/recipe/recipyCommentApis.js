@@ -19,13 +19,13 @@ export const createRecipeComment = async ({recipeId,comment}) => {
 /**
  * 레시피 댓글 조회 API
  */
-export const readRecipeComment = async (recipeId) => {
+export const readRecipeComment = async ({recipeId, page}) => {
     try {
         const response = await API.get(
             '/recipe/comment',
             {params: {
                 recipeId: recipeId,
-                page: 0
+                page: page
             }}
         );
         return response.data;
