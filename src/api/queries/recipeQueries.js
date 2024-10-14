@@ -28,6 +28,7 @@ export const useRecipeMetaDataQuery = () => {
 export const useRecipeRegisterQuery = () => {
 
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const regist = useMutation({
         mutationFn: async (recipeData) => {
@@ -47,6 +48,7 @@ export const useRecipeRegisterQuery = () => {
             console.log(data);
             alert('레시피가 등록되었습니다.');
             navigate('/mypage/myboards'); //페이지 이동
+            queryClient.invalidateQueries(['myRecipeData']); // 레시피 업데이트 성공 시 쿼리 무효화 및 새로고침
         },
         onError: (error) => {
             console.error(error);
@@ -73,7 +75,8 @@ export const useRecipeRegisterQuery = () => {
     });
 
     return {
-        data, error, isLoading
+        data, error, isLoading,
+        content: data?.content || {}
     };
 };
 
@@ -81,22 +84,22 @@ export const useRecipeRegisterQuery = () => {
    * 레시피 목록 조회
    * @description 레시피 이름으로 조회
    */
-export const useRecipeListQuery = () => {
+export const useRecipeListQuery = (page) => {
 
     //Redux로 가져온 전역 상태변수
     const recipeName = useAppSelector(state => state.search.searchContent); 
 
-    const {data, error} = useQuery({
+    const {data, status} = useQuery({
         queryKey: ['recipeListByName', recipeName], // recipeName이 바뀔때마다 다시 api 호출
-        queryFn: () => getRecipeListByName(recipeName),
+        queryFn: () => getRecipeListByName({recipeName,page}),
         retry: false
     })
 
     return{
+        data, status,
         content: data?.content || [],
         totalPages: data?.totalPages || '',
         pageable: data?.pageable || [],
-        error
     }
   }
 

@@ -15,6 +15,7 @@ export default function SearchBar() {
     if(searchType === 'name'){
       RootStore.dispatch(toggleSearchContent(searchContent));
     }
+    setSearchContent('')
   }
 
   return (
@@ -28,7 +29,12 @@ export default function SearchBar() {
 
           <p>|</p>
 
-          <input type="text"  placeholder="검색어를 입력해주세요." onChange={(e) => setSearchContent(e.target.value)}/>
+          <input 
+            type="text"  
+            placeholder="검색어를 입력해주세요."
+            value={searchContent}
+            onChange={(e) => setSearchContent(e.target.value)}
+          />
 
       </div>
         <IoSearch size={40} color="#ffbb00" onClick={handleSearch} />

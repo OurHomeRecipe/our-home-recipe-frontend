@@ -9,9 +9,9 @@ import Pagenation from '../../common/component/pagenation/pagenation';
 
 export default function MainPage() {
 
-  const {content, totalPages, pageable} = useRecipeListQuery(); //서버에서 받아온 레시피 목록
   const [page, setPage] = useState(0); //현재 페이지
-
+  
+  const {content, totalPages, pageable, status} = useRecipeListQuery(page); //서버에서 받아온 레시피 목록
   const startIndex = (page) * pageable.pageSize; //0, 9, 18, 27... 
   const currentItems = content.slice(startIndex, startIndex + pageable.pageSize); // {0~8} {9~17} {18~26} ...
 
@@ -23,6 +23,9 @@ export default function MainPage() {
     }
     return rows;
   };
+
+  if(status === "pending") {return ( <div>...Loading</div>)}
+
 
   return (
     <div className={common.frame}>
@@ -44,5 +47,6 @@ export default function MainPage() {
 
     </div>
   )
+
 
 }

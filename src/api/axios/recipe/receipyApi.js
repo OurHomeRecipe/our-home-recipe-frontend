@@ -55,14 +55,14 @@ export const getRecipeMetaData = async () => {
  * 레시피 목록 조회
  * @description 레시피 이름으로 조회
  */
-export const getRecipeListByName = async({recipeName}) => {
+export const getRecipeListByName = async({recipeName, page}) => {
   try {
     const response = await API.get(
       '/recipe/search',      
       {
         params: {
           name: recipeName,
-          page: 0
+          page: page
         }
       }
     );
