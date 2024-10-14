@@ -2,12 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface searchItem {
     searchType: string;
-    searchContent: string;
+    searchName: string;
+    searchNickname: string;
 }
 
 const initialState: searchItem = {
     searchType: 'name',
-    searchContent: ''
+    searchName: '',
+    searchNickname: ''
 }
 
 const searchSlice = createSlice({
@@ -17,11 +19,14 @@ const searchSlice = createSlice({
         toggleSearchType: (state, action) => {
             state.searchType = action.payload;
         },
-        toggleSearchContent: (state, action) => {
-            state.searchContent = action.payload;
+        toggleSearchName: (state, action) => {
+            state.searchName = action.payload;
+        },
+        toggleSearchNickname: (state, action) => {
+            state.searchNickname = action.payload;
         }
     }
 })
 
-export const { toggleSearchType, toggleSearchContent } = searchSlice.actions;
+export const { toggleSearchType, toggleSearchName, toggleSearchNickname  } = searchSlice.actions;
 export default searchSlice.reducer;

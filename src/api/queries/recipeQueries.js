@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMyRecipe, getRecipeDetail, getRecipeListByName, getRecipeMetaData } from "../axios/recipe/receipyApi";
+import { getMyRecipe, getRecipeDetail, getRecipeListByName, getRecipeListByNickname, getRecipeMetaData } from "../axios/recipe/receipyApi";
 import API from "../interceptor/API";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../RootStore";
@@ -87,11 +87,12 @@ export const useRecipeRegisterQuery = () => {
 export const useRecipeListQuery = (page) => {
 
     //Redux로 가져온 전역 상태변수
-    const recipeName = useAppSelector(state => state.search.searchContent); 
+    const recipeName = useAppSelector(state => state.search.searchName); 
 
     const {data, status} = useQuery({
         queryKey: ['recipeListByName', recipeName], // recipeName이 바뀔때마다 다시 api 호출
         queryFn: () => getRecipeListByName({recipeName,page}),
+        //staleTime: 1000 * 60,
         retry: false
     })
 
@@ -102,6 +103,30 @@ export const useRecipeListQuery = (page) => {
         pageable: data?.pageable || [],
     }
   }
+
+ /**
+ * 레시피 목록 조회
+ * @description 닉네임으로 조회
+*/
+export const useRecipeListByNickName = (page) => {
+
+    const nickName = useAppSelector(state => state.search.searchNickname); 
+
+    const {data, status, error} = useQuery({
+        queryKey: ['recipeListByNickName', nickName], // nickName이 바뀔때마다 다시 api 호출
+        queryFn: () => getRecipeListByNickname({page, nickName}),
+        //staleTime: 1000 * 60,
+        retry: false
+    })
+
+    return { 
+        data, status, error,
+        content: data?.content || [],
+        totalPages: data?.totalPages || '',
+        pageable: data?.pageable || [],
+     }
+} 
+
 
 /**
  * 레시피 상세조회 쿼리

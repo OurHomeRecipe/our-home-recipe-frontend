@@ -1,3 +1,4 @@
+import { useAppSelector } from "../../../RootStore";
 import API from "../../interceptor/API";
 
 
@@ -53,9 +54,10 @@ export const getRecipeMetaData = async () => {
 
 /**
  * 레시피 목록 조회
- * @description 레시피 이름으로 조회
+ * @description 레시피 검색조건 : 레시피 이름(name)
  */
-export const getRecipeListByName = async({recipeName, page}) => {
+export const getRecipeListByName = async({page, recipeName}) => {
+
   try {
     const response = await API.get(
       '/recipe/search',      
@@ -64,6 +66,26 @@ export const getRecipeListByName = async({recipeName, page}) => {
           name: recipeName,
           page: page
         }
+      }
+    );
+      console.log(response.data);
+      return response.data;
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+/**
+ * 레시피 목록 조회
+ * @description 레시피 검색조건 : 닉네임(nickname)
+ */
+export const getRecipeListByNickname = async({page, nickName}) => {
+  try {
+    const response = await API.get(
+      '/recipe/member/search',      
+      {
+        params: nickName === "" ? { page: page } : { page: page, nickname: nickName }
       }
     );
       console.log(response.data);

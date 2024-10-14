@@ -9,14 +9,15 @@ import Modal from "../../common/modal/modal";
 import RootStore, { useAppSelector } from "../../RootStore";
 import Header from "./header/header";
 import SearchBar from "./searchbar/searchBar";
-import { toggleSearchContent } from "../../features/search/searchSlice";
+import { toggleSearchName, toggleSearchNickname } from "../../features/search/searchSlice";
 
 
 
 export default function MainLayout(){
 
     // 처음엔 모두 조회
-    RootStore.dispatch(toggleSearchContent(''));
+    RootStore.dispatch(toggleSearchName(''));
+    RootStore.dispatch(toggleSearchNickname(''));
 
     //로그인 화면 보이는지 여부
     const isLoginModal = useAppSelector((state) => state.login.loginPageShow);

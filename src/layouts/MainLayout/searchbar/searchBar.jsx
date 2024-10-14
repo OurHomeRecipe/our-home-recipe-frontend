@@ -2,7 +2,7 @@ import style from "../../../css/mainlayout.module.css"
 import { IoSearch } from "react-icons/io5";
 import { useState } from "react";
 import RootStore from "../../../RootStore";
-import { toggleSearchContent } from "../../../features/search/searchSlice";
+import { toggleSearchName, toggleSearchNickname, toggleSearchType } from "../../../features/search/searchSlice";
 
 export default function SearchBar() {
 
@@ -11,9 +11,16 @@ export default function SearchBar() {
 
   // 검색 버튼 클릭 시
   const handleSearch = () => {
+    // 검색타임 변경
+    RootStore.dispatch(toggleSearchType(searchType));
+
     // 검색타입이 레시피 이름일 때
     if(searchType === 'name'){
-      RootStore.dispatch(toggleSearchContent(searchContent));
+      RootStore.dispatch(toggleSearchName(searchContent));
+    }
+    // 검색타입이 닉네임 일 때
+    if(searchType === 'nickname'){
+      RootStore.dispatch(toggleSearchNickname(searchContent));
     }
     setSearchContent('')
   }
