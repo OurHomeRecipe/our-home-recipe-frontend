@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 import {PersistGate} from 'redux-persist/integration/react';
 import {BrowserRouter} from "react-router-dom";
 import RootStore from './RootStore';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 // React Query의 QueryClient 생성
 const queryClient = new QueryClient({
@@ -28,6 +29,7 @@ root.render(
     <Provider store={RootStore}>
         <PersistGate loading={null} persistor={persistor}>
             <QueryClientProvider client={queryClient}>
+                <ReactQueryDevtools initialIsOpen={true} />
                 <BrowserRouter>
                     <App/>
                 </BrowserRouter>
