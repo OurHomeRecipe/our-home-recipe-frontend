@@ -12,14 +12,16 @@ import RootStore from './RootStore';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 // React Query의 QueryClient 생성
-const queryClient = new QueryClient({
+const queryClient = new QueryClient(
+    {
     defaultOptions: {
       queries: {
         staleTime: 1000 * 60,  // 데이터가 신선한 시간 (1분)
         gcTime: 1000 * 60 * 5, // 가비지 컬렉션 되기 전까지 캐시되는 시간 (5분)
       }
     },
-});
+}
+);
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

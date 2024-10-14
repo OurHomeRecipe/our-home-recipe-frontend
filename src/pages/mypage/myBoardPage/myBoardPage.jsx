@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import { IoMdAddCircleOutline } from "react-icons/io";
 import style from './styles/myBoard.module.css'
 import { useMyRecipeQuery } from '../../../api/queries/recipeQueries';
-import { useEffect, useState } from 'react';
 import BasicTable from '../../../common/component/table/basicTable';
 
 export default function MyBoardPage() {
@@ -21,12 +20,9 @@ export default function MyBoardPage() {
     { width: "35%"},
     { width: "20%"},
     { width: "10%"}
+  ]
 
-]
-
-  const { data, error, isLoading } = useMyRecipeQuery(); //서버로부터 받아온 recipe 데이터
-  const {content} = data || {} // 테이블안에 들어갈 데이터
-  console.log(content);
+  const { content, error, isLoading } = useMyRecipeQuery(); //서버로부터 받아온 recipe 데이터
 
   const navigate = useNavigate();
 
