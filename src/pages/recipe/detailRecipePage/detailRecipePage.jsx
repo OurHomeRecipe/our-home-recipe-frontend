@@ -1,9 +1,9 @@
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import common from '../../../css/pages/page.common.module.css'
 import style from './style/detailRecipe.module.css'
-import { ProfileImg, RecipeImage } from './style/detailRecipe.style'
-import { useRecipeDetailQuery } from '../../../api/queries/recipeQueries';
-import Comment from './component/comment';
+import {ProfileImg, RecipeImage} from './style/detailRecipe.style'
+import {useRecipeDetailQuery} from '../../../api/queries/recipeQueries';
+import Review from './component/review';
 
 export default function DetailRecipePage() {
 
@@ -13,9 +13,7 @@ export default function DetailRecipePage() {
     // 레시피 조회
     const { data, error, isLoading } = useRecipeDetailQuery(recipeId); 
     const { member, recipeImage, recipeName, recipeDescription, tags, ingredients } = data || {};
-    
-    
-    
+
     if (isLoading) { return <div>Loading...</div>; }
     if (error) { return <div>Error: {error.message}</div>; }
 
@@ -54,7 +52,7 @@ export default function DetailRecipePage() {
                 )}
             </div>
 
-            <Comment recipeId={recipeId}/>
+            <Review recipeId={recipeId}/>
 
     </div>
     )

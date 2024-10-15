@@ -8,7 +8,7 @@
     padding: 25px 40px;
 }
 
-.commentBox {
+.reviewBox {
     background-color: #fff5e3;
     border-radius: 10px;
     margin-top: 20px;
@@ -16,7 +16,7 @@
     padding: 10px 25px;
 }
 
-.commentBox pre {
+.reviewBox pre {
     padding: 0px 20px;
 }
 
@@ -32,9 +32,58 @@
 
 
 
-/* 댓글 입력 */
+/* 리뷰 입력 */
+.starRating {
+    display: flex;
+    flex-direction: row;
+}
 
-.commentInputBox{
+.starWrapper {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.starBase {
+    color: lightgray;
+}
+
+.starFilled {
+    color: gold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.2s ease-in-out; /* 채워지는 애니메이션 */
+}
+
+.leftHalf {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.rightHalf {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.leftHalf:hover ~ .starFilled {
+    width: 50%; /* 왼쪽 절반에 hover하면 별의 절반만 채움 */
+}
+
+.rightHalf:hover ~ .starFilled {
+    width: 100%; /* 오른쪽 절반에 hover하면 별을 완전히 채움 */
+}
+
+.reviewInputBox{
     display: flex;
     border-bottom: 2px solid #d6d6d6;
     flex-direction: column;
@@ -43,7 +92,7 @@
     margin-bottom: 40px;
 }
 
-.commentInputBox textarea {
+.reviewInputBox textarea {
     padding: 15px 20px;
     border: 1px solid orange;
     border-radius: 8px;
