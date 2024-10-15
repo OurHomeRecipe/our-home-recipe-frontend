@@ -3,7 +3,7 @@ import { getMyRecipe, getRecipeDetail, getRecipeListByName, getRecipeListByNickn
 import API from "../interceptor/API";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../RootStore";
-import { createRecipeComment, readRecipeComment } from "../axios/recipe/recipyCommentApis";
+import { createRecipeReview, readRecipeReview } from "../axios/recipe/recipeReviewApis";
 
 
 /**
@@ -146,17 +146,17 @@ export const useRecipeListByNickName = (page) => {
   }
 
 /**
- * 레시피 댓글 등록 쿼리
+ * 레시피 리뷰 등록 쿼리
  */
-export const useRecipeCommentMutation = () => {
+export const useRecipeReviewMutation = () => {
 
     const queryClient = useQueryClient();
 
     const regist = useMutation({
-        mutationFn: ({recipeId,comment}) => createRecipeComment({recipeId,comment}),
+        mutationFn: ({recipeId, content, rating}) => createRecipeReview({recipeId, content, rating}),
         onSuccess: (data) => {
             console.log(data);
-            // 댓글 등록 성공 시 쿼리 무효화 및 새로고침
+            // 리뷰 등록 성공 시 쿼리 무효화 및 새로고침
             queryClient.invalidateQueries(['recipeComment']);
         },
         onError: (error) => {
@@ -164,21 +164,21 @@ export const useRecipeCommentMutation = () => {
         }
     });
 
-    const addComment = ({recipeId,comment}) => {
-        regist.mutate({recipeId,comment});
+    const addReview = ({recipeId,content, rating}) => {
+        regist.mutate({recipeId,content, rating});
     }
 
-    return { addComment };
+    return { addReview };
 }
 
 /**
  * 레시피 댓글 조회 쿼리
  */
-export const useRecipeCommentQuery = ({recipeId, page}) => {
+export const useRecipeReviewQuery = ({recipeId, page}) => {
     const {data, error, isLoading} = useQuery({
 
-        queryKey: ['recipeComment',page],
-        queryFn: () => readRecipeComment({recipeId, page}),
+        queryKey: ['recipeReview',page],
+        queryFn: () => readRecipeReview({recipeId, page}),
         retry: false
     })
 

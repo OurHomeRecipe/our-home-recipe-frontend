@@ -1,13 +1,13 @@
 import API from "../../interceptor/API"
 
 /**
- * 레시피 댓글 등록 API
+ * 레시피 리뷰 등록 API
  */
-export const createRecipeComment = async ({recipeId,comment}) => {
+export const createRecipeReview = async ({recipeId,content, rating}) => {
     try {
         const response = await API.post(
-            '/recipe/comment',
-            {recipeId,comment},
+            '/recipe/review',
+            {recipeId, content, rating},
             {withCredentials: true} //CORS
         );
         return response.data;
@@ -19,10 +19,10 @@ export const createRecipeComment = async ({recipeId,comment}) => {
 /**
  * 레시피 댓글 조회 API
  */
-export const readRecipeComment = async ({recipeId, page}) => {
+export const readRecipeReview = async ({recipeId, page}) => {
     try {
         const response = await API.get(
-            '/recipe/comment',
+            '/recipe/review',
             {params: {
                 recipeId: recipeId,
                 page: page
