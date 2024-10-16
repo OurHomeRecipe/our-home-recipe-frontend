@@ -75,7 +75,7 @@ export default function ReviewInput({recipeId}) {
                     </div>
                 ))}
             </div>
-            
+
             <textarea
                 placeholder='타인을 비방하는 리뷰는 삭제될 수 있습니다.'
                 value={review}

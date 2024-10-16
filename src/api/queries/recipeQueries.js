@@ -178,6 +178,7 @@ export const useRecipeReviewQuery = ({recipeId, page}) => {
     const {data, error, isLoading} = useQuery({
 
         queryKey: ['recipeReview', recipeId, page],
+
         queryFn: () => readRecipeReview({recipeId, page}),
         retry: false
     })
