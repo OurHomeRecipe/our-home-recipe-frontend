@@ -6,6 +6,7 @@ import { toggleSearchName, toggleSearchNickname, toggleSearchType } from "../../
 
 export default function SearchBar() {
 
+
   const [searchType, setSearchType] = useState('name'); // 검색 타입
   const [searchContent, setSearchContent] = useState(''); //검색 내용
 
@@ -13,6 +14,11 @@ export default function SearchBar() {
   const handleSearch = () => {
     // 검색타임 변경
     RootStore.dispatch(toggleSearchType(searchType));
+
+    //검색 내용이 비어있을 때
+    if(searchContent === ''){
+      alert('검색내용을 입력해주세요');
+    }
 
     // 검색타입이 레시피 이름일 때
     if(searchType === 'name'){
@@ -22,7 +28,7 @@ export default function SearchBar() {
     if(searchType === 'nickname'){
       RootStore.dispatch(toggleSearchNickname(searchContent));
     }
-    setSearchContent('')
+    setSearchContent('');
   }
 
   return (
