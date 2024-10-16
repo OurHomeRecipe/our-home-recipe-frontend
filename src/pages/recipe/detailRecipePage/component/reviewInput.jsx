@@ -11,7 +11,7 @@ export default function ReviewInput({recipeId}) {
     const {addReview} = useRecipeReviewMutation();
 
     // 리뷰을 담을 상태변수
-    const [review, setReview] = useState();
+    const [review, setReview] = useState('');
 
     // 로그인 상태를 담은 전역변수
     const isLogin = useAppSelector(state => state.login.loginState)
@@ -75,6 +75,7 @@ export default function ReviewInput({recipeId}) {
                     </div>
                 ))}
             </div>
+
             <textarea
                 placeholder='타인을 비방하는 리뷰는 삭제될 수 있습니다.'
                 value={review}

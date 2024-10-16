@@ -177,7 +177,8 @@ export const useRecipeReviewMutation = () => {
 export const useRecipeReviewQuery = ({recipeId, page}) => {
     const {data, error, isLoading} = useQuery({
 
-        queryKey: ['recipeReview',page],
+        queryKey: ['recipeReview', recipeId, page],
+
         queryFn: () => readRecipeReview({recipeId, page}),
         retry: false
     })
