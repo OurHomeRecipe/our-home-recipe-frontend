@@ -15,15 +15,13 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
             ingredientQuantity: 0 }
     ]);
 
-
-    const [ingredientUnit, setIngredientUnit] = useState('');
-
     // 선택한 값이 변경될 때 마다 recipeData의 ingredients 값도 바뀜
     useEffect(() => {
         setRecipeData(prev => ({
             ...prev,
             ingredients: selects
         }))
+        console.log(selects);
     }, [selects]);
 
 
@@ -50,6 +48,23 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
     const upDateIngredient = (e, index) => {
         const ingredientId = e.target.value;
         const ingredientName = e.target.options[e.target.selectedIndex].textContent;
+        let ingredientUnit = "";
+
+       
+        // selects 배열의 중복 확인을 위해 Set으로 변환
+        const selectedIds = new Set(selects.map(select => select.ingredientId));
+
+        if (selectedIds.has(ingredientId)) {
+            setSelects(selects.filter((select) => select.index !== index)); //삭제
+            alert('이미 존재하는 재료입니다.');
+            return;
+        }
+
+        // ingredients 배열을 Map으로 변환해 탐색 최적화
+        const ingredientMap = new Map(ingredients.map(ingredient => [String(ingredient.ingredientId), ingredient.ingredientUnit]));
+
+        // Map에서 단위를 바로 찾아서 할당
+        ingredientUnit = ingredientMap.get(ingredientId) || "";
 
         //선택한 재료 상태 배열에 추가
         setSelects(prevSelects => 
@@ -57,19 +72,12 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
                 select.index === index ? { 
                     ...select, 
                     ingredientId:ingredientId,
-                    ingredientName:ingredientName
+                    ingredientName:ingredientName,
+                    ingredientUnit:ingredientUnit
                 } : 
                 select
             )
         );
-
-        //선택한 재료의 단위 설정
-        for (let i = 0; i < ingredients.length; i++) {
-            if (ingredientId === String(ingredients[i].ingredientId)) {
-                setIngredientUnit(ingredients[i].ingredientUnit);
-                break;  // 원하는 값을 찾으면 루프를 중단
-            }
-        }
     }
 
 
@@ -110,7 +118,7 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
 
             <div className={style.quantityBox}>
                 <input type='text' onChange={(e) => updateQuantity(e, select.index)}/>
-                <p>{ingredientUnit}</p>
+                <p>{select.ingredientUnit}</p>
             </div>
 
             <BiSolidMinusCircle
