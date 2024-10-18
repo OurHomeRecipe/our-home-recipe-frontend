@@ -19,7 +19,7 @@ export const useFindUserResetPassword = () => {
         }
     });
 
-    const handleResetPassword = (formData) => {
+    const handleResetPassword = (formData:FormData) => {
         resetPasswordMutation.mutate(formData);
     }
 

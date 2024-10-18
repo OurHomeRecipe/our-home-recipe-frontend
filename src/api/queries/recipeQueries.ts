@@ -4,6 +4,7 @@ import API from "../interceptor/API";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../RootStore";
 import { createRecipeReview, readRecipeReview } from "../axios/recipe/recipeReviewApis";
+import { RecipeRegisterResponse, RecipeReviewData, RecipeReviewResponse } from "../../interfaces";
 
 
 /**
@@ -30,16 +31,15 @@ export const useRecipeRegisterQuery = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const regist = useMutation({
+    const regist = useMutation <RecipeRegisterResponse, Error, FormData> ({
         mutationFn: async (recipeData) => {
             try {
-              const response = await API.post(
+              const response = await API.post<RecipeRegisterResponse>(
                 '/recipe/register',
                 recipeData,
-                { headers: {"Content-Type": 'multipart/form-data'} },
-                {withCredentials: true} //CORS
+                { headers: {"Content-Type": 'multipart/form-data'}, withCredentials: true },
               );
-              return response;
+              return response.data;
             } catch (error) {
                 throw error
             }
@@ -48,14 +48,14 @@ export const useRecipeRegisterQuery = () => {
             console.log(data);
             alert('레시피가 등록되었습니다.');
             navigate('/mypage/myboards'); //페이지 이동
-            queryClient.invalidateQueries(['myRecipeData']); // 레시피 업데이트 성공 시 쿼리 무효화 및 새로고침
+            queryClient.invalidateQueries({ queryKey: ['myRecipeData']}); // 레시피 업데이트 성공 시 쿼리 무효화 및 새로고침
         },
         onError: (error) => {
             console.error(error);
         }
     });
 
-    const recipeRegist = (formData) => {
+    const recipeRegist = (formData: FormData) => {
         regist.mutate(formData);
     }
 
@@ -84,7 +84,7 @@ export const useRecipeRegisterQuery = () => {
    * 레시피 목록 조회
    * @description 레시피 이름으로 조회
    */
-export const useRecipeListQuery = (page) => {
+export const useRecipeListQuery = (page: number) => {
 
     //Redux로 가져온 전역 상태변수
     const recipeName = useAppSelector(state => state.search.searchName); 
@@ -108,7 +108,7 @@ export const useRecipeListQuery = (page) => {
  * 레시피 목록 조회
  * @description 닉네임으로 조회
 */
-export const useRecipeListByNickName = (page) => {
+export const useRecipeListByNickName = (page: number) => {
 
     const nickName = useAppSelector(state => state.search.searchNickname); 
 
@@ -131,7 +131,7 @@ export const useRecipeListByNickName = (page) => {
 /**
  * 레시피 상세조회 쿼리
  */
-  export const useRecipeDetailQuery = (recipeId) => {
+  export const useRecipeDetailQuery = (recipeId: number) => {
     
     const {data, error, isLoading} = useQuery({
 
@@ -152,19 +152,19 @@ export const useRecipeReviewMutation = () => {
 
     const queryClient = useQueryClient();
 
-    const regist = useMutation({
+    const regist = useMutation<RecipeReviewResponse, Error, RecipeReviewData>({
         mutationFn: ({recipeId, content, rating}) => createRecipeReview({recipeId, content, rating}),
         onSuccess: (data) => {
             console.log(data);
             // 리뷰 등록 성공 시 쿼리 무효화 및 새로고침
-            queryClient.invalidateQueries(['recipeComment']);
+            queryClient.invalidateQueries({queryKey: ['recipeComment']});
         },
         onError: (error) => {
             console.error(error);
         }
     });
 
-    const addReview = ({recipeId,content, rating}) => {
+    const addReview = ({recipeId,content, rating}: RecipeReviewData) => {
         regist.mutate({recipeId,content, rating});
     }
 
@@ -174,7 +174,7 @@ export const useRecipeReviewMutation = () => {
 /**
  * 레시피 댓글 조회 쿼리
  */
-export const useRecipeReviewQuery = ({recipeId, page}) => {
+export const useRecipeReviewQuery = ({recipeId, page}: {recipeId: number, page: number}) => {
     const {data, error, isLoading} = useQuery({
 
         queryKey: ['recipeReview', recipeId, page],
