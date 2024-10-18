@@ -3,7 +3,7 @@ import API from "../../interceptor/API"
 /**
  * 레시피 리뷰 등록 API
  */
-export const createRecipeReview = async ({recipeId,content, rating}) => {
+export const createRecipeReview = async ({recipeId,content, rating}:{recipeId:number,content:string, rating:number}) => {
     try {
         const response = await API.post(
             '/recipe/review',
@@ -19,7 +19,7 @@ export const createRecipeReview = async ({recipeId,content, rating}) => {
 /**
  * 레시피 댓글 조회 API
  */
-export const readRecipeReview = async ({recipeId, page}) => {
+export const readRecipeReview = async ({recipeId, page}: {recipeId:number, page:number}) => {
     try {
         const response = await API.get(
             '/recipe/review',
