@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import API from "../interceptor/API";
 import {useSelector} from "react-redux";
+import { RootState } from "../../RootStore";
 
 /**
  * 프로필 조회 쿼리
@@ -8,7 +9,7 @@ import {useSelector} from "react-redux";
  */
 export const useProfileQuery = () => {
 
-    const loginState = useSelector((state) => state.login.loginState); //로그인 상태(boolean)
+    const loginState = useSelector((state: RootState) => state?.login?.loginState); //로그인 상태(boolean)
     
     const {data, error, isLoading} = useQuery({
         queryKey: ['profile'],  // 쿼리 키
@@ -42,14 +43,13 @@ export const useProfileUpdateQuery = () => {
 
     const queryClient = useQueryClient();
 
-        const update = useMutation({
+        const update = useMutation<FormData, Error, FormData>({
             mutationFn: async (profileData) => {
                 try {
                     const response = await API.post(
                         '/member/me/profile',
                         profileData,
-                        {headers: {"Content-Type": 'multipart/form-data'}},
-                        {withCredentials: true}, //CORS
+                        { headers: {"Content-Type": 'multipart/form-data'}, withCredentials: true },
                     );
                     return response.data;
                 } catch (error) {
@@ -59,7 +59,7 @@ export const useProfileUpdateQuery = () => {
             onSuccess: (data) => {
                 console.log('프로필 업데이트 성공', data);
                 alert('프로필이 수정되었습니다.');
-                queryClient.invalidateQueries(['profile']); // 프로필 업데이트 성공 시 쿼리 무효화 및 새로고침
+                queryClient.invalidateQueries({ queryKey: ['profile'] }); // 프로필 업데이트 성공 시 쿼리 무효화 및 새로고침
             },
             onError: (error) => {
                 console.error('프로필 수정 실패:', error);
@@ -67,10 +67,9 @@ export const useProfileUpdateQuery = () => {
 
         });
 
-        const profileUpdate = (formData) => {
+        const profileUpdate = (formData:FormData) => {
             update.mutate(formData);
         }
 
         return {profileUpdate};
-
 }

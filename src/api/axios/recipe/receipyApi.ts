@@ -19,13 +19,12 @@ export const getRecipeMetaData = async () => {
  * 레시피 등록 API
  * @author 소연
  */
-  export const postRecipe = async (recipeData) => {
+  export const postRecipe = async (recipeData:FormData) => {
     try {
       const response = await API.post(
         '/recipe/register',
         recipeData,
-        { headers: {"Content-Type": 'multipart/from-data'} },
-        {withCredentials: true} //CORS
+        { headers: {"Content-Type": 'multipart/from-data'}, withCredentials: true },
       );
       return response;
     } catch (error) {
@@ -55,7 +54,7 @@ export const getRecipeMetaData = async () => {
  * 레시피 목록 조회
  * @description 레시피 검색조건 : 레시피 이름(name)
  */
-export const getRecipeListByName = async({page, recipeName}) => {
+export const getRecipeListByName = async({page, recipeName}: { page: number, recipeName: string })=> {
 
   try {
     const response = await API.get(
@@ -79,7 +78,7 @@ export const getRecipeListByName = async({page, recipeName}) => {
  * 레시피 목록 조회
  * @description 레시피 검색조건 : 닉네임(nickname)
  */
-export const getRecipeListByNickname = async({page, nickName}) => {
+export const getRecipeListByNickname = async({page, nickName}:{page: number, nickName:string}) => {
   try {
     const response = await API.get(
       '/recipe/member/search',      
@@ -98,7 +97,7 @@ export const getRecipeListByNickname = async({page, nickName}) => {
 /**
  * 레시피 상세조회 API
  */
-export const getRecipeDetail = async(recipeId) => {
+export const getRecipeDetail = async(recipeId:number) => {
   try {
     const response = await API.get(
       `/recipe/guest/${recipeId}`,      

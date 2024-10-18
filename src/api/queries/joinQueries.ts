@@ -1,5 +1,7 @@
 import { useMutation } from "@tanstack/react-query"
 import { postEmailAuchConfirm, postEmailAuth } from "../axios/member/emailApi";
+import { EmailAuthData, EmailAuthResponse } from "../../interfaces";
+
 
 /**
  * 이메일 인증코드 요청 쿼리
@@ -8,7 +10,7 @@ import { postEmailAuchConfirm, postEmailAuth } from "../axios/member/emailApi";
  */
 export const useEmailAuthQuery = () => {
 
-    const emailAuthMutation = useMutation({
+    const emailAuthMutation = useMutation <EmailAuthResponse, Error, string> ({
         mutationFn: postEmailAuth,
         onSuccess: (data) => {
             alert(data.message);
@@ -18,8 +20,8 @@ export const useEmailAuthQuery = () => {
         }
     })
 
-    const emailAuth = (email) => {
-        emailAuthMutation.mutate({email});
+    const emailAuth = (email: string) => {
+        emailAuthMutation.mutate(email);
     }
  
     return{
@@ -33,7 +35,7 @@ export const useEmailAuthQuery = () => {
  */
 export const useEmailAuthConfirmQuery = () => {
 
-    const emailAuthConfirmMutation = useMutation({
+    const emailAuthConfirmMutation = useMutation<EmailAuthResponse, Error, EmailAuthData>({
         mutationFn: postEmailAuchConfirm,
         onSuccess: (data) => {
             alert(data.message);
@@ -43,7 +45,7 @@ export const useEmailAuthConfirmQuery = () => {
         }
     })
 
-    const emailAuthConfirm = (email, authCode) => {
+    const emailAuthConfirm = (email: string, authCode: string) => {
         emailAuthConfirmMutation.mutate({email, authCode});
     }
 

@@ -7,17 +7,12 @@ import API from "../../interceptor/API";
  * @param {*} profileData 
  * @returns {*} {id : 1}
  */
-export const updateProfile = async (profileData) => {
+export const updateProfile = async (profileData:FormData) => {
     try {
         const response = await API.post(
             '/member/me/profile',
-            profileData,
-            {
-                headers: {
-                    "Content-Type": 'multipart/from-data'
-                }
-            },
-            {withCredentials: true}
+            profileData,          
+            { headers: { "Content-Type": 'multipart/from-data' }, withCredentials: true },
         );
         return response.data;
     } catch (error) {

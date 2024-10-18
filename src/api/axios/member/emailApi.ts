@@ -1,4 +1,4 @@
-import { EmailAuthData, RegisterData } from "../../../interfaces";
+import { EmailAuthData, EmailAuthResponse, RegisterData } from "../../../interfaces";
 import API from "../../interceptor/API";
 
 
@@ -7,15 +7,15 @@ import API from "../../interceptor/API";
  * @author 소연
  * @param email email 정보
  */
-export const postEmailAuth = async (email:EmailAuthData) => {
+export const postEmailAuth = async (email:string): Promise<EmailAuthResponse> => {
     try {
-        const response = await API.post(
+        const response = await API.post<EmailAuthResponse>(
             '/member/email/auth/request', 
             email,
             {withCredentials: true}
         );
-        console.log(response);
-        return response;
+        console.log(response.data);
+        return response.data;
     } catch (error) {
         throw error;  // 에러를 다시 던져서 onError에서 처리할 수 있도록
     }
@@ -25,16 +25,15 @@ export const postEmailAuth = async (email:EmailAuthData) => {
 /**
  * 이메일 인증코드 확인 API
  * @author 소연
- * @param {*} emailAuthData {email, authCode}
  */
-export const postEmailAuchConfirm = async(emailAuthData:EmailAuthData)=> {
+export const postEmailAuchConfirm = async(emailAuthData:EmailAuthData): Promise<EmailAuthResponse> => {
     try {
-        const response = await API.post(
+        const response = await API.post<EmailAuthResponse>(
             '/member/email/auth/confirm',
             emailAuthData,
             {withCredentials: true}
         );
-        return response;
+        return response.data;
     } catch (error) {
         throw error;  // 에러를 다시 던져서 onError에서 처리할 수 있도록
     }

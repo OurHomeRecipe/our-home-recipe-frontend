@@ -37,3 +37,10 @@ export interface PasswordReset {
     name: string;
     phoneNumber: string;
 }
+
+/**
+ * 이메일인증 응당
+ */
+export interface EmailAuthResponse {
+    message: string;
+}

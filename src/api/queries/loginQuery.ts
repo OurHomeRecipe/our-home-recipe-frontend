@@ -24,7 +24,7 @@ export const useLoginQuery = () => {
       })
 
 
-    const login = (email,password) => {
+    const login = (email:string, password:string) => {
         loginMuation.mutate({email, password});
     }
 
