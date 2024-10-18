@@ -50,7 +50,6 @@ export default function RecipeIngredients({ingredients, setRecipeData}) {
         const ingredientName = e.target.options[e.target.selectedIndex].textContent;
         let ingredientUnit = "";
 
-       
         // selects 배열의 중복 확인을 위해 Set으로 변환
         const selectedIds = new Set(selects.map(select => select.ingredientId));
 
