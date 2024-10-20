@@ -18,6 +18,8 @@ const queryClient = new QueryClient(
       queries: {
         staleTime: 1000 * 60,  // 데이터가 신선한 시간 (1분)
         gcTime: 1000 * 60 * 5, // 가비지 컬렉션 되기 전까지 캐시되는 시간 (5분)
+        retry: 0,
+        refetchOnWindowFocus: false,
       }
     },
 }
