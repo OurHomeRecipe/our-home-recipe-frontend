@@ -29,6 +29,7 @@ export interface RegisterData {
 }
 
 export interface EmailAuthResponse {
+    code: number;
     message: string;
 }
 

@@ -157,7 +157,7 @@ export const useRecipeReviewMutation = () => {
         onSuccess: (data) => {
             console.log(data);
             // 리뷰 등록 성공 시 쿼리 무효화 및 새로고침
-            queryClient.invalidateQueries({queryKey: ['recipeComment']});
+            queryClient.invalidateQueries({queryKey: ['recipeReview']});
         },
         onError: (error) => {
             console.error(error);
