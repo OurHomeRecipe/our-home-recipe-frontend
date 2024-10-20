@@ -71,7 +71,7 @@ export const useRecipeRegisterQuery = () => {
     const { data, error, isLoading } = useQuery({
         queryKey: ['myRecipeData'], // 쿼리 키 수정
         queryFn: getMyRecipe,
-        retry: false // 쿼리 실패 시 재시도 방지
+        //retry: false // 쿼리 실패 시 재시도 방지
     });
 
     return {
@@ -90,10 +90,10 @@ export const useRecipeListQuery = (page: number) => {
     const recipeName = useAppSelector(state => state.search.searchName); 
 
     const {data, status} = useQuery({
-        queryKey: ['recipeListByName', recipeName], // recipeName이 바뀔때마다 다시 api 호출
+        queryKey: ['recipeListByName', {recipeName, page}], // recipeName이 바뀔때마다 다시 api 호출
         queryFn: () => getRecipeListByName({recipeName,page}),
         //staleTime: 1000 * 60,
-        retry: false
+        //retry: false
     })
 
     return{
@@ -116,7 +116,7 @@ export const useRecipeListByNickName = (page: number) => {
         queryKey: ['recipeListByNickName', nickName], // nickName이 바뀔때마다 다시 api 호출
         queryFn: () => getRecipeListByNickname({page, nickName}),
         //staleTime: 1000 * 60,
-        retry: false
+        //retry: false
     })
 
     return { 
@@ -180,7 +180,7 @@ export const useRecipeReviewQuery = ({recipeId, page}: {recipeId: number, page: 
         queryKey: ['recipeReview', recipeId, page],
 
         queryFn: () => readRecipeReview({recipeId, page}),
-        retry: false
+        //retry: false
     })
 
         return{
